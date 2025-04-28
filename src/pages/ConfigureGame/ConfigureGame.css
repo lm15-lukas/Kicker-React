@@ -1,3 +1,5 @@
+
+
 .configure-game-page {
     display: flex;
     justify-content: center;
@@ -65,4 +67,19 @@
 
 .form-button:hover {
     background-color: #038c5a;
+}
+.img{
+    width: 100px;
+    height: auto; 
+    margin-bottom: 20px;
+}
+.header {
+background-color:#f4f4f4;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+
+.h1{
+    text-align: center;
 }
