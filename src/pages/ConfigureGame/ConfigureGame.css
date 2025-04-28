@@ -83,3 +83,22 @@ text-align: center;
 .h1{
     text-align: center;
 }
+
+.team-selection{
+ justify-content: left;
+ border: 10px;
+
+}
+
+.team-input{
+    padding:20px;
+}
+
+.team-form-container {
+    background: white;
+    padding: 200px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}

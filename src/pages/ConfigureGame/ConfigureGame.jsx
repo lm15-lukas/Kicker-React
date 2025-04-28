@@ -15,9 +15,26 @@ export default function ConfigureGame() {
          <div className="header">
             <Header/>
             <div className="configure-game-page">
-                <div className="form-container">
+                <div className="team-form-container">
+                    
                     <h2>Setup Teams</h2>
                     <p>Hier kannst du jetzt deine Teams zusammenstellen!</p>
+                    <div className="form-item">
+                        <label className="team-selection" htmlFor="team-names">Team Names</label>
+                        <input className="team-input" id="team-names" type="text" />
+                    </div>
+                    <div className="form-item">
+                        <label className="team-input" htmlFor="alone">Alone</label>
+                        <input id="alone" type="text" />
+                    </div>
+                    <div className="form-item">
+                        <label className="team-input"  htmlFor="double">Double</label>
+                        <input id="double" type="text" />
+                    </div>
+                    <div className="form-item">
+                        <label  className="team-input" htmlFor="draw">Draw your Partner</label>
+                        <input id="draw" type="text" />
+                    </div>
                 </div>
             </div>
             </div>
@@ -47,7 +64,7 @@ export default function ConfigureGame() {
 
                 <div className="form-item">
                     <label htmlFor="points" className="form-label">Points per win</label>
-                    <input id="points" className="form-input" type="number"  required/>
+                    <input id="points" className="form-input" type="number" required/>
                 </div>
 
                 <div className="form-item">
