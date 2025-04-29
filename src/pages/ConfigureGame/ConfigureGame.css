@@ -1,3 +1,6 @@
+body{
+    background-color: #455559;
+}
 
 
 .configure-game-page {
@@ -5,12 +8,12 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f4f4f4;
+    background-color:#455559;
     font-family: Arial, sans-serif;
 }
 
 .form-container {
-    background: white;
+    background: #28403D;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -27,15 +30,16 @@
 
 .form-label {
     font-size: 1.1rem;
-    color: #333;
+    color: #73c6a7;
     margin-bottom: 8px;
 }
 
 .form-input {
     padding: 10px;
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid #130d0d;
     border-radius: 6px;
+    background-color: #130d0d;
 }
 
 .form-button {
@@ -72,9 +76,11 @@
     width: 100px;
     height: auto; 
     margin-bottom: 20px;
+    color: white;
 }
 .header {
-background-color:#f4f4f4;
+background-color:#455559;
+border: 2px solid black;
 justify-content: center;
 align-items: center;
 text-align: center;
@@ -82,6 +88,7 @@ text-align: center;
 
 .h1{
     text-align: center;
+    background-color: ;
 }
 
 .team-selection{
@@ -91,14 +98,75 @@ text-align: center;
 }
 
 .team-input{
-    padding:20px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.team-label {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 8px;
 }
 
 .team-form-container {
-    background: white;
-    padding: 200px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .team-option {
+    width: 140px;
+    height: 160px;
+    border-radius: 4px;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    position: relative;
+    text-align: center;
+  }
+  
+  .team-option:hover {
+    transform: translateY(-4px);
+  }
+  .team-option .title {
+    font-size: 14px;
+    font-weight: bold;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .green { background-color: #182625; }
+  .orange { background-color: #db4437; }
+  .teal { background-color: #009688; }
+  .blue { background-color: #039be5; }
+
+  .team-button{
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 30px;
+    font-size: 16px;
+    cursor: pointer;
     width: 100%;
-    max-width: 400px;
-}
+    border-radius: 6px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  .team-area{
+    padding: auto;
+  }
+
+ 
