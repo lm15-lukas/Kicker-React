@@ -29,7 +29,6 @@ export default function ConfigureGame() {
                     <div className="team-option blue">
                         <div className="title">Draw your partner</div>
                     </div>
-                    
                         <button className="team-button">Create Tournament</button>
                     
                 </div>
