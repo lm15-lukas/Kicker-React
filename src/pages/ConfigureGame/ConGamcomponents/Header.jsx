@@ -1,6 +1,6 @@
 import logoImg from './gamepad-solid.svg';
 import "../ConfigureGame.css";
-export default function Header(){
+export default function HeadHeader(){
     return (
         <header className='header'>
             <img className='img' src={logoImg} alt="controller"/>

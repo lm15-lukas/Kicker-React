@@ -13,30 +13,30 @@ export default function ConfigureGame() {
     const handleAlone = () => showModal("Alone gedrückt");
     const handleDouble = () => showModal("Double gedrückt");
     const handleDrawPartner = () => showModal("Draw your partner gedrückt");
-
-
-
+    const handleCreateTournament = () => showModal("Tournament Created");
     const [step, setStep] = useState("configure");
-
+    
     const handleAdvance = () => {
         setStep("setup-teams");
     };
-
-
     if (step === "setup-teams") {
         return (
-
             <>
                 <Header />
                 {modalText && (
                     <div className="modal">
                         <div className="modal-content">
                             <p>{modalText}</p>
-                            <button onClick={() => setModalText("")}>Schließen</button>
+                            <button onClick={() => setModalText("")} className="modal-button">Schließen</button>
+
+                            <p><div>1</div><input className="team-input" type="text" /></p>
+                            <p><div>2</div><input  className="team-input" type="text" /></p>
+                            <p><div>3</div><input className="team-input" type="text" /></p>
+                            <p><div>4</div><input className="team-input" type="text" /></p>
+                            <p><div>5</div><input className="team-input" type="text" /></p>
                         </div>
                     </div>
                 )}
-
                 <main className="color">
                     <div className="team-form-container">
                         <div onClick={handleTeamNames} className="team-option green">
@@ -51,12 +51,10 @@ export default function ConfigureGame() {
                         <div onClick={handleDrawPartner} className="team-option blue">
                             <div className="title">Draw your partner</div>
                         </div>
+                        <button className="cancel-team-adjustment-btn" onClick={(setStep)}>Cancel</button>
                         <button className="empty-button" disabled></button>
                         <button className="empty-button" disabled></button>
-                        <button className="empty-button" disabled></button>
-                        <button className="team-button">Create Tournament</button>
-
-
+                        <button className="team-button" onClick={handleCreateTournament}>Create Tournament</button>
                     </div>
                 </main>
             </>
@@ -67,18 +65,15 @@ export default function ConfigureGame() {
         <div className="header">
             <Header />
             <div className="configure-game-page">
-
                 <div className="form-container">
                     <div className="form-item">
                         <label htmlFor="players" className="form-label">Enter number of players</label>
                         <input id="players" className="form-input" type="number" required />
                     </div>
-
                     <div className="form-item">
                         <label htmlFor="goals" className="form-label">Goals to win</label>
                         <input id="goals" className="form-input" type="number" required />
                     </div>
-
                     <div className="form-item">
                         <label htmlFor="length" className="form-label">Match length in minutes</label>
                         <input id="length" className="form-input" type="number" required />
@@ -88,13 +83,10 @@ export default function ConfigureGame() {
                         <label htmlFor="points" className="form-label">Points per win</label>
                         <input id="points" className="form-input" type="number" required />
                     </div>
-
                     <div className="form-item">
                         <label htmlFor="date" className="form-label">Date</label>
                         <input id="date" className="form-input" type="date" required />
                     </div>
-
-
                     <div>
                         <button className="cancel-button">Cancel</button>
                         <button className="form-button" onClick={handleAdvance}>Advance</button>
@@ -102,6 +94,5 @@ export default function ConfigureGame() {
                 </div>
             </div>
         </div>
-
     );
 }
