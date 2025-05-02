@@ -1,8 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./ConfigureGame.css";
 import Header from "./ConGamcomponents/Header.jsx";
 
 export default function ConfigureGame() {
+
+    const navigate = useNavigate();
+
+const handleCreateTournament = () => {
+    navigate("/tournament"); 
+};
+
 
     const [modalText, setModalText] = useState('');
 
@@ -13,7 +21,6 @@ export default function ConfigureGame() {
     const handleAlone = () => showModal("Alone gedrückt");
     const handleDouble = () => showModal("Double gedrückt");
     const handleDrawPartner = () => showModal("Draw your partner gedrückt");
-    const handleCreateTournament = () => showModal("Tournament Created");
     const [step, setStep] = useState("configure");
     
     const handleAdvance = () => {
