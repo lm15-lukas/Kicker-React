@@ -5,11 +5,27 @@ import Header from "./ConGamcomponents/Header.jsx";
 
 export default function ConfigureGame() {
 
+
+    const [formData, setFormData] = useState({
+        players: "",
+        goals: "",
+        length: "",
+        points: "",
+        date: ""
+    });
+
+    const handleFormDataChange = (event) => {
+        setFormData({
+            ...formData,
+            [event.target.id]: event.target.value
+        });
+    };
+
     const navigate = useNavigate();
 
-const handleCreateTournament = () => {
-    navigate("/tournament"); 
-};
+    const handleCreateTournament = () => {
+        navigate("/tournament", { state: formData });
+    };
 
 
     const [modalText, setModalText] = useState('');
@@ -22,7 +38,7 @@ const handleCreateTournament = () => {
     const handleDouble = () => showModal("Double gedrückt");
     const handleDrawPartner = () => showModal("Draw your partner gedrückt");
     const [step, setStep] = useState("configure");
-    
+
     const handleAdvance = () => {
         setStep("setup-teams");
     };
@@ -37,7 +53,7 @@ const handleCreateTournament = () => {
                             <button onClick={() => setModalText("")} className="modal-button">Schließen</button>
 
                             <p><div>1</div><input className="team-input" type="text" /></p>
-                            <p><div>2</div><input  className="team-input" type="text" /></p>
+                            <p><div>2</div><input className="team-input" type="text" /></p>
                             <p><div>3</div><input className="team-input" type="text" /></p>
                             <p><div>4</div><input className="team-input" type="text" /></p>
                             <p><div>5</div><input className="team-input" type="text" /></p>
@@ -72,27 +88,84 @@ const handleCreateTournament = () => {
         <div className="header">
             <Header />
             <div className="configure-game-page">
+
                 <div className="form-container">
+
                     <div className="form-item">
-                        <label htmlFor="players" className="form-label">Enter number of players</label>
-                        <input id="players" className="form-input" type="number" required />
+                        <label htmlFor="players" className="form-label">
+                            Enter number of players
+                        </label>
+                        <select
+                            id="players" className="form-input" type="number" required
+                            value={formData.players}
+                            onChange={handleFormDataChange}
+                        >
+                            <option value="">-- Please Select --</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+
+                        </select>
                     </div>
+
                     <div className="form-item">
                         <label htmlFor="goals" className="form-label">Goals to win</label>
-                        <input id="goals" className="form-input" type="number" required />
+                        <select id="goals" className="form-input" type="number" required
+                            value={formData.goals}
+                            onChange={handleFormDataChange}
+                        >
+                            <option value="7">7</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
                     </div>
                     <div className="form-item">
+
                         <label htmlFor="length" className="form-label">Match length in minutes</label>
-                        <input id="length" className="form-input" type="number" required />
+
+                        <select id="length" className="form-input" type="number" required
+                            value={formData.length}
+                            onChange={handleFormDataChange}
+                        >
+                            <option value="no Value">No time tracking</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
                     </div>
 
                     <div className="form-item">
                         <label htmlFor="points" className="form-label">Points per win</label>
-                        <input id="points" className="form-input" type="number" required />
+                        <select
+                            id="points" className="form-input" type="number" required value={formData.points} onChange={handleFormDataChange}>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+
                     </div>
                     <div className="form-item">
                         <label htmlFor="date" className="form-label">Date</label>
-                        <input id="date" className="form-input" type="date" required />
+                        <input id="date" className="form-input" type="date" required value={formData.date} onChange={handleFormDataChange} />
                     </div>
                     <div>
                         <button className="cancel-button">Cancel</button>
