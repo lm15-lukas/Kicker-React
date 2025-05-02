@@ -5,7 +5,16 @@ import Header from "./ConGamcomponents/Header.jsx";
 
 export default function ConfigureGame() {
 
-    const[reset,setReset] =useState({});
+    const handleReset = () =>{
+        setFormData({
+            players:"",
+            goals:"",
+            length:"",
+            points:"",
+            date:"",
+        });
+        setErrors({})
+    }
 
     const [errors,setErrors]=useState({});
 
@@ -195,7 +204,7 @@ export default function ConfigureGame() {
                         {errors.date && <h3 className="error-text">{errors.date}</h3>}
                     </div>
                     <div>
-                        <button className="cancel-button">Reset</button>
+                        <button className="cancel-button" onClick={handleReset}>Reset</button>
                         <button className="form-button" onClick={handleAdvance}>Advance</button>
                     </div>
                 </div>
