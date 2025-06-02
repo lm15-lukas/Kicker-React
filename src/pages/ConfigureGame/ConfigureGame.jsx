@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./ConfigureGame.css";
 import Header from "./ConGamcomponents/Header.jsx";
-import TeamAdjustment from "./ConGamcomponents/TeamAdjustment.jsx";
 import SelectGameMode from "./ConGamcomponents/SelectGameMode.jsx";
 
 

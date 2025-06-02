@@ -4,6 +4,7 @@ import monster from './monster.svg';
 import play from './play-solid.svg';
 import Header from './Header.jsx';
 import { useNavigate } from 'react-router-dom';
+import "../ConfigureGame.css";
 
 
 export default function () {
