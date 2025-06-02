@@ -135,6 +135,7 @@ body {
     transition: transform 0.2s ease;
     position: relative;
     text-align: center;
+    background-color: #377e79;
 }
 
 .team-option:hover {
@@ -150,21 +151,6 @@ body {
     justify-content: center;
 }
 
-.green {
-    background-color: #182625;
-}
-
-.orange {
-    background-color: #db4437;
-}
-
-.teal {
-    background-color: #009688;
-}
-
-.blue {
-    background-color: #039be5;
-}
 
 .team-button {
     height: 70px;
@@ -189,31 +175,7 @@ body {
     border: #455559;
 }
 
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
 
-.modal-content {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    text-align: center;
-    height: 500px;
-    width: 400px;
-}
-
-.modal-button {
-    height: 40px
-}
 
 .cancel-team-adjustment-btn {
     height: 70px;
@@ -234,3 +196,57 @@ body {
     font-size: 0.9rem;
     margin-top: 0.25rem;
 }
+.monster-logo{
+    height: 40px;
+    width: 20px;
+}
+.play-logo{
+    height: 40px;
+    width: 20px;
+    justify-content: right;
+}
+.a{
+    text-align: center;
+}
+.ghost-in-team{
+    height: 250px;
+    width: 150px;
+}
+.team-header{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.team-h1{
+    text-align: center;
+    
+}
+.player-input {
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  .ul-t{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    list-style: none;
+  }
+  .remove-btn{
+    margin-left: 8px;
+    background: transparent;
+    border: none;
+    color: #ff4444;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.2em;
+  }
+  .cemter{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+  }

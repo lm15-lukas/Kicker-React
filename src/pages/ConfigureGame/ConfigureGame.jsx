@@ -2,23 +2,24 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./ConfigureGame.css";
 import Header from "./ConGamcomponents/Header.jsx";
+import TeamAdjustment from "./ConGamcomponents/TeamAdjustment.jsx";
+import monster from './ConGamcomponents/monster.svg';
+import play from './ConGamcomponents/play-solid.svg';
 
 export default function ConfigureGame() {
 
-    const handleReset = () =>{
+    const handleReset = () => {
         setFormData({
-            players:"",
-            goals:"",
-            length:"",
-            points:"",
-            date:"",
+            players: "",
+            goals: "",
+            length: "",
+            points: "",
+            date: "",
         });
         setErrors({})
     }
 
-    const [errors,setErrors]=useState({});
-
-
+    const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         players: "",
         goals: "",
@@ -26,6 +27,9 @@ export default function ConfigureGame() {
         points: "",
         date: ""
     });
+    const [step, setStep] = useState("configure");
+    const [teams,setTeams]=useState('');
+    const navigate = useNavigate();
 
     const handleFormDataChange = (event) => {
         setFormData({
@@ -34,36 +38,40 @@ export default function ConfigureGame() {
         });
     };
 
-    const navigate = useNavigate();
+
 
     const handleCreateTournament = () => {
         navigate("/tournament", { state: formData });
     };
 
 
-    const [modalText, setModalText] = useState('');
 
-    const showModal = (text) => {
-        setModalText(text);
+    const handleTeamAdjustment=() => {
+        setTeams("team-building");
     }
-    const handleTeamNames = () => showModal("Team Names pressed");
-    const handleAlone = () => showModal("Alone pressed");
-    const handleDouble = () => showModal("Double pressed");
-    const handleDrawPartner = () => showModal("Draw your partner pressed");
-    const [step, setStep] = useState("configure");
+    if(teams === "team-building"){
+        return(
+            <>
+            <TeamAdjustment/>
+            </>
+        )
+    }
+    
+
+
 
     const handleAdvance = () => {
-        const newErrors ={};
+        const newErrors = {};
 
-        if(!formData.players) newErrors.players = "PLease select a value";
-        if(!formData.goals) newErrors.goals = "Please select a value for Goals";
-        if(!formData.length || formData.length ==="no Value") newErrors.length = "Select a Match length";
-        if(!formData.points) newErrors.points = "Please select points per Match";
-        if(!formData.date) newErrors.date = "Select a date For the Tournament";
+        if (!formData.players) newErrors.players = "PLease select a value";
+        if (!formData.goals) newErrors.goals = "Please select a value for Goals";
+        if (!formData.length || formData.length === "no Value") newErrors.length = "Select a Match length";
+        if (!formData.points) newErrors.points = "Please select points per Match";
+        if (!formData.date) newErrors.date = "Select a date For the Tournament";
 
-        if(Object.keys(newErrors).length >0){
+        if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
-        }else{
+        } else {
             setErrors({});
             setStep("setup-teams");
         }
@@ -74,40 +82,14 @@ export default function ConfigureGame() {
         return (
             <>
                 <Header />
-                {modalText && (
-                    <div className="modal">
-                        <div className="modal-content">
-                            <p>{modalText}</p>
-                            <button onClick={() => setModalText("")} className="modal-button">Schließen</button>
-
-                            <p><div>1</div><input className="team-input" type="text" /></p>
-                            <p><div>2</div><input className="team-input" type="text" /></p>
-                            <p><div>3</div><input className="team-input" type="text" /></p>
-                            <p><div>4</div><input className="team-input" type="text" /></p>
-                            <p><div>5</div><input className="team-input" type="text" /></p>
-                        </div>
-                    </div>
-                )}
-                <main className="color">
-                    <div className="team-form-container">
-                        <div onClick={handleTeamNames} className="team-option green">
-                            <div className="title">Team Names</div>
-                        </div>
-                        <div onClick={handleAlone} className="team-option orange">
-                            <div className="title">Alone</div>
-                        </div>
-                        <div onClick={handleDouble} className="team-option teal">
-                            <div className="title">Double</div>
-                        </div>
-                        <div onClick={handleDrawPartner} className="team-option blue">
-                            <div className="title">Draw your partner</div>
-                        </div>
-                        <button className="cancel-team-adjustment-btn" onClick={(setStep)}>Cancel</button>
-                        <button className="empty-button" disabled></button>
-                        <button className="empty-button" disabled></button>
-                        <button className="team-button" onClick={handleCreateTournament}>Create Tournament</button>
-                    </div>
-                </main>
+                <h1 className="a">Select a Game Mode</h1>
+                <div className="team-form-container">
+                <div className="team-option" onClick={handleTeamAdjustment}>
+                <img src={monster} alt="ghost"  className="monster-logo"/>
+                <img src={play} alt="playbutton" className="play-logo" />
+                <h4>Monster DYP</h4>
+                </div>
+                </div>
             </>
         );
     }
@@ -115,6 +97,7 @@ export default function ConfigureGame() {
     return (
         <div className="header">
             <Header />
+           
             <div className="configure-game-page">
 
                 <div className="form-container">
@@ -176,7 +159,7 @@ export default function ConfigureGame() {
                             <option value="9">9</option>
                             <option value="10">10</option>
                         </select>
-                        {errors.length && <h3 className="error-text">{errors.length}</h3> }
+                        {errors.length && <h3 className="error-text">{errors.length}</h3>}
                     </div>
 
                     <div className="form-item">
