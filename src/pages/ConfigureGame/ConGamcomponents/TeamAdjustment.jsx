@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import MonsterLogo from './monster.svg';
 
 export default function PlayerInputList() {
+    const navigateTournament = useNavigate();
   const [players, setPlayers] = useState([""]);
 
   const handlePlayerChange = (index, value) => {
@@ -23,14 +25,19 @@ export default function PlayerInputList() {
     const updatedPlayers = players.filter((_, i) => i !== index);
     setPlayers(updatedPlayers.length > 0 ? updatedPlayers : [""]);
   };
-
+const handleCreateTournament = () => {
+    navigateTournament('/tournament')
+}
   return (
     <>
       <header className="team-header">
-        <h1>Monster DYP</h1>
+        <h1>Monster DYP </h1>
+        <div className="button-container">
+        <button className="create-tournament" onClick={handleCreateTournament}>Create Tournament</button>
+        </div>  
         <img src={MonsterLogo} alt="ghost" className="ghost-in-team" />
       </header>
-      <div className="center">
+      <div>
         <h2 className="cemter">Enter Player Names</h2>
         <ul className="ul-t">
           {players.map((name, index) => (

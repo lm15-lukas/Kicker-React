@@ -3,8 +3,8 @@ import { useState } from "react";
 import "./ConfigureGame.css";
 import Header from "./ConGamcomponents/Header.jsx";
 import TeamAdjustment from "./ConGamcomponents/TeamAdjustment.jsx";
-import monster from './ConGamcomponents/monster.svg';
-import play from './ConGamcomponents/play-solid.svg';
+import SelectGameMode from "./ConGamcomponents/SelectGameMode.jsx";
+
 
 export default function ConfigureGame() {
 
@@ -28,8 +28,8 @@ export default function ConfigureGame() {
         date: ""
     });
     const [step, setStep] = useState("configure");
-    const [teams,setTeams]=useState('');
-    const navigate = useNavigate();
+
+    const navigateSelectGameMode = useNavigate();
 
     const handleFormDataChange = (event) => {
         setFormData({
@@ -37,28 +37,6 @@ export default function ConfigureGame() {
             [event.target.id]: event.target.value
         });
     };
-
-
-
-    const handleCreateTournament = () => {
-        navigate("/tournament", { state: formData });
-    };
-
-
-
-    const handleTeamAdjustment=() => {
-        setTeams("team-building");
-    }
-    if(teams === "team-building"){
-        return(
-            <>
-            <TeamAdjustment/>
-            </>
-        )
-    }
-    
-
-
 
     const handleAdvance = () => {
         const newErrors = {};
@@ -74,6 +52,7 @@ export default function ConfigureGame() {
         } else {
             setErrors({});
             setStep("setup-teams");
+            navigateSelectGameMode('/select-game-mode')
         }
 
 
@@ -82,14 +61,7 @@ export default function ConfigureGame() {
         return (
             <>
                 <Header />
-                <h1 className="a">Select a Game Mode</h1>
-                <div className="team-form-container">
-                <div className="team-option" onClick={handleTeamAdjustment}>
-                <img src={monster} alt="ghost"  className="monster-logo"/>
-                <img src={play} alt="playbutton" className="play-logo" />
-                <h4>Monster DYP</h4>
-                </div>
-                </div>
+                <SelectGameMode/>
             </>
         );
     }
