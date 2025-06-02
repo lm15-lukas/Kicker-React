@@ -244,7 +244,7 @@ body {
     cursor: pointer;
     font-size: 1.2em;
   }
-  .cemter{
+  .center{
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -267,3 +267,9 @@ body {
     margin-top: 20px;
     transition: background-color 0.3s ease;
 }
+.create-tournament:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
