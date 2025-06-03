@@ -12,17 +12,23 @@ export default function PlayerInputList() {
 };
 
 const findDuplicateName = () => {
-  const trimmedNames = players.map(name => name.trim()).filter(name => name !== "");
-  const nameCount = {};
+  const seen = {};
+  
+  for (let name of players) {
+    const trimmed = name.trim();
+    if (trimmed === "") continue;
 
-  for (let name of trimmedNames) {
-    nameCount[name] = (nameCount[name] || 0) + 1;
-    if (nameCount[name] > 1) {
-      return name;
+    const lower = trimmed.toLowerCase();
+    if (seen[lower]) {
+      return trimmed;
+    } else {
+      seen[lower] = true;
     }
   }
+
   return null;
 };
+
 
 
   
