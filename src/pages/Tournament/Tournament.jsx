@@ -1,9 +1,11 @@
 import "./Tournament.css";
+import PlayerTable from "./PlayerTable.jsx";
+import TournamentHeader from "./TournamentComponents/TurnamentHeader.jsx";
 export default function Tournament() {
     return (
-        <div className="Tournament-Page">
-            <h1>Tournament Page</h1>
-            <p>Hier kommt die Turnierübersicht hin.</p>
-        </div>
+        <>
+        <TournamentHeader/>
+        <PlayerTable/>
+        </>
     );
 }
