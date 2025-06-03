@@ -3,6 +3,29 @@ import { useEffect, useState,useRef } from "react";
 import MonsterLogo from './monster.svg';
 
 export default function PlayerInputList() {
+  const [error,setError] =useState('');
+
+  const hasDuplicateNames = () => {
+  const trimmedNames = players.map(name => name.trim()).filter(name => name !== "");
+  const nameSet = new Set(trimmedNames);
+  return nameSet.size !== trimmedNames.length;
+};
+
+const findDuplicateName = () => {
+  const trimmedNames = players.map(name => name.trim()).filter(name => name !== "");
+  const nameCount = {};
+
+  for (let name of trimmedNames) {
+    nameCount[name] = (nameCount[name] || 0) + 1;
+    if (nameCount[name] > 1) {
+      return name;
+    }
+  }
+  return null;
+};
+
+
+  
     const navigateTournament = useNavigate();
 
   const [players, setPlayers] = useState(() => {
@@ -44,8 +67,22 @@ useEffect(()=>{
     setPlayers(updatedPlayers.length > 0 ? updatedPlayers : [""]);
   };
 const handleCreateTournament = () => {
-    navigateTournament('/tournament')
-}
+  if (!isValidPlayerList()) {
+    setError("At least 4 player names are required.");
+    return;
+  }
+
+  const duplicateName = findDuplicateName();
+  if (duplicateName) {
+    setError(`The name "${duplicateName}" is used more than once.`);
+    return;
+  }
+
+  setError("");
+  navigateTournament('/tournament');
+};
+
+
 const isValidPlayerList = () => {
     const nonEmptyPlayers = players.filter(name => name.trim() !== "");
     return nonEmptyPlayers.length >= 4;
@@ -58,7 +95,7 @@ const isValidPlayerList = () => {
         <button
   className="create-tournament"
   onClick={handleCreateTournament}
-  disabled={!isValidPlayerList()}
+
 >
   Create Tournament
 </button>
@@ -69,6 +106,8 @@ const isValidPlayerList = () => {
       <div>
         <h2 className="center">Enter Player Names</h2>
         <h3 className="center">Minimum 4 Players</h3>
+        {error && <p className="error-message ">{error}</p>}
+
         <ul className="ul-t">
           {players.map((name, index) => (
             <li key={index}>

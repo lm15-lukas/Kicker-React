@@ -52,7 +52,7 @@ export default function ConfigureGame() {
         setFormData(resetData);
 
         setErrors(getInitialErrors(resetData));
-        
+
         localStorage.removeItem('form');
     };
 
@@ -89,6 +89,7 @@ export default function ConfigureGame() {
     if (step === "setup-teams") {
         return (
             <>
+           
                 <Header />
                 <SelectGameMode />
             </>
