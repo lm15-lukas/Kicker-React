@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import MonsterLogo from './monster.svg';
 
 export default function PlayerInputList() {
@@ -9,6 +9,15 @@ export default function PlayerInputList() {
   const saved = localStorage.getItem("player-names");
   return saved ? JSON.parse(saved) : [""];
 });
+
+const inputRefs = useRef([])
+
+useEffect(() =>{
+  const lastIndex = players.length -1;
+  if(inputRefs.current[lastIndex]){
+    inputRefs.current[lastIndex].focus();
+  }
+},[players.length])
 
 useEffect(()=>{
   localStorage.setItem('player-names', JSON.stringify(players))
@@ -66,6 +75,7 @@ const isValidPlayerList = () => {
               <input
                 type="text"
                 value={name}
+                ref={el => inputRefs.current[index] = el}
                 onChange={(e) => handlePlayerChange(index, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 placeholder={`Player ${index + 1}`}
