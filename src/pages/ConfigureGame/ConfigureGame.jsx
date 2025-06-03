@@ -16,29 +16,26 @@ const getInitialErrors = (data) => {
     return errs;
 };
 
-export default function ConfigureGame() {
-    const navigateSelectGameMode = useNavigate();
-
-    const [formData, setFormData] = useState({
+function getFormValues(){
+    const storedValues = localStorage.getItem('form')
+    if(!storedValues) return{
         players: "",
         goals: "",
         length: "",
         points: "",
         date: ""
-    });
-    
-    useEffect(() => {
-        const data = window.localStorage.getItem('my-form-data');
-        if (data) {
-            setFormData(JSON.parse(data));
-        }
-    }, []);
-    
-    useEffect(() => {
-        window.localStorage.setItem('my-form-data', JSON.stringify(formData));
-    }, [formData]);
-    
-    
+    };
+    return JSON.parse(storedValues);
+}
+
+export default function ConfigureGame() {
+    const navigateSelectGameMode = useNavigate();
+
+    const [formData, setFormData] = useState(getFormValues);
+        
+    useEffect(()=>{
+        localStorage.setItem('form',JSON.stringify(formData))
+    }, [formData])
 
     const [errors, setErrors] = useState(getInitialErrors(formData));
     const [step, setStep] = useState("configure");
@@ -51,8 +48,12 @@ export default function ConfigureGame() {
             points: "",
             date: ""
         };
+
+        setFormData(resetData);
+
         setErrors(getInitialErrors(resetData));
-        localStorage.removeItem('my-form-data');
+        
+        localStorage.removeItem('form');
     };
 
     const handleFormDataChange = (event) => {

@@ -1,10 +1,19 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MonsterLogo from './monster.svg';
 
 export default function PlayerInputList() {
     const navigateTournament = useNavigate();
-  const [players, setPlayers] = useState([""]);
+
+  const [players, setPlayers] = useState(() => {
+  const saved = localStorage.getItem("player-names");
+  return saved ? JSON.parse(saved) : [""];
+});
+
+useEffect(()=>{
+  localStorage.setItem('player-names', JSON.stringify(players))
+},[players])
+
 
   const handlePlayerChange = (index, value) => {
     const updatedPlayers = [...players];
