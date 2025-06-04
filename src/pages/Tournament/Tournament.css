@@ -1,14 +1,56 @@
-.Tournament-Page{
-    text-align: center;
+.layout{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    position: relative;
+    height: 100vh;
+    padding: 20px;
 }
+
 .tournament-container {
+  	margin-left: auto;
+    background-color: #2a2a2a;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+}
+.player-table{
   padding: 2rem;
   max-width: 800px;
   margin: 0 auto;
 }
-.player-table{
-  width: 100%;
-  border-collapse: collapse;
+.header{
+  text-align: center;
+}
+.match-table-container{
+    background: #28403D;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 850px;
+}
+.match-table-buttons{
+  margin: 4px;
+  border-radius: 50%;
+  border: none;
+  background-color: #0f766e ;
+  color: rgb(255, 255, 255);
+  font-size: 24px;
+  cursor: pointer;
   
+  transition: background-color 0.2s ease;
+}
+.match-table-buttons:hover{
+background-color: #115e59;
+}
+.button-row{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.colon{
+  font-size: 20px;
+  color: white;
 
 }

@@ -1,7 +1,16 @@
 import './Tournament.css';
+import Button from './TournamentComponents/Button.jsx';
+
 export default function PlayerTable() {
     return (
         <>
+        <div className="layout">
+            <div className="match-table-container">
+                
+                <Button></Button>
+            </div>
+
+
             <div className="tournament-container">
                 <h2>Participants</h2>
                 <table className='player-table'>
@@ -37,6 +46,9 @@ export default function PlayerTable() {
                 </table>
 
 
+            </div>
+
+            
             </div>
         </>
     )
