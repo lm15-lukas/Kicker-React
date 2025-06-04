@@ -4,7 +4,9 @@ import Tournament from "./pages/Tournament/Tournament";
 import TeamAdjustment from "./pages/ConfigureGame/ConGamcomponents/TeamAdjustment.jsx";
 import SelectGameMode from "./pages/ConfigureGame/ConGamcomponents/SelectGameMode.jsx";
 import LandingPage from "./pages/CreateGame/LandingPage.jsx";
-import HeroSection from "./components/HeroSection";
+import HeroSection from "./pages/CreateGame/HeroSection.jsx";
+import ScoreBoard from "./pages/ScoreBoard/ScoreBoard.jsx";
+
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
       <HeroSection />
     <Router>
       <Routes>
+        <Route path="/scoreboard" element={<ScoreBoard />} />
         <Route path="/" element={<ConfigureGame/>}></Route>
         <Route path="/team-adjustment" element={<TeamAdjustment/>}></Route>
         <Route path="/select-game-mode" element={<SelectGameMode/>}></Route>

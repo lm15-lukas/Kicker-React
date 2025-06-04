@@ -24,7 +24,7 @@ const HeroSection= () => {
             </motion.h1>
 
             <motion.p
-                        initial={{ opacity: 0, y: 80 }}
+            initial={{ opacity: 0, y: 80 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
                 type:"spring",
