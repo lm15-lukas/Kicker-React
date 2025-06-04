@@ -30,15 +30,11 @@
     width: 90%;
     max-width: 850px;
 }
-.match-table-players-container{
-    margin-bottom: 40px;
-    background-color: rgb(96, 37, 37);
-}
 .match-table-buttons{
   margin: 4px;
   border-radius: 50%;
   border: none;
-  background-color: #0f766e ;
+  background-color: #28403D ;
   color: rgb(255, 255, 255);
   font-size: 24px;
   cursor: pointer;
@@ -67,4 +63,36 @@ background-color: #115e59;
   font-size: 20px;
   color: white;
 
+}
+.match-table-players-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.player-side {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.center-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.enter-results-button {
+    padding: 10px 20px;
+    background-color: #3d5d80;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.enter-results-button:hover {
+    background-color: #759ac3;
 }
