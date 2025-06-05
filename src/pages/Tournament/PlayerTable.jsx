@@ -11,9 +11,9 @@ export default function PlayerTable() {
         date: ""
     });
 
+    const [matches, setMatches] = useState([]);
     const [playerNames, setPlayerNames] = useState([]);
     const [playedPlayers, setPlayedPlayers] = useState([]);
-    const [currentMatchPlayers, setCurrentMatchPlayers] = useState([]);
     const [showMatchResults, setShowMatchResults] = useState(false);
 
     function startNewRound() {
@@ -30,10 +30,11 @@ export default function PlayerTable() {
             selectedPlayers = shuffle(playerNames).slice(0, 4);
         }
 
-        setCurrentMatchPlayers(selectedPlayers);
 
         const updatedPlayed = [...new Set([...playedPlayers, ...selectedPlayers])];
         setPlayedPlayers(updatedPlayed);
+
+        setMatches(prevMatches => [...prevMatches, selectedPlayers]);
     }
 
     function shuffle(array) {
@@ -58,24 +59,38 @@ export default function PlayerTable() {
         <>
             <div className="layout">
                 <div className="match-section">
-                    <div className="match-table-players-container">
-                        <div className="player-side left-side">
-                            <span>{currentMatchPlayers[0]}</span>
-                            <span>{currentMatchPlayers[1]}</span>
-                        </div>
-
+                    { }
+                    {matches.length === 0 && (
                         <div className="center-button">
-                            <button onClick={startNewRound}>New Round</button>
-                            <button onClick={() => setShowMatchResults(prev => !prev)}>
-                                {showMatchResults ? "Close Match Results" : "Enter Match Results"}
-                            </button>
+                            <button onClick={startNewRound}>Start New Round</button>
                         </div>
+                    )}
 
-                        <div className="player-side right-side">
-                            <span>{currentMatchPlayers[2]}</span>
-                            <span>{currentMatchPlayers[3]}</span>
+                    { }
+                    {matches.map((matchPlayers, index) => (
+                        <div className="match-table-players-container" key={index}>
+                            <div className="player-side left-side">
+                                <span>{matchPlayers[0]}</span>
+                                <span>{matchPlayers[1]}</span>
+                            </div>
+
+                            <div className="center-button">
+                                {index === matches.length - 1 && (
+                                    <>
+                                        <button onClick={startNewRound}>New Round</button>
+                                        <button onClick={() => setShowMatchResults(prev => !prev)}>
+                                            {showMatchResults ? "Close Match Results" : "Enter Match Results"}
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+
+                            <div className="player-side right-side">
+                                <span>{matchPlayers[2]}</span>
+                                <span>{matchPlayers[3]}</span>
+                            </div>
                         </div>
-                    </div>
+                    ))}
 
                     {showMatchResults && (
                         <div className="match-table-container">
@@ -83,6 +98,8 @@ export default function PlayerTable() {
                         </div>
                     )}
                 </div>
+
+
 
                 <div className="tournament-container">
                     <h2>Participants</h2>
