@@ -4,7 +4,7 @@ import Button from './TournamentComponents/Button.jsx';
 
 
 export default function PlayerTable() {
-    const [formData, setFormData] = useState({
+    const [, setFormData] = useState({
         players: "",
         goals: "",
         length: "",

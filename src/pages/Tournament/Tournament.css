@@ -1,120 +1,128 @@
-.layout{
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    position: relative;
-    height: 100vh;
-    padding: 20px;
+.layout {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  position: relative;
+  height: 100vh;
+  padding: 20px;
 }
 
 .tournament-container {
-  	margin-left: auto;
-    background-color: #2a2a2a;
-    padding: 10px;
-    border-radius: 8px;
-    color: white;
+  margin-left: auto;
+  background-color: #2a2a2a;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
 }
-.player-table{
+
+.player-table {
   padding: 2rem;
   max-width: 800px;
   margin: 0 auto;
 }
-.header{
+
+.header {
   text-align: center;
 }
-.match-table-container{
+
+.match-table-container {
   display: flex;
   align-items: center;
-    background: #28403D;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 850px;
+  background: #28403D;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 850px;
 }
+
 .match-table-players-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 40px;
-    gap: 247px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 40px;
+  gap: 247px;
 }
-.match-table-buttons:hover{
-background-color: #115e59;
+
+.match-table-buttons:hover {
+  background-color: #115e59;
 }
-.match-table-player-container-span{
-background-color: #115e59;
+
+.match-table-player-container-span {
+  background-color: #115e59;
 }
-.match-section{
+
+.match-section {
   display: flex;
   flex-direction: column;
   margin-right: auto;
   gap: 20px;
 }
-.button-row{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    flex-wrap: nowrap;
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
 }
-.colon{
+
+.colon {
   font-size: 20px;
   color: white;
+  padding: 20px;
 
 }
 
 
 .player-side {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    size: 200rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  size: 200rem;
 }
 
 .enter-results-button {
-    padding: 10px 20px;
-    background-color: #3d5d80;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
+  padding: 10px 20px;
+  background-color: #3d5d80;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .enter-results-button:hover {
-    background-color: #759ac3;
+  background-color: #759ac3;
 }
+
 .center-button button {
-    padding: 10px 20px;
-    background-color: #3d5d80;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
+  padding: 10px 20px;
+  background-color: #3d5d80;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .center-button button:hover {
-    background-color: #759ac3;
+  background-color: #759ac3;
 }
+
 .toggle-button {
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+  width: 20px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 16px;
 }
 
 .toggle-button.inactive {
-      margin: 4px;
+  margin: 4px;
   border-radius: 50%;
   border: none;
-  background-color: #28403D ;
+  background-color: #28403D;
   color: rgb(255, 255, 255);
   font-size: 20px;
   cursor: pointer;

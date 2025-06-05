@@ -16,7 +16,7 @@ export default function Button() {
     }
 
     return (
-        <div className="button-column">
+<>
             <div className="button-row">
                 {topButtons.map((num, index) => (
                     <button
@@ -42,6 +42,6 @@ export default function Button() {
                     </button>
                 ))}
             </div>
-        </div>
+   </>
     );
 }
