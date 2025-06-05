@@ -14,7 +14,7 @@ export default function PlayerTable() {
     const [matches, setMatches] = useState([]);
     const [playerNames, setPlayerNames] = useState([]);
     const [playedPlayers, setPlayedPlayers] = useState([]);
-    const [showMatchResults, setShowMatchResults] = useState(false);
+    const [showMatchResults, setShowMatchResults] = useState({});
 
     function startNewRound() {
         const unplayed = playerNames.filter(p => !playedPlayers.includes(p));
@@ -36,6 +36,13 @@ export default function PlayerTable() {
 
         setMatches(prevMatches => [...prevMatches, selectedPlayers]);
     }
+    function toggleMatchResult(index) {
+        setShowMatchResults(prev => ({
+            ...prev,
+            [index]: !prev[index]
+        }));
+    }
+
 
     function shuffle(array) {
         return [...array].sort(() => 0.5 - Math.random());
@@ -59,45 +66,52 @@ export default function PlayerTable() {
         <>
             <div className="layout">
                 <div className="match-section">
-                    { }
-                    {matches.length === 0 && (
+                    {matches.length === 0 ? (
                         <div className="center-button">
-                            <button onClick={startNewRound}>Start New Round</button>
+                            <button onClick={startNewRound}>Start First Round</button>
+                        </div>
+                    ) : (
+                        <div className="center-button">
+                            <button onClick={startNewRound}>Start new Round</button>
                         </div>
                     )}
 
-                    { }
+
                     {matches.map((matchPlayers, index) => (
-                        <div className="match-table-players-container" key={index}>
-                            <div className="player-side left-side">
-                                <span>{matchPlayers[0]}</span>
-                                <span>{matchPlayers[1]}</span>
+                        <div key={index}>
+                            <div className="match-table-players-container">
+                                <div className="player-side left-side">
+                                    <span>{matchPlayers[0]}</span>
+                                    <span>{matchPlayers[1]}</span>
+                                </div>
+
+                                <div className="center-button">
+
+                                    <button
+                                        className="enter-results-button"
+                                        onClick={() => toggleMatchResult(index)}
+                                    >
+                                        {showMatchResults[index] ? "Close Match Results" : "Enter Match Results"}
+                                    </button>
+
+                                </div>
+
+                                <div className="player-side right-side">
+                                    <span>{matchPlayers[2]}</span>
+                                    <span>{matchPlayers[3]}</span>
+                                </div>
                             </div>
 
-                            <div className="center-button">
-                                {index === matches.length - 1 && (
-                                    <>
-                                        <button onClick={startNewRound}>New Round</button>
-                                        <button onClick={() => setShowMatchResults(prev => !prev)}>
-                                            {showMatchResults ? "Close Match Results" : "Enter Match Results"}
-                                        </button>
-                                    </>
-                                )}
-                            </div>
-
-                            <div className="player-side right-side">
-                                <span>{matchPlayers[2]}</span>
-                                <span>{matchPlayers[3]}</span>
-                            </div>
+                            {showMatchResults[index] && (
+                                <div className="match-table-container">
+                                    <Button />
+                                </div>
+                            )}
                         </div>
                     ))}
 
-                    {showMatchResults && (
-                        <div className="match-table-container">
-                            <Button />
-                        </div>
-                    )}
                 </div>
+
 
 
 

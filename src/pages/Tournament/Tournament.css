@@ -77,12 +77,6 @@ background-color: #115e59;
     gap: 10px;
 }
 
-.center-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .enter-results-button {
     padding: 10px 20px;
     background-color: #3d5d80;
@@ -94,5 +88,18 @@ background-color: #115e59;
 }
 
 .enter-results-button:hover {
+    background-color: #759ac3;
+}
+.center-button button {
+    padding: 10px 20px;
+    background-color: #3d5d80;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.center-button button:hover {
     background-color: #759ac3;
 }
