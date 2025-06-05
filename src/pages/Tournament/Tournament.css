@@ -30,6 +30,14 @@
     width: 90%;
     max-width: 850px;
 }
+.match-table-players-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 40px;
+    gap: 240px;
+}
 .match-table-buttons{
   margin: 4px;
   border-radius: 50%;
@@ -64,12 +72,7 @@ background-color: #115e59;
   color: white;
 
 }
-.match-table-players-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
+
 
 .player-side {
     display: flex;

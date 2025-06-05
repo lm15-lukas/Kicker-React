@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './Tournament.css';
 import Button from './TournamentComponents/Button.jsx';
 
+
 export default function PlayerTable() {
     const [formData, setFormData] = useState({
         players: "",
@@ -30,7 +31,6 @@ export default function PlayerTable() {
             selectedPlayers = shuffle(playerNames).slice(0, 4);
         }
 
-
         const updatedPlayed = [...new Set([...playedPlayers, ...selectedPlayers])];
         setPlayedPlayers(updatedPlayed);
 
@@ -43,7 +43,6 @@ export default function PlayerTable() {
         }));
     }
 
-
     function shuffle(array) {
         return [...array].sort(() => 0.5 - Math.random());
     }
@@ -51,11 +50,9 @@ export default function PlayerTable() {
     useEffect(() => {
         const storedForm = localStorage.getItem('form');
         const storedPlayerNames = localStorage.getItem('player-names');
-
         if (storedForm) {
             setFormData(JSON.parse(storedForm));
         }
-
         if (storedPlayerNames) {
             const parsedNames = JSON.parse(storedPlayerNames).filter(name => name.trim() !== "");
             setPlayerNames(parsedNames);
@@ -75,8 +72,6 @@ export default function PlayerTable() {
                             <button onClick={startNewRound}>Start new Round</button>
                         </div>
                     )}
-
-
                     {matches.map((matchPlayers, index) => (
                         <div key={index}>
                             <div className="match-table-players-container">
@@ -84,9 +79,7 @@ export default function PlayerTable() {
                                     <span>{matchPlayers[0]}</span>
                                     <span>{matchPlayers[1]}</span>
                                 </div>
-
                                 <div className="center-button">
-
                                     <button
                                         className="enter-results-button"
                                         onClick={() => toggleMatchResult(index)}
@@ -95,13 +88,11 @@ export default function PlayerTable() {
                                     </button>
 
                                 </div>
-
                                 <div className="player-side right-side">
                                     <span>{matchPlayers[2]}</span>
                                     <span>{matchPlayers[3]}</span>
                                 </div>
                             </div>
-
                             {showMatchResults[index] && (
                                 <div className="match-table-container">
                                     <Button />
@@ -109,12 +100,7 @@ export default function PlayerTable() {
                             )}
                         </div>
                     ))}
-
                 </div>
-
-
-
-
                 <div className="tournament-container">
                     <h2>Participants</h2>
                     <table className='player-table'>
