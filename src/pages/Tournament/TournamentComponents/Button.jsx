@@ -1,30 +1,47 @@
-export default function Button(){
-    return(
-<>
-<div className="button-row">
-<button className="match-table-buttons">0</button>
-<button className="match-table-buttons">1</button>
-<button className="match-table-buttons">2</button>
-<button className="match-table-buttons">3</button>
-<button className="match-table-buttons">4</button>
-<button className="match-table-buttons">5</button>
-<button className="match-table-buttons">6</button>
-<button className="match-table-buttons">7</button>
+import { useState } from "react";
 
-<span className="colon">:</span>
+export default function Button() {
+    const topButtons = [0, 1, 2, 3, 4, 5, 6, 7];
+    const bottomButtons = [...topButtons].reverse();
 
-<button className="match-table-buttons">7</button>
-<button className="match-table-buttons">6</button>
-<button className="match-table-buttons">5</button>
-<button className="match-table-buttons">4</button>
-<button className="match-table-buttons">3</button>
-<button className="match-table-buttons">2</button>
-<button className="match-table-buttons">1</button>
-<button className="match-table-buttons">0</button>
+    const [topStates, setTopStates] = useState(Array(topButtons.length).fill(false));
+    const [bottomStates, setBottomStates] = useState(Array(bottomButtons.length).fill(false));
 
+    function handleTopClick(index) {
+        setTopStates(prev => prev.map((val, i) => i === index ? !val : val));
+    }
 
+    function handleBottomClick(index) {
+        setBottomStates(prev => prev.map((val, i) => i === index ? !val : val));
+    }
 
-</div>
-</>
-    )
+    return (
+        <div className="button-column">
+            <div className="button-row">
+                {topButtons.map((num, index) => (
+                    <button
+                        key={`top-${index}`}
+                        onClick={() => handleTopClick(index)}
+                        className={`toggle-button ${topStates[index] ? 'active' : 'inactive'}`}
+                    >
+                        {num}
+                    </button>
+                ))}
+            </div>
+
+            <span className="colon">:</span>
+
+            <div className="button-row">
+                {bottomButtons.map((num, index) => (
+                    <button
+                        key={`bottom-${index}`}
+                        onClick={() => handleBottomClick(index)}
+                        className={`toggle-button ${bottomStates[index] ? 'active' : 'inactive'}`}
+                    >
+                        {num}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
 }

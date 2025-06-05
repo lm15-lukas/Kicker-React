@@ -23,6 +23,8 @@
   text-align: center;
 }
 .match-table-container{
+  display: flex;
+  align-items: center;
     background: #28403D;
     padding: 40px;
     border-radius: 12px;
@@ -36,25 +38,13 @@
     align-items: center;
     margin-bottom: 20px;
     padding: 40px;
-    gap: 240px;
-}
-.match-table-buttons{
-  margin: 4px;
-  border-radius: 50%;
-  border: none;
-  background-color: #28403D ;
-  color: rgb(255, 255, 255);
-  font-size: 24px;
-  cursor: pointer;
-  
-  transition: background-color 0.2s ease;
+    gap: 247px;
 }
 .match-table-buttons:hover{
 background-color: #115e59;
 }
 .match-table-player-container-span{
-  display: flex;
-  gap: 810px;
+background-color: #115e59;
 }
 .match-section{
   display: flex;
@@ -63,9 +53,12 @@ background-color: #115e59;
   gap: 20px;
 }
 .button-row{
-  display: flex;
-  gap: 8px;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: nowrap;
 }
 .colon{
   font-size: 20px;
@@ -78,6 +71,7 @@ background-color: #115e59;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    size: 200rem;
 }
 
 .enter-results-button {
@@ -105,4 +99,35 @@ background-color: #115e59;
 
 .center-button button:hover {
     background-color: #759ac3;
+}
+.toggle-button {
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button.inactive {
+      margin: 4px;
+  border-radius: 50%;
+  border: none;
+  background-color: #28403D ;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-button.active {
+  background-color: green;
+  margin: 4px;
+  border-radius: 50%;
+  border: none;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
