@@ -4,25 +4,25 @@ export default function Button() {
     const topButtons = [0, 1, 2, 3, 4, 5, 6, 7];
     const bottomButtons = [...topButtons].reverse();
 
-    const [topStates, setTopStates] = useState(Array(topButtons.length).fill(false));
-    const [bottomStates, setBottomStates] = useState(Array(bottomButtons.length).fill(false));
+    const [topButtonActive, setTopButtonActive] = useState(null);
+    const [bottomButtonActive, setBottomButtonActive] = useState(null);
 
     function handleTopClick(index) {
-        setTopStates(prev => prev.map((val, i) => i === index ? !val : val));
+        setTopButtonActive(prev => (prev === index ? null : index));
     }
 
     function handleBottomClick(index) {
-        setBottomStates(prev => prev.map((val, i) => i === index ? !val : val));
+        setBottomButtonActive(prev => (prev === index ? null : index));
     }
 
     return (
-<>
+        <>
             <div className="button-row">
                 {topButtons.map((num, index) => (
                     <button
                         key={`top-${index}`}
                         onClick={() => handleTopClick(index)}
-                        className={`toggle-button ${topStates[index] ? 'active' : 'inactive'}`}
+                        className={`toggle-button ${topButtonActive === index ? 'active' : 'inactive'}`}
                     >
                         {num}
                     </button>
@@ -36,12 +36,12 @@ export default function Button() {
                     <button
                         key={`bottom-${index}`}
                         onClick={() => handleBottomClick(index)}
-                        className={`toggle-button ${bottomStates[index] ? 'active' : 'inactive'}`}
+                        className={`toggle-button ${bottomButtonActive === index ? 'active' : 'inactive'}`}
                     >
                         {num}
                     </button>
                 ))}
             </div>
-   </>
+        </>
     );
 }

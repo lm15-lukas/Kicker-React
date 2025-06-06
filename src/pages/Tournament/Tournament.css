@@ -55,7 +55,7 @@
 
 .match-section {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   margin-right: auto;
   gap: 20px;
 }
@@ -64,8 +64,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  flex-wrap: nowrap;
+  gap: 15px;
 }
 
 .colon {
@@ -117,7 +116,6 @@
   border-radius: 50%;
   font-size: 16px;
 }
-
 .toggle-button.inactive {
   margin: 4px;
   border-radius: 50%;
