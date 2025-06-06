@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { PlayerProvider } from "./pages/Tournament/TournamentComponents/PlayerContext.js";
+
 import ConfigureGame from "./pages/ConfigureGame/ConfigureGame";
 import Tournament from "./pages/Tournament/Tournament";
 import TeamAdjustment from "./pages/ConfigureGame/ConGamcomponents/TeamAdjustment.jsx";
@@ -7,6 +9,7 @@ import SelectGameMode from "./pages/ConfigureGame/ConGamcomponents/SelectGameMod
 function App() {
   return (
     <>
+    <PlayerProvider>
     <Router>
       <Routes>
         <Route path="/" element={<ConfigureGame/>}></Route>
@@ -15,6 +18,7 @@ function App() {
         <Route path="/tournament" element={<Tournament/>}></Route>
       </Routes>
       </Router>
+      </PlayerProvider>
       </>
   );
 }

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import { usePlayers } from './TournamentComponents/PlayerContext.js';
 import './Tournament.css';
 import Button from './TournamentComponents/Button.jsx';
 import AddPlayer from './AddPlayer.jsx';
-
 
 export default function PlayerTable() {
     const [, setFormData] = useState({
@@ -13,14 +13,15 @@ export default function PlayerTable() {
         date: ""
     });
 
+    const { players, addPlayer, removePlayer } = usePlayers();
+
     const [matches, setMatches] = useState([]);
-    const [playerNames, setPlayerNames] = useState([]);
     const [playedPlayers, setPlayedPlayers] = useState([]);
     const [showMatchResults, setShowMatchResults] = useState({});
 
     function startNewRound() {
-        const unplayed = playerNames.filter(p => !playedPlayers.includes(p));
-        const played = playerNames.filter(p => playedPlayers.includes(p));
+        const unplayed = players.filter(p => !playedPlayers.includes(p));
+        const played = players.filter(p => playedPlayers.includes(p));
 
         let selectedPlayers = [];
 
@@ -29,19 +30,14 @@ export default function PlayerTable() {
             const experienced = shuffle(played).slice(0, 2);
             selectedPlayers = [...newOnes, ...experienced];
         } else {
-            selectedPlayers = shuffle(playerNames).slice(0, 4);
+            selectedPlayers = shuffle(players).slice(0, 4);
         }
+
         const updatedPlayed = [...new Set([...playedPlayers, ...selectedPlayers])];
         setPlayedPlayers(updatedPlayed);
-
         setMatches(prevMatches => [...prevMatches, selectedPlayers]);
     }
-    
-        function addPlayers(name){
-            setPlayerNames(prev => [...prev,name]);
 
-            localStorage.setItem('player-names' ,JSON.stringify([...playerNames,name]));
-        }
     function toggleMatchResult(index) {
         setShowMatchResults(prev => ({
             ...prev,
@@ -55,88 +51,80 @@ export default function PlayerTable() {
 
     useEffect(() => {
         const storedForm = localStorage.getItem('form');
-        const storedPlayerNames = localStorage.getItem('player-names');
         if (storedForm) {
             setFormData(JSON.parse(storedForm));
-        }
-        if (storedPlayerNames) {
-            const parsedNames = JSON.parse(storedPlayerNames).filter(name => name.trim() !== "");
-            setPlayerNames(parsedNames);
         }
     }, []);
 
     return (
-        <>
-            <div className="layout">
-                <div className="match-section">
-                    {matches.length === 0 ? (
-                        <div className="center-button">
-                            <button onClick={startNewRound}>Start First Round</button>
-                        </div>
-                    ) : (
-                        <div className="center-button">
-                            <button onClick={startNewRound}>Start new Round</button>
-                        </div>
-                    )}
-                    {matches.map((matchPlayers, index) => (
-                        <div key={index}>
-                            <div className="match-table-players-container">
-                                <div className="player-side left-side">
-                                    <span>{matchPlayers[0]}</span>
-                                    <span>{matchPlayers[1]}</span>
-                                </div>
-                                <div className="center-button">
-                                    <button
-                                        className="enter-results-button"
-                                        onClick={() => toggleMatchResult(index)}
-                                    >
-                                        {showMatchResults[index] ? "Close Match Results" : "Enter Match Results"}
-                                    </button>
-
-                                </div>
-                                <div className="player-side right-side">
-                                    <span>{matchPlayers[2]}</span>
-                                    <span>{matchPlayers[3]}</span>
-                                </div>
+        <div className="layout">
+            <div className="match-section">
+                <div className="center-button">
+                    <button onClick={startNewRound}>
+                        {matches.length === 0 ? "Start First Round" : "Start New Round"}
+                    </button>
+                </div>
+                {matches.map((matchPlayers, index) => (
+                    <div key={index}>
+                        <div className="match-table-players-container">
+                            <div className="player-side left-side">
+                                <span>{matchPlayers[0]}</span>
+                                <span>{matchPlayers[1]}</span>
                             </div>
-                            {showMatchResults[index] && (
-                                <div className="match-table-container">
-                                    <Button/>
-                                </div>
-                            )}
+                            <div className="center-button">
+                                <button
+                                    className="enter-results-button"
+                                    onClick={() => toggleMatchResult(index)}
+                                >
+                                    {showMatchResults[index] ? "Close Match Results" : "Enter Match Results"}
+                                </button>
+                            </div>
+                            <div className="player-side right-side">
+                                <span>{matchPlayers[2]}</span>
+                                <span>{matchPlayers[3]}</span>
+                            </div>
                         </div>
-                    ))}
-                </div>
-                <div className="tournament-container">
-                    <h2>Participants</h2>
-    	            <AddPlayer onAdd={addPlayers}/>
-                    <table className='player-table'>
-                        
-                        <thead>
-                            <tr>
-                                <th>Place</th>
-                                <th>Player</th>
-                                <th>Games</th>
-                                <th>Wins</th>
-                                <th>Losses</th>
-                                <th>Points</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {playerNames.map((player, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{player}</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>00</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                        {showMatchResults[index] && (
+                            <div className="match-table-container">
+                                <Button />
+                            </div>
+                        )}
+                    </div>
+                ))}
             </div>
-        </>
+
+            <div className="tournament-container">
+                <h2>Participants</h2>
+                <AddPlayer onAdd={addPlayer} />
+                <table className='player-table'>
+                    <thead>
+                        <tr>
+                            <th>Place</th>
+                            <th>Player</th>
+                            <th>Games</th>
+                            <th>Wins</th>
+                            <th>Losses</th>
+                            <th>Points</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {players.map((player, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{player}</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>
+                                    <button className="remove-button" onClick={() => removePlayer(index)}>×</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     );
 }

@@ -156,3 +156,12 @@ margin-right: 27px;
 .add{
   size: 20rem;
 }
+.remove-button{
+      margin-left: 8px;
+    background: transparent;
+    border: none;
+    color: #ff4444;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.2em;
+}
