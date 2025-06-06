@@ -76,7 +76,8 @@ export default function PlayerTable() {
                                     className="enter-results-button"
                                     onClick={() => toggleMatchResult(index)}
                                 >
-                                    {showMatchResults[index] ? "Close Match Results" : "Enter Match Results"}
+                                    {showMatchResults[index]
+                                     ? "Close Match Results" : "Enter Match Results"}
                                 </button>
                             </div>
                             <div className="player-side right-side">
@@ -118,7 +119,12 @@ export default function PlayerTable() {
                                 <td>0</td>
                                 <td>0</td>
                                 <td>
-                                    <button className="remove-button" onClick={() => removePlayer(index)}>×</button>
+                                    <button 
+                                    className="remove-button" 
+                                    onClick={() => removePlayer(index)}
+                                    >
+                                        ×
+                                        </button>
                                 </td>
                             </tr>
                         ))}

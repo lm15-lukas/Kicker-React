@@ -32,7 +32,7 @@ export default function AddPlayer({onAdd}) {
                         <input type="text"
                         value={newPlayerName}
                         onChange={e => setNewPlayerName(e.target.value)}
-                        placeholder='PLayer Name'
+                        placeholder='Player Name'
                         />
                     </form>
                 )}
