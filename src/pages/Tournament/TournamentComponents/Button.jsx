@@ -41,6 +41,7 @@ export default function Button() {
                         {num}
                     </button>
                 ))}
+                <button className="setting-button-row">Confirm</button>
             </div>
         </>
     );

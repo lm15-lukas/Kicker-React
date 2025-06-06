@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './Tournament.css';
 import Button from './TournamentComponents/Button.jsx';
+import AddPlayer from './AddPlayer.jsx';
 
 
 export default function PlayerTable() {
@@ -30,12 +31,17 @@ export default function PlayerTable() {
         } else {
             selectedPlayers = shuffle(playerNames).slice(0, 4);
         }
-
         const updatedPlayed = [...new Set([...playedPlayers, ...selectedPlayers])];
         setPlayedPlayers(updatedPlayed);
 
         setMatches(prevMatches => [...prevMatches, selectedPlayers]);
     }
+    
+        function addPlayers(name){
+            setPlayerNames(prev => [...prev,name]);
+
+            localStorage.setItem('player-names' ,JSON.stringify([...playerNames,name]));
+        }
     function toggleMatchResult(index) {
         setShowMatchResults(prev => ({
             ...prev,
@@ -95,7 +101,7 @@ export default function PlayerTable() {
                             </div>
                             {showMatchResults[index] && (
                                 <div className="match-table-container">
-                                    <Button />
+                                    <Button/>
                                 </div>
                             )}
                         </div>
@@ -103,7 +109,9 @@ export default function PlayerTable() {
                 </div>
                 <div className="tournament-container">
                     <h2>Participants</h2>
+    	            <AddPlayer onAdd={addPlayers}/>
                     <table className='player-table'>
+                        
                         <thead>
                             <tr>
                                 <th>Place</th>
@@ -122,7 +130,7 @@ export default function PlayerTable() {
                                     <td>0</td>
                                     <td>0</td>
                                     <td>0</td>
-                                    <td>0</td>
+                                    <td>00</td>
                                 </tr>
                             ))}
                         </tbody>
