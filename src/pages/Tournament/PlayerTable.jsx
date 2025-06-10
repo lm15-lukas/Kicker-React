@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { usePlayers } from './TournamentComponents/PlayerContext.js';
 import './Tournament.css';
-import Button from './TournamentComponents/Button.jsx';
 import AddPlayer from './AddPlayer.jsx';
 import TwoWinningSets from './TwoWinningSets.jsx';
 import ThreeWinnningSets from './ThreeWinningSets.jsx';
+import OneWinningSet from './OneWinningSet.jsx';
 
 export default function PlayerTable() {
     const [, setFormData] = useState({
@@ -94,10 +94,9 @@ export default function PlayerTable() {
                             </div>
                         </div>
                         {showMatchResults[index] && (
-                            <div className="match-table-wrapper">
-                                <div className='match-table-container'>                            
-                            <Button/>
-                            </div>
+                            <div className="match-table-wrapper">  
+                                                     
+                            <OneWinningSet/>
                             <TwoWinningSets/>
                             <ThreeWinnningSets/>
                                 

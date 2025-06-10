@@ -27,6 +27,7 @@
 
 .match-table-container {
   display: flex;
+  justify-content: center;
   background: #28403D;
   padding: 40px;
   border-radius: 12px;
@@ -75,7 +76,7 @@
 
 .setting-button-row {
   row-gap: 50px;
-  background-color: #c81d1d;
+  background-color: green;
   border: none;
   color: white;
   padding: 15px 32px;
