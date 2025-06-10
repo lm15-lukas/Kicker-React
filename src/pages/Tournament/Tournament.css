@@ -27,13 +27,13 @@
 
 .match-table-container {
   display: flex;
-  align-items: center;
   background: #28403D;
   padding: 40px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 850px;
+  margin-bottom: 20px;
 }
 
 .match-table-players-container {
@@ -66,10 +66,19 @@
   align-items: center;
   gap: 15px;
 }
-.setting-button-row{
-  display: flex;
-  align-content: space-evenly;
-  flex-wrap: nowrap;
+
+.setting-button-row {
+  row-gap: 50px;
+  background-color: #c81d1d;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 45%;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  margin-right: 40px;
 }
 
 .colon {
@@ -121,6 +130,7 @@
   border-radius: 50%;
   font-size: 16px;
 }
+
 .toggle-button.inactive {
   margin: 4px;
   border-radius: 50%;
@@ -142,26 +152,48 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-.plus-sign{
+
+.plus-sign {
   height: 50px;
   cursor: pointer;
 }
-.plus-area{
+
+.plus-area {
   height: 50px;
   color: white;
   display: flex;
-justify-content: right;
-margin-right: 27px;
+  justify-content: right;
+  margin-right: 27px;
 }
-.add{
+
+.add {
   size: 20rem;
 }
-.remove-button{
-      margin-left: 8px;
-    background: transparent;
-    border: none;
-    color: #ff4444;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1.2em;
+
+.remove-button {
+  margin-left: 8px;
+  background: transparent;
+  border: none;
+  color: #ff4444;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.match-table-container-2 {
+  display: flex;
+  align-items: center;
+  background: #28403D;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 850px;
+  margin-bottom: 20px;
+}
+.match-table-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 }

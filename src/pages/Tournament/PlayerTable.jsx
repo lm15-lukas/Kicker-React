@@ -3,6 +3,7 @@ import { usePlayers } from './TournamentComponents/PlayerContext.js';
 import './Tournament.css';
 import Button from './TournamentComponents/Button.jsx';
 import AddPlayer from './AddPlayer.jsx';
+import AddGameRounds from './AddGameRounds.jsx';
 
 export default function PlayerTable() {
     const [, setFormData] = useState({
@@ -10,7 +11,8 @@ export default function PlayerTable() {
         goals: "",
         length: "",
         points: "",
-        date: ""
+        date: "",
+        sets:"",
     });
 
     const { players, addPlayer, removePlayer } = usePlayers();
@@ -86,8 +88,12 @@ export default function PlayerTable() {
                             </div>
                         </div>
                         {showMatchResults[index] && (
-                            <div className="match-table-container">
-                                <Button />
+                            <div className="match-table-wrapper">                            
+                            <div className="match-table-container"> <Button /> </div>
+                            <AddGameRounds/>
+                                
+                               
+
                             </div>
                         )}
                     </div>
