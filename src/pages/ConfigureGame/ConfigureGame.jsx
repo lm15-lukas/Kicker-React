@@ -106,6 +106,27 @@ export default function ConfigureGame() {
                 <div className="form-container">
                     { }
                     <div className="form-item">
+                        <label htmlFor="players" className="form-label">
+                            Enter number of players
+                        </label>
+                        <select
+                            id="players"
+                            className="form-input"
+                            value={formData.players}
+                            onChange={handleFormDataChange}
+                        >
+                            <option value="">-- Please Select --</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                        </select>
+                        {errors.players && <h3 className="error-text">{errors.players}</h3>}
+                    </div>
+
+                    { }
+                    <div className="form-item">
                         <label htmlFor="goals" className="form-label">Goals to win</label>
                         <select
                             id="goals"
