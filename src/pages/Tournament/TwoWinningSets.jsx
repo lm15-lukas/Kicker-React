@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import Button from "./TournamentComponents/Button";
 
-export default function AddGameRounds(){
+export default function TwoWinningSets(){
 
     const[showRounds,setShowRounds] = useState(false);
 

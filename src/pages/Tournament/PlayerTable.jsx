@@ -3,7 +3,8 @@ import { usePlayers } from './TournamentComponents/PlayerContext.js';
 import './Tournament.css';
 import Button from './TournamentComponents/Button.jsx';
 import AddPlayer from './AddPlayer.jsx';
-import AddGameRounds from './AddGameRounds.jsx';
+import TwoWinningSets from './TwoWinningSets.jsx';
+import ThreeWinnningSets from './ThreeWinningSets.jsx';
 
 export default function PlayerTable() {
     const [, setFormData] = useState({
@@ -90,7 +91,8 @@ export default function PlayerTable() {
                         {showMatchResults[index] && (
                             <div className="match-table-wrapper">                            
                             <div className="match-table-container"> <Button /> </div>
-                            <AddGameRounds/>
+                            <TwoWinningSets/>
+                            <ThreeWinnningSets/>
                                 
                                
 
