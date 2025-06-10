@@ -1,19 +1,19 @@
 body {
-    background-color: #455559;
+    background-color: #0f0f0f;
+    color: #f3f4f6;
+    font-family: 'Arial', sans-serif;
 }
-
 
 .configure-game-page {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #455559;
-    font-family: Arial, sans-serif;
+    background-color: #0f0f0f;
 }
 
 .form-container {
-    background: #28403D;
+    background: #1f2937;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -30,59 +30,57 @@ body {
 
 .form-label {
     font-size: 1.1rem;
-    color: #73c6a7;
+    color: #9ca3af;
     margin-bottom: 8px;
 }
 
 .form-input {
     padding: 10px;
     font-size: 1rem;
-    border: 2px solid black;
-    background-color: hwb(180 98% 2%);
+    border: 2px solid #374151;
+    background-color: #111827;
+    color: #f3f4f6;
+    border-radius: 0.5rem;
 }
 
 .form-button {
-    background-color: #04AA6D;
+    background: linear-gradient(to right, #991b1b, #065f46);
     border: none;
     color: white;
-    padding: 15px 32px;
-    font-size: 16px;
-    cursor: pointer;
-    width: 45%;
-    border-radius: 6px;
-    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 0.5rem;
     transition: background-color 0.3s ease;
 }
 
+.form-button:hover {
+    background: linear-gradient(to right, #7f1d1d, #047857);
+}
+
 .cancel-button {
-    row-gap: 50px;
-    background-color: #c81d1d;
+    background-color: #991b1b;
     border: none;
     color: white;
-    padding: 15px 32px;
-    font-size: 16px;
-    cursor: pointer;
-    width: 45%;
-    border-radius: 6px;
-    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 0.5rem;
     transition: background-color 0.3s ease;
     margin-right: 40px;
 }
 
-.form-button:hover {
-    background-color: #038c5a;
+.cancel-button:hover {
+    background-color: #7f1d1d;
 }
 
-.img {
-    width: 100px;
-    height: auto;
-    margin-bottom: 20px;
-    color: white;
+.error-text {
+    color: #ef4444;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
 }
 
 .header {
-    background-color: #455559;
-    border: 2px solid black;
+    background-color: #0f0f0f;
+    border: 2px solid #374151;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -95,19 +93,20 @@ body {
 .team-selection {
     justify-content: left;
     border: 10px;
-
 }
 
 .team-input {
     padding: 10px;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+    background-color: #111827;
+    color: #f3f4f6;
 }
 
 .team-label {
     font-size: 1.1rem;
-    color: #333;
+    color: #9ca3af;
     margin-bottom: 8px;
 }
 
@@ -135,7 +134,7 @@ body {
     transition: transform 0.2s ease;
     position: relative;
     text-align: center;
-    background-color: #377e79;
+    background-color: #1f2937;
 }
 
 .team-option:hover {
@@ -151,19 +150,22 @@ body {
     justify-content: center;
 }
 
-
 .team-button {
     height: 70px;
-    background-color: #04AA6D;
+    background-color: #065f46;
     border: none;
     color: white;
     padding: 15px;
     font-size: 16px;
     cursor: pointer;
     width: 100%;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     margin-top: 20px;
     transition: background-color 0.3s ease;
+}
+
+.team-button:hover {
+    background-color: #047857;
 }
 
 .team-area {
@@ -171,110 +173,121 @@ body {
 }
 
 .empty-button {
-    background-color: #455559;
-    border: #455559;
+    background-color: #0f0f0f;
+    border: #0f0f0f;
 }
-
-
 
 .cancel-team-adjustment-btn {
     height: 70px;
-    background-color: #C81D1D;
+    background-color: #991b1b;
     border: black;
     color: white;
     padding: 15px;
     font-size: 16px;
     cursor: pointer;
     width: 100%;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     margin-top: 20px;
     transition: background-color 0.3s ease;
 }
 
-.error-text {
-    color: red;
-    font-size: 0.9rem;
-    margin-top: 0.25rem;
+.cancel-team-adjustment-btn:hover {
+    background-color: #7f1d1d;
 }
-.monster-logo{
+
+.monster-logo {
     height: 40px;
     width: 20px;
 }
-.play-logo{
+
+.play-logo {
     height: 40px;
     width: 20px;
     justify-content: right;
 }
-.a{
+
+.a {
     text-align: center;
 }
-.ghost-in-team{
+
+.ghost-in-team {
     height: 250px;
     width: 150px;
 }
-.team-header{
+
+.team-header {
     justify-content: center;
     align-items: center;
     text-align: center;
 }
-.team-h1{
+
+.team-h1 {
     text-align: center;
-    
 }
+
 .player-input {
     margin-bottom: 10px;
     padding: 8px;
     width: 250px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  .ul-t{
+    border-radius: 0.5rem;
+    border: 1px solid #374151;
+    background-color: #111827;
+    color: #f3f4f6;
+}
+
+.ul-t {
     justify-content: center;
     align-items: center;
     text-align: center;
     align-content: center;
     list-style: none;
-  }
-  .remove-btn{
+}
+
+.remove-btn {
     margin-left: 8px;
     background: transparent;
     border: none;
-    color: #ff4444;
+    color: #ef4444;
     font-weight: bold;
     cursor: pointer;
     font-size: 1.2em;
-  }
-  .center{
+}
+
+.center {
     justify-content: center;
     align-items: center;
     text-align: center;
     align-content: center;
-  }
-.button-container{
+}
+
+.button-container {
     text-align: right;
     margin-right: 20rem;
     margin-top: 0.2rem;
 }
-.create-tournament{
+
+.create-tournament {
     height: 50px;
-    background-color: #04AA6D;
+    background-color: #065f46;
     border: none;
     color: white;
     padding: 15px;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     margin-top: 20px;
     transition: background-color 0.3s ease;
 }
+
 .create-tournament:disabled {
-    background-color: #ccc;
+    background-color: #374151;
     cursor: not-allowed;
     opacity: 0.6;
-  }
-  .error-message {
-  color: red;
-  font-weight: bold;
-  margin: 0.5rem 0;
-  text-align: center;
+}
+
+.error-message {
+    color: #ef4444;
+    font-weight: bold;
+    margin: 0.5rem 0;
+    text-align: center;
 }
