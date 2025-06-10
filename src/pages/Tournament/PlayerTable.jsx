@@ -5,6 +5,7 @@ import AddPlayer from './AddPlayer.jsx';
 import TwoWinningSets from './TwoWinningSets.jsx';
 import ThreeWinnningSets from './ThreeWinningSets.jsx';
 import OneWinningSet from './OneWinningSet.jsx';
+import { WinningLogic } from './WinningLogic.jsx';
 
 export default function PlayerTable() {
     const [, setFormData] = useState({
@@ -12,8 +13,13 @@ export default function PlayerTable() {
         length: "",
         points: "",
         date: "",
-        sets:"",
+        sets: "",
     });
+    const storedWinningForm = JSON.parse(localStorage.getItem('form') || "{}");
+    const goalsToWin = parseInt(storedWinningForm.goals, 10) || 4;
+
+    const stats = WinningLogic(matches, goalsToWin);
+
 
     const { players, addPlayer, removePlayer } = usePlayers();
 
@@ -70,10 +76,10 @@ export default function PlayerTable() {
                     <div key={index}>
                         <div className="match-table-players-container">
                             <div className='teams'><span className='team-border'>Team A</span>
-                            <div className="player-side">
-                                
-                                <span>{matchPlayers[0]}</span>
-                                <span>{matchPlayers[1]}</span>
+                                <div className="player-side">
+
+                                    <span>{matchPlayers[0]}</span>
+                                    <span>{matchPlayers[1]}</span>
                                 </div>
                             </div>
                             <div className="center-button">
@@ -82,25 +88,25 @@ export default function PlayerTable() {
                                     onClick={() => toggleMatchResult(index)}
                                 >
                                     {showMatchResults[index]
-                                     ? "Close Match Results" : "Enter Match Results"}
+                                        ? "Close Match Results" : "Enter Match Results"}
                                 </button>
                             </div>
                             <div className='teams'>
                                 <span className='team-border'>Team B</span>
-                            <div className="player-side">
-                                <span>{matchPlayers[2]}</span>
-                                <span>{matchPlayers[3]}</span>
+                                <div className="player-side">
+                                    <span>{matchPlayers[2]}</span>
+                                    <span>{matchPlayers[3]}</span>
                                 </div>
                             </div>
                         </div>
                         {showMatchResults[index] && (
-                            <div className="match-table-wrapper">  
-                                                     
-                            <OneWinningSet/>
-                            <TwoWinningSets/>
-                            <ThreeWinnningSets/>
-                                
-                               
+                            <div className="match-table-wrapper">
+
+                                <OneWinningSet />
+                                <TwoWinningSets />
+                                <ThreeWinnningSets />
+
+
 
                             </div>
                         )}
@@ -123,28 +129,25 @@ export default function PlayerTable() {
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {players.map((player, index) => (
-                            <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{player}</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>
-                                    <button 
-                                    className="remove-button" 
-                                    onClick={() => removePlayer(index)}
-                                    >
-                                        ×
-                                        </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    );
-}
+                    {players.map((player, index) => (
+                            const playerStats = stats[player] || {
+                            games: 0,
+                            wins: 0,
+                            losses: 0,
+                            points: 0,
+                            goalDiff: 0,
+                        };
+                    return(
+                        <tr key={index}>
+                            <td>{index+1}</td>
+                            <td>{player}</td>
+                            <td>{player.stats}</td>
+                            <td>{player.losses}</td>
+                            <td>{player.points}</td>
+                            <td>{player.goalDiff}</td>
+                            <td>
+                                <button className='remove-button' onClick={() => removePlayer(index)}></button>
+                            </td>
+
+                        </tr>
+                    )
