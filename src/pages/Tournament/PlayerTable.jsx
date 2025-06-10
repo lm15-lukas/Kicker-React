@@ -8,7 +8,6 @@ import ThreeWinnningSets from './ThreeWinningSets.jsx';
 
 export default function PlayerTable() {
     const [, setFormData] = useState({
-        players: "",
         goals: "",
         length: "",
         points: "",

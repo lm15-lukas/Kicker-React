@@ -8,7 +8,6 @@ import SelectGameMode from "./ConGamcomponents/SelectGameMode.jsx";
 
 const getInitialErrors = (data) => {
     const errs = {};
-    if (!data.players) errs.players = "Please enter a number of players";
     if (!data.goals) errs.goals = "Please enter goals to win";
     if (!data.length || data.length === "null") errs.length = "Please enter a Match length";
     if (!data.points) errs.points = "Please enter points per win";
@@ -20,7 +19,6 @@ const getInitialErrors = (data) => {
 function getFormValues() {
     const storedValues = localStorage.getItem('form')
     if (!storedValues) return {
-        players: "",
         goals: "",
         length: "",
         points: "",
@@ -44,7 +42,6 @@ export default function ConfigureGame() {
 
     const handleReset = () => {
         const resetData = {
-            players: "",
             goals: "",
             length: "",
             points: "",
@@ -104,27 +101,6 @@ export default function ConfigureGame() {
             <Header />
             <div className="configure-game-page">
                 <div className="form-container">
-                    { }
-                    <div className="form-item">
-                        <label htmlFor="players" className="form-label">
-                            Enter number of players
-                        </label>
-                        <select
-                            id="players"
-                            className="form-input"
-                            value={formData.players}
-                            onChange={handleFormDataChange}
-                        >
-                            <option value="">-- Please Select --</option>
-                            <option value="4">4</option>
-                            <option value="6">6</option>
-                            <option value="8">8</option>
-                            <option value="10">10</option>
-                            <option value="12">12</option>
-                        </select>
-                        {errors.players && <h3 className="error-text">{errors.players}</h3>}
-                    </div>
-
                     { }
                     <div className="form-item">
                         <label htmlFor="goals" className="form-label">Goals to win</label>
