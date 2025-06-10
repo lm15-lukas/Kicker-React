@@ -6,6 +6,30 @@ import HeadHeader from './Header.jsx';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+const NavigationButtons = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="fixed bottom-4 left-4 flex space-x-2 z-50">
+      <motion.button
+        onClick={() => navigate(-1)}
+        className="bg-gray-700 text-white px-3 py-2 rounded-lg text-sm hover:bg-gray-600 transition-all"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Zurück
+      </motion.button>
+      <motion.button
+        onClick={() => navigate("/")}
+        className="bg-red-600 text-white px-3 py-2 rounded-lg text-sm hover:bg-red-700 transition-all"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Startseite
+      </motion.button>
+    </div>
+  );
+};
+
 export default function SelectGameMode() {
   const navigate = useNavigate();
   const [teams, setTeams] = useState('');
@@ -16,7 +40,12 @@ export default function SelectGameMode() {
   };
 
   if (teams === "team-building") {
-    return <TeamAdjustment />;
+    return (
+      <>
+        <TeamAdjustment />
+        <NavigationButtons />
+      </>
+    );
   }
 
   return (
@@ -45,6 +74,7 @@ export default function SelectGameMode() {
           </motion.div>
         </div>
       </div>
+      <NavigationButtons />
     </>
   );
 }

@@ -3,6 +3,30 @@ import { useEffect, useState, useRef } from "react";
 import MonsterLogo from './monster.svg';
 import { motion } from 'framer-motion';
 
+const NavigationButtons = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="fixed bottom-4 left-4 flex space-x-2 z-50">
+      <motion.button
+        onClick={() => navigate(-1)}
+        className="bg-gray-700 text-white px-3 py-2 rounded-lg text-sm hover:bg-gray-600 transition-all"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Zurück
+      </motion.button>
+      <motion.button
+        onClick={() => navigate("/")}
+        className="bg-red-600 text-white px-3 py-2 rounded-lg text-sm hover:bg-red-700 transition-all"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Startseite
+      </motion.button>
+    </div>
+  );
+};
+
 export default function PlayerInputList() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -144,6 +168,7 @@ export default function PlayerInputList() {
           ))}
         </ul>
       </div>
+      <NavigationButtons />
     </>
   );
 }
