@@ -1,14 +1,15 @@
-
 import { motion } from "framer-motion";
 import { SiPersonio } from "react-icons/si";
 import { BsMicrosoftTeams } from "react-icons/bs";
 import { FaAtlassian } from "react-icons/fa";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
+import { useNavigate } from "react-router-dom"; // ✅ Navigation importieren
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
+  const navigate = useNavigate(); // ✅ Navigation Hook
 
   return (
     <header className="absolute w-full z-50 transition-all duration-300">
@@ -54,8 +55,9 @@ const Header = () => {
           </motion.a>
         </div>
 
-        {/* Original Spielen Button */}
+        {/* Spielen Button (Desktop) */}
         <motion.button
+          onClick={() => navigate("/configure")} // ✅ Navigation aktivieren
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1.6, duration: 0.8, type: "spring", stiffness: 100, damping: 15 }}
@@ -100,8 +102,12 @@ const Header = () => {
             </a>
           </div>
 
+          {/* Spielen Button (Mobile) */}
           <button
-            onClick={toggleMenu}
+            onClick={() => {
+              toggleMenu();
+              navigate("/configure"); // ✅ Navigation aktivieren
+            }}
             className="mt-4 block w-full px-4 py-2 rounded-lg bg-gradient-to-r from-red-400 to-red-600 text-white font-bold"
           >
             Spielen

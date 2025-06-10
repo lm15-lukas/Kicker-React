@@ -7,22 +7,23 @@ import LandingPage from "./pages/CreateGame/LandingPage.jsx";
 import HeroSection from "./pages/CreateGame/HeroSection.jsx";
 import ScoreBoard from "./pages/ScoreBoard/ScoreBoard.jsx";
 
-
 function App() {
   return (
-    <>
-    <LandingPage />
-      <HeroSection />
     <Router>
       <Routes>
+        <Route path="/" element={
+          <>
+            <LandingPage />
+            <HeroSection />
+          </>
+        } />
+        <Route path="/configure" element={<ConfigureGame />} />
+        <Route path="/team-adjustment" element={<TeamAdjustment />} />
+        <Route path="/select-game-mode" element={<SelectGameMode />} />
+        <Route path="/tournament" element={<Tournament />} />
         <Route path="/scoreboard" element={<ScoreBoard />} />
-        <Route path="/" element={<ConfigureGame/>}></Route>
-        <Route path="/team-adjustment" element={<TeamAdjustment/>}></Route>
-        <Route path="/select-game-mode" element={<SelectGameMode/>}></Route>
-        <Route path="/tournament" element={<Tournament/>}></Route>
       </Routes>
-      </Router>
-      </>
+    </Router>
   );
 }
 
