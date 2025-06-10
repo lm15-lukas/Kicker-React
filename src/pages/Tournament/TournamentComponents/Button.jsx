@@ -15,6 +15,21 @@ export default function Button() {
         setBottomButtonActive(prev => (prev === index ? null : index));
     }
 
+    function handleConfirm() {
+        if (topButtonActive !== null && bottomButtonActive !== null) {
+            const teamA = topButtons[topButtonActive];
+            const teamB = bottomButtons[bottomButtonActive];
+            const result = `${teamA}:${teamB}`;
+
+            
+            localStorage.setItem("lastResult", result);
+
+            console.log("Ergebnis gespeichert:", result);
+        } else {
+            console.log("Beide Ergnbisse auswähöen");
+        }
+    }
+
     return (
         <>
             <div className="button-row">
@@ -41,7 +56,7 @@ export default function Button() {
                         {num}
                     </button>
                 ))}
-                <button className="setting-button-row">Confirm</button>
+                <button className="setting-button-row" onClick={handleConfirm}>Confirm</button>
             </div>
         </>
     );

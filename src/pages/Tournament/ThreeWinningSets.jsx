@@ -29,7 +29,6 @@ export default function ThreeWinnningSets(){
         <div className="match-table-container-3"><Button /></div>
         <div className="match-table-container-3"><Button /></div>
         <div className="match-table-container-3"><Button /></div>
-        <div className="match-table-container-3"><Button /></div>
         </>
     )
 }

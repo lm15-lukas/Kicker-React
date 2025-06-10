@@ -70,9 +70,12 @@ export default function PlayerTable() {
                 {matches.map((matchPlayers, index) => (
                     <div key={index}>
                         <div className="match-table-players-container">
-                            <div className="player-side left-side">
+                            <div className='teams'><span className='team-border'>Team A</span>
+                            <div className="player-side">
+                                
                                 <span>{matchPlayers[0]}</span>
                                 <span>{matchPlayers[1]}</span>
+                                </div>
                             </div>
                             <div className="center-button">
                                 <button
@@ -83,9 +86,12 @@ export default function PlayerTable() {
                                      ? "Close Match Results" : "Enter Match Results"}
                                 </button>
                             </div>
-                            <div className="player-side right-side">
+                            <div className='teams'>
+                                <span className='team-border'>Team B</span>
+                            <div className="player-side">
                                 <span>{matchPlayers[2]}</span>
                                 <span>{matchPlayers[3]}</span>
+                                </div>
                             </div>
                         </div>
                         {showMatchResults[index] && (
