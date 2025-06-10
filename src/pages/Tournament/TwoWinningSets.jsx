@@ -26,8 +26,11 @@ export default function TwoWinningSets(){
 
     return(
         <>
-        <div className="match-table-container-2"><Button/></div>
-        <div className="match-table-container-2"><Button/></div>
+        <div className="match-table-container-2">
+        <Button/>
+        <Button/>
+        <Button/>
+        </div>
         </>
     )
 }

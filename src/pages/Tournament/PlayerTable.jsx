@@ -94,8 +94,10 @@ export default function PlayerTable() {
                             </div>
                         </div>
                         {showMatchResults[index] && (
-                            <div className="match-table-wrapper">                            
-                            <div className="match-table-container"> <Button /> </div>
+                            <div className="match-table-wrapper">
+                                <div className='match-table-container'>                            
+                            <Button/>
+                            </div>
                             <TwoWinningSets/>
                             <ThreeWinnningSets/>
                                 

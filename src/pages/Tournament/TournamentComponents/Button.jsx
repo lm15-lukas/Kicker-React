@@ -17,9 +17,9 @@ export default function Button() {
 
     function handleConfirm() {
         if (topButtonActive !== null && bottomButtonActive !== null) {
-            const teamA = topButtons[topButtonActive];
-            const teamB = bottomButtons[bottomButtonActive];
-            const result = `${teamA}:${teamB}`;
+            const TeamA = topButtons[topButtonActive];
+            const TeamB = bottomButtons[bottomButtonActive];
+            const result = `${TeamA}:${TeamB}`;
 
             
             localStorage.setItem("lastResult", result);
@@ -32,6 +32,7 @@ export default function Button() {
 
     return (
         <>
+        <div className="button-wrapper">
             <div className="button-row">
                 {topButtons.map((num, index) => (
                     <button
@@ -45,8 +46,9 @@ export default function Button() {
             </div>
 
             <span className="colon">:</span>
-
+            
             <div className="button-row">
+                
                 {bottomButtons.map((num, index) => (
                     <button
                         key={`bottom-${index}`}
@@ -57,7 +59,8 @@ export default function Button() {
                     </button>
                 ))}
                 <button className="setting-button-row" onClick={handleConfirm}>Confirm</button>
-            </div>
+                </div>
+                </div>
         </>
     );
 }

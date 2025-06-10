@@ -25,10 +25,14 @@ export default function ThreeWinnningSets(){
     }
     return(
         <>
-        <div className="match-table-container-3"><Button /></div>
-        <div className="match-table-container-3"><Button /></div>
-        <div className="match-table-container-3"><Button /></div>
-        <div className="match-table-container-3"><Button /></div>
+        <div className="match-table-container-3">
+        <Button />
+        <Button/>
+        <Button/>
+        <Button/>
+        <Button/>
+        <Button />
+        </div>
         </>
     )
 }
