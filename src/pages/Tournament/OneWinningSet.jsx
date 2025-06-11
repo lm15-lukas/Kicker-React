@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import Button from "./TournamentComponents/Button";
 
-export default function OneWinningSet(){
+export default function OneWinningSet({matchPlayers,index,OnResultConfirm}){
     const [showRounds,setShowRounds] = useState(false);
 
     useEffect(()=>{
@@ -24,7 +24,7 @@ export default function OneWinningSet(){
     return( 
         <>
         <div className="match-table-container">
-        <Button/>
+        <Button onConfirm={(result) => OnResultConfirm(result,index,matchPlayers)}/>
         </div>
         </>
     )

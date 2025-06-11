@@ -1,49 +1,39 @@
-export function WinningLogic(matches,goalsToWin){
-    const stats={}
+export function WinningLogic(matches, goalsToWin = 4) {
+    const stats = {};
 
     matches.forEach(match => {
-        const {players,result} = match;
-        if(!result) return;
+        if (!match.result) return;
 
-        const [scoreA,scoreB] = result.split(":").map(Number);
-        const TeamA= [players[0], players[1]];
-        const TeamB = [players[2],players[3]];
+        const [goalsA, goalsB] = match.result.split(":").map(Number);
+        if (isNaN(goalsA) || isNaN(goalsB)) return;
 
-        let winningTeam,losingTeam;
-        if(scoreA >= goalsToWin && scoreA > scoreB){
-            winningTeam=TeamA;
-            losingTeam = TeamB;
-        }else if(scoreB >= goalsToWin && scoreB > scoreA){
-            winningTeam= TeamB;
-            losingTeam = TeamA;
-        }else 
-        return;
+        const teamA = [match.players[0], match.players[1]];
+        const teamB = [match.players[2], match.players[3]];
 
-        TeamA.concat(TeamB).forEach(player =>{
-            if(!stats[player]){
-                stats[player]={
-                    games: 0,
-                    wins:0,
-                    losses:0,
-                    points:0,
-                    goalDiff:0
-                };
+        teamA.forEach(player => {
+            if (!stats[player]) stats[player] = { games: 0, wins: 0, losses: 0, points: 0, goalDiff: 0 };
+            stats[player].games++;
+            stats[player].goalDiff += goalsA - goalsB;
+            if (goalsA > goalsB) {
+                stats[player].wins++;
+                stats[player].points += 3;
+            } else {
+                stats[player].losses++;
             }
-            stats[player].games +=1;
         });
-        winningTeam.forEach(player => {
-            stats[player].wins +=1;
-            stats[player].points+= 3;
-        });
-        losingTeam.forEach(player=>{
-            stats[player].losses += 1;
-        });
-        TeamA.forEach(player =>{
-            stats[player].goalDiff += scoreA - scoreB;
-        });
-        TeamB.forEach(player =>{
-            stats[player].goalDiff += scoreB - scoreA;
+
+        teamB.forEach(player => {
+            if (!stats[player]) stats[player] = { games: 0, wins: 0, losses: 0, points: 0, goalDiff: 0 };
+            stats[player].games++;
+            stats[player].goalDiff += goalsB - goalsA;
+            if (goalsB > goalsA) {
+                stats[player].wins++;
+                stats[player].points += 3;
+            } else {
+                stats[player].losses++;
+            }
         });
     });
+
     return stats;
 }

@@ -1,38 +1,38 @@
 import { useEffect, useState } from "react"
 import Button from "./TournamentComponents/Button"
-export default function ThreeWinnningSets(){
+export default function ThreeWinnningSets({ matchPlayers, index, ThreeResultConfirm }) {
 
-    const [ showRounds,setShowRounds] = useState(false);
+    const [showRounds, setShowRounds] = useState(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         const storedForm = localStorage.getItem('form');
-        if(storedForm){
+        if (storedForm) {
             try {
                 const parsedForm = JSON.parse(storedForm)
                 const sets = parsedForm.sets;
 
-                if(sets === "3"){
+                if (sets === "3") {
                     setShowRounds(true);
                 }
             } catch (error) {
-                console.error("Fehler beim Parsen von 'form': ",error)
+                console.error("Fehler beim Parsen von 'form': ", error)
             }
         }
-    },[])
+    }, [])
 
-    if(!showRounds){
+    if (!showRounds) {
         return null;
     }
-    return(
+    return (
         <>
-        <div className="match-table-container-3">
-        <Button />
-        <Button/>
-        <Button/>
-        <Button/>
-        <Button/>
-        <Button />
-        </div>
+            <div className="match-table-container-3">
+                <Button onConfirm={(result) => ThreeResultConfirm(result, index, matchPlayers)} />
+                <Button onConfirm={(result) => ThreeResultConfirm(result, index, matchPlayers)} />
+                <Button onConfirm={(result) => ThreeResultConfirm(result, index, matchPlayers)} />
+                <Button onConfirm={(result) => ThreeResultConfirm(result, index, matchPlayers)} />
+                <Button onConfirm={(result) => ThreeResultConfirm(result, index, matchPlayers)} />
+                <Button onConfirm={(result) => ThreeResultConfirm(result, index, matchPlayers)} />
+            </div>
         </>
     )
 }

@@ -15,17 +15,17 @@ export default function PlayerTable() {
         date: "",
         sets: "",
     });
+
+    const [matches, setMatches] = useState([]);
+    const [playedPlayers, setPlayedPlayers] = useState([]);
+    const [showMatchResults, setShowMatchResults] = useState({});
+
     const storedWinningForm = JSON.parse(localStorage.getItem('form') || "{}");
     const goalsToWin = parseInt(storedWinningForm.goals, 10) || 4;
 
     const stats = WinningLogic(matches, goalsToWin);
 
-
     const { players, addPlayer, removePlayer } = usePlayers();
-
-    const [matches, setMatches] = useState([]);
-    const [playedPlayers, setPlayedPlayers] = useState([]);
-    const [showMatchResults, setShowMatchResults] = useState({});
 
     function startNewRound() {
         const unplayed = players.filter(p => !playedPlayers.includes(p));
@@ -43,13 +43,38 @@ export default function PlayerTable() {
 
         const updatedPlayed = [...new Set([...playedPlayers, ...selectedPlayers])];
         setPlayedPlayers(updatedPlayed);
-        setMatches(prevMatches => [...prevMatches, selectedPlayers]);
+
+        const newMatch = {
+            players: selectedPlayers,
+            result: null
+        };
+
+        setMatches(prevMatches => [...prevMatches, newMatch]);
     }
 
     function toggleMatchResult(index) {
         setShowMatchResults(prev => ({
             ...prev,
             [index]: !prev[index]
+        }));
+    }
+
+    function handleResultConfirm(result, index, matchPlayers) {
+        const newMatch = {
+            players: matchPlayers,
+            result: result
+        };
+        console.log("New Match gespeichert:", newMatch);
+
+        setMatches(prevMatches => {
+            const updatedMatches = [...prevMatches];
+            updatedMatches[index] = newMatch;
+            return updatedMatches;
+        });
+
+        setShowMatchResults(prev => ({
+            ...prev,
+            [index]: false
         }));
     }
 
@@ -63,6 +88,10 @@ export default function PlayerTable() {
             setFormData(JSON.parse(storedForm));
         }
     }, []);
+    useEffect(()=>{
+        console.log("Matches",matches);
+        console.log("Stats",stats);
+    },[matches])
 
     return (
         <div className="layout">
@@ -72,14 +101,14 @@ export default function PlayerTable() {
                         {matches.length === 0 ? "Start First Round" : "Start New Round"}
                     </button>
                 </div>
-                {matches.map((matchPlayers, index) => (
+                {matches.map((match, index) => (
                     <div key={index}>
                         <div className="match-table-players-container">
-                            <div className='teams'><span className='team-border'>Team A</span>
+                            <div className='teams'>
+                                <span className='team-border'>Team A</span>
                                 <div className="player-side">
-
-                                    <span>{matchPlayers[0]}</span>
-                                    <span>{matchPlayers[1]}</span>
+                                    <span>{match.players[0]}</span>
+                                    <span>{match.players[1]}</span>
                                 </div>
                             </div>
                             <div className="center-button">
@@ -87,27 +116,34 @@ export default function PlayerTable() {
                                     className="enter-results-button"
                                     onClick={() => toggleMatchResult(index)}
                                 >
-                                    {showMatchResults[index]
-                                        ? "Close Match Results" : "Enter Match Results"}
+                                    {showMatchResults[index] ? "Close Match Results" : "Enter Match Results"}
                                 </button>
                             </div>
                             <div className='teams'>
                                 <span className='team-border'>Team B</span>
                                 <div className="player-side">
-                                    <span>{matchPlayers[2]}</span>
-                                    <span>{matchPlayers[3]}</span>
+                                    <span>{match.players[2]}</span>
+                                    <span>{match.players[3]}</span>
                                 </div>
                             </div>
                         </div>
                         {showMatchResults[index] && (
                             <div className="match-table-wrapper">
-
-                                <OneWinningSet />
-                                <TwoWinningSets />
-                                <ThreeWinnningSets />
-
-
-
+                                <OneWinningSet
+                                    matchPlayers={match.players}
+                                    index={index}
+                                    OnResultConfirm={handleResultConfirm}
+                                />
+                                <TwoWinningSets
+                                    matchPlayers={match.players}
+                                    index={index}
+                                    TwoResultConfirm={handleResultConfirm}
+                                />
+                                <ThreeWinnningSets
+                                    matchPlayers={match.players}
+                                    index={index}
+                                    ThreeResultConfirm={handleResultConfirm}
+                                />
                             </div>
                         )}
                     </div>
@@ -126,28 +162,45 @@ export default function PlayerTable() {
                             <th>Wins</th>
                             <th>Losses</th>
                             <th>Points</th>
+                            <th>Goal Diff</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    {players.map((player, index) => (
-                            const playerStats = stats[player] || {
-                            games: 0,
-                            wins: 0,
-                            losses: 0,
-                            points: 0,
-                            goalDiff: 0,
-                        };
-                    return(
-                        <tr key={index}>
-                            <td>{index+1}</td>
-                            <td>{player}</td>
-                            <td>{player.stats}</td>
-                            <td>{player.losses}</td>
-                            <td>{player.points}</td>
-                            <td>{player.goalDiff}</td>
-                            <td>
-                                <button className='remove-button' onClick={() => removePlayer(index)}></button>
-                            </td>
-
-                        </tr>
-                    )
+                    <tbody>
+                        {players
+                            .map((player) => ({
+                                player,
+                                ...stats[player] || {
+                                    games: 0,
+                                    wins: 0,
+                                    losses: 0,
+                                    points: 0,
+                                    goalDiff: 0,
+                                }
+                            }))
+                            .sort((a, b) => b.points - a.points || b.goalDiff - a.goalDiff)
+                            .map((p, index) => (
+                                <tr key={p.player}>
+                                    <td>{index + 1}</td>
+                                    <td>{p.player}</td>
+                                    <td>{p.games}</td>
+                                    <td>{p.wins}</td>
+                                    <td>{p.losses}</td>
+                                    <td>{p.points}</td>
+                                    <td>{p.goalDiff}</td>
+                                    <td>
+                                        <button
+                                            className="remove-button"
+                                            onClick={() => removePlayer(players.indexOf(p.player))}
+                                        >
+                                            x
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+}
