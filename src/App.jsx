@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { PlayerProvider } from "./pages/Tournament/TournamentComponents/PlayerContext.js";
+import { PlayerProvider } from "./pages/Tournament/context/PlayerContext.js";
 
 import ConfigureGame from "./pages/ConfigureGame/ConfigureGame";
-import Tournament from "./pages/Tournament/Tournament";
+import Tournament from"./pages/Tournament/TournamentComponents/Tournament.jsx"
 import TeamAdjustment from "./pages/ConfigureGame/ConGamcomponents/TeamAdjustment.jsx";
 import SelectGameMode from "./pages/ConfigureGame/ConGamcomponents/SelectGameMode.jsx";
 
