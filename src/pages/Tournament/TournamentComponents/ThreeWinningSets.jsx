@@ -31,7 +31,6 @@ export default function ThreeWinnningSets({ matchPlayers, index, ThreeResultConf
                 <Button onConfirm={(result) => ThreeResultConfirm(result, index, matchPlayers)} />
                 <Button onConfirm={(result) => ThreeResultConfirm(result, index, matchPlayers)} />
                 <Button onConfirm={(result) => ThreeResultConfirm(result, index, matchPlayers)} />
-                <Button onConfirm={(result) => ThreeResultConfirm(result, index, matchPlayers)} />
             </div>
         </>
     )

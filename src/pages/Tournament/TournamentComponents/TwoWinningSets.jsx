@@ -30,7 +30,6 @@ export default function TwoWinningSets({matchPlayers, index, TwoResultConfirm}) 
                 <Button onConfirm={(result) => TwoResultConfirm(result, index, matchPlayers)} />
                 <Button onConfirm={(result) => TwoResultConfirm(result, index, matchPlayers)} />
                 <Button onConfirm={(result) => TwoResultConfirm(result, index, matchPlayers)} />
-                <Button onConfirm={(result) => TwoResultConfirm(result, index, matchPlayers)} />
             </div>
         </>
     )

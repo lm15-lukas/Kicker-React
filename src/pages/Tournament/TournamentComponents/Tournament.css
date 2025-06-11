@@ -8,6 +8,7 @@
 }
 
 .tournament-container {
+  position: fixed;
   margin-left: auto;
   background-color: #2a2a2a;
   padding: 10px;
