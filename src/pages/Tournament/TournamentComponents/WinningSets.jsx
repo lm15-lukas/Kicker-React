@@ -6,21 +6,26 @@ export default function WinningSets({ matchPlayers, index, onResultConfirm }) {
     const [results, setResults] = useState([]);
     const [error, setError] = useState("");
 
-    useEffect(() => {
-        const storedForm = localStorage.getItem("form");
-        if (storedForm) {
-            try {
-                const parsedForm = JSON.parse(storedForm);
-                const sets = parseInt(parsedForm.sets, 10);
-                const goals = parseInt(parsedForm.goals, 10);
-                if (sets >= 1 && sets <= 3) setSetsCount(sets);
-                if (goals >= 1 && goals <= 8) setGoalsToWin(goals);
-                setResults(Array(sets).fill(null)); 
-            } catch (error) {
-                console.error("Fehler beim Parsen von 'form': ", error);
+useEffect(() => {
+    const storedForm = localStorage.getItem("form");
+    if (storedForm) {
+        try {
+            const parsedForm = JSON.parse(storedForm);
+            const sets = parseInt(parsedForm.sets, 10);
+            const goals = parseInt(parsedForm.goals, 10);
+            if (sets >= 1 && sets <= 3) {
+                setSetsCount(sets);
+                
+                const totalGames = sets === 1 ? 1 : sets * 2 - 1;
+                setResults(Array(totalGames).fill(null));
             }
+            if (goals >= 1 && goals <= 8) setGoalsToWin(goals);
+        } catch (error) {
+            console.error("Fehler beim Parsen von 'form': ", error);
         }
-    }, []);
+    }
+}, []);
+
 
     if (setsCount === 0) return null;
 
