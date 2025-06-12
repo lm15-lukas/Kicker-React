@@ -48,8 +48,9 @@ export default function Button({ onConfirm }) {
                     </button>
                 ))}
             </div>
-
+            <span className="colon">-</span>
             <span className="colon">:</span>
+            <span className="colon">-</span>   
 
             <div className="button-row">
                 {bottomButtons.map((num, index) => (
