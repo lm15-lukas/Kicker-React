@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Button from "./Button";
 
 export default function WinningSets({ matchPlayers, index, onResultConfirm }) {
     const [setsCount, setSetsCount] = useState(0);
@@ -59,7 +60,7 @@ useEffect(() => {
                 />
             ))}
 
-            <button className="setting-button-row" onClick={handleConfirmAll}>Alle bestätigen</button>
+            <button className="setting-button-row" onClick={handleConfirmAll}>Confirm all</button>
 
             {error && <div style={{ color: "red", marginTop: "8px" }}>{error}</div>}
         </div>

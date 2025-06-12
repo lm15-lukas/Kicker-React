@@ -141,7 +141,7 @@ export default function PlayerTable() {
             <div className="tournament-container">
                 <h2>Participants</h2>
                 <AddPlayer onAdd={addPlayer} />
-                <table className='player-table'>
+                <table className='player-table' id='costomers'>
                     <thead>
                         <tr>
                             <th>Place</th>
