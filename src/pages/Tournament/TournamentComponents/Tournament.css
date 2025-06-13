@@ -271,3 +271,11 @@
   width: 2rem;
   text-align: center;
 }
+.tournament-End{
+
+  margin-left: auto;
+  background-color: #2a2a2a;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+}
