@@ -7,9 +7,11 @@ export default function TournamentHeader() {
     }
     return (
         <header className="header">
+            <div>
             <img src={Trophy} alt="trophy" className="trophy"/>
             <button className="tournament-End" onClick={handleEndTournament}>End Tournament</button>
             <h1>Tournament XY</h1> 
+            </div>
         </header>
     )
 }

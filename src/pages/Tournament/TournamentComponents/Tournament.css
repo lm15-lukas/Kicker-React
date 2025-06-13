@@ -6,6 +6,7 @@
   position: relative;
   height: 100vh;
   padding: 20px;
+  margin-top:0%;
 }
 
 .tournament-container {
@@ -36,7 +37,7 @@
   margin-left: auto;
   background-color: #8e4646;
   margin-right: 50px;
-  padding: 45px;
+  padding: 24px;
   color: white;
   border: none;
   border-radius: 8px;
@@ -86,7 +87,7 @@
   flex-direction: column;
   margin-right: auto;
   gap: 20px;
-  /* margin-left: 500px; */
+  margin-left: 400px;
 }
 
 .button-row {
@@ -202,12 +203,9 @@
   transition: background-color 0.2s ease;
 }
 
-.plus-sign {
-  height: 50px;
-  cursor: pointer;
-}
 
 .plus-area {
+
   height: 50px;
   color: white;
   display: flex;
@@ -272,8 +270,7 @@
   width: 100%;
 }
 
-#costomers td,
-#costomers thd {
+#costomers td,th {
   border: 1px solid #ddd;
   padding: 8px;
 }

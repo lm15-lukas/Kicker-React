@@ -4,6 +4,7 @@ import './Tournament.css';
 import AddPlayer from './AddPlayer.jsx';
 import { WinningLogic } from '../logic/WinningLogic.jsx';
 import WinningSets from './WinningSets.jsx';
+import FormatResults from './FormatResults.jsx';
 
 export default function PlayerTable() {
     const [, setFormData] = useState({
@@ -95,45 +96,57 @@ export default function PlayerTable() {
         <div className="layout">
             <div className="match-section">
 
-                {matches.map((match, index) => (
-                    <div key={index}>
-                        <div className="match-table-players-container">
-                            <div className='teams'>
-                                <span className='team-border'>Team A</span>
-                                <div className="player-side">
-                                    <span>{match.players[0]}</span>
-                                    <span>{match.players[1]}</span>
-                                </div>
-                            </div>
-                            <div className="center-button">
-                                <button
-                                    className="enter-results-button"
-                                    onClick={() => toggleMatchResult(index)}
-                                >
-                                    {showMatchResults[index] ? "Close Match Results" : "Enter Match Results"}
-                                </button>
-                            </div>
-                            <div className='teams'>
-                                <span className='team-border'>Team B</span>
-                                <div className="player-side">
-                                    <span>{match.players[2]}</span>
-                                    <span>{match.players[3]}</span>
-                                </div>
-                            </div>
-                        </div>
+{matches.map((match, index) => (
+    <div key={index}>
+        <div className="match-table-players-container">
+            {/* Team A */}
+            <div className='teams'>
+                <span className='team-border'>Team A</span>
+                <div className="player-side">
+                    <span>{match.players[0]}</span>
+                    <span>{match.players[1]}</span>
+                </div>
+            </div>
 
-                        {showMatchResults[index] && (
-                            <div className="match-table-wrapper">
-                                <WinningSets
-                                    matchPlayers={match.players}
-                                    index={index}
-                                    onResultConfirm={handleResultConfirm}
-                                />
-                            </div>
-                        )}
-                        
-                    </div>
-                ))}
+            {}
+            <div className="center-button">
+                <FormatResults resultArray={match.result} />
+                            <div className="center-button">
+                <button
+                    className="enter-results-button"
+                    onClick={() => toggleMatchResult(index)}
+                >
+                    {showMatchResults[index] ? "Close Match Results" : "Enter Match Results"}
+                </button>
+            </div>
+            </div>
+
+            {}
+            <div className='teams'>
+                <span className='team-border'>Team B</span>
+                <div className="player-side">
+                    <span>{match.players[2]}</span>
+                    <span>{match.players[3]}</span>
+                </div>
+            </div>
+
+            {}
+
+        </div>
+
+        {}
+        {showMatchResults[index] && (
+            <div className="match-table-wrapper">
+                <WinningSets
+                    matchPlayers={match.players}
+                    index={index}
+                    onResultConfirm={handleResultConfirm}
+                />
+            </div>
+        )}
+    </div>
+))}
+
                 <div className="center-button">
                     <button onClick={startNewRound}>
                         {matches.length === 0 ? "Start First Round" : "Start New Round"}
