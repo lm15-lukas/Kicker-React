@@ -110,8 +110,7 @@ export default function PlayerTable() {
 
             {}
             <div className="center-button">
-                <FormatResults resultArray={match.result} />
-                            <div className="center-button">
+                <FormatResults resultArray={match.result} />   
                 <button
                     className="enter-results-button"
                     onClick={() => toggleMatchResult(index)}
@@ -119,8 +118,6 @@ export default function PlayerTable() {
                     {showMatchResults[index] ? "Close Match Results" : "Enter Match Results"}
                 </button>
             </div>
-            </div>
-
             {}
             <div className='teams'>
                 <span className='team-border'>Team B</span>
