@@ -86,19 +86,15 @@ export default function PlayerTable() {
             setFormData(JSON.parse(storedForm));
         }
     }, []);
-    useEffect(()=>{
-        console.log("Matches",matches);
-        console.log("Stats",stats);
-    },[matches])
+    useEffect(() => {
+        console.log("Matches", matches);
+        console.log("Stats", stats);
+    }, [matches])
 
     return (
         <div className="layout">
             <div className="match-section">
-                <div className="center-button">
-                    <button onClick={startNewRound}>
-                        {matches.length === 0 ? "Start First Round" : "Start New Round"}
-                    </button>
-                </div>
+
                 {matches.map((match, index) => (
                     <div key={index}>
                         <div className="match-table-players-container">
@@ -125,17 +121,24 @@ export default function PlayerTable() {
                                 </div>
                             </div>
                         </div>
+
                         {showMatchResults[index] && (
                             <div className="match-table-wrapper">
-                            <WinningSets
-                            matchPlayers={match.players}
-                            index={index}
-                            onResultConfirm={handleResultConfirm}
-                            />
+                                <WinningSets
+                                    matchPlayers={match.players}
+                                    index={index}
+                                    onResultConfirm={handleResultConfirm}
+                                />
                             </div>
                         )}
+                        
                     </div>
                 ))}
+                <div className="center-button">
+                    <button onClick={startNewRound}>
+                        {matches.length === 0 ? "Start First Round" : "Start New Round"}
+                    </button>
+                </div>
             </div>
 
             <div className="tournament-container">
