@@ -9,7 +9,7 @@ export function usePlayers() {
 export function PlayerProvider({ children }) {
   const [players, setPlayers] = useState(() => {
     const saved = localStorage.getItem("player-names");
-    return saved ? JSON.parse(saved) : [""];
+    return saved ? JSON.parse(saved) : [];
   });
 
   useEffect(() => {

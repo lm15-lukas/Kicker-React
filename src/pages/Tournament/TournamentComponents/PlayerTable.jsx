@@ -14,9 +14,14 @@ export default function PlayerTable() {
         date: "",
         sets: "",
     });
-
-    const [matches, setMatches] = useState([]);
-    const [playedPlayers, setPlayedPlayers] = useState([]);
+    const [matches, setMatches] = useState(()=>{
+        const saved = localStorage.getItem('matches');
+        return saved ? JSON.parse(saved) : [];
+    });
+    const [playedPlayers, setPlayedPlayers] = useState(()=>{
+        const saved = localStorage.getItem('playedPLayers');
+        return saved ? JSON.parse(saved) :[];
+    });
     const [showMatchResults, setShowMatchResults] = useState({});
 
     const storedWinningForm = JSON.parse(localStorage.getItem('form') || "{}");
@@ -25,6 +30,23 @@ export default function PlayerTable() {
     const stats = WinningLogic(matches, goalsToWin);
 
     const { players, addPlayer, removePlayer } = usePlayers();
+
+    useEffect(()=>{
+        localStorage.setItem('matches',JSON.stringify(matches));
+    },[matches])
+
+    useEffect(()=> {
+        localStorage.setItem('playedPLayers',JSON.stringify(playedPlayers));
+    },[playedPlayers])
+
+    useEffect(()=>{
+        
+        const storedMaatches = JSON.parse(localStorage.getItem('matches'))||[];
+        const storedPlayedPlayers = JSON.parse(localStorage.getItem('playedPlayers')) ||[];
+
+        setMatches(storedMaatches);
+        setPlayedPlayers(storedPlayedPlayers);
+    },[])
 
     function startNewRound() {
         const unplayed = players.filter(p => !playedPlayers.includes(p));
