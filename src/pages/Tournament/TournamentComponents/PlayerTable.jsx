@@ -15,8 +15,7 @@ export default function PlayerTable() {
         date: "",
         sets: "",
     });
-    const [matchToDelete, setMatchToDelete] = useState(null);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
     const [matches, setMatches] = useState(() => {
         const saved = localStorage.getItem('matches');
         return saved ? JSON.parse(saved) : [];
@@ -26,23 +25,25 @@ export default function PlayerTable() {
         return saved ? JSON.parse(saved) : [];
     });
     const [showMatchResults, setShowMatchResults] = useState({});
+    const [matchToDelete, setMatchToDelete] = useState(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showSaveModal, setShowSaveModal] = useState(false);
 
     const storedWinningForm = JSON.parse(localStorage.getItem('form') || "{}");
     const goalsToWin = parseInt(storedWinningForm.goals, 10) || 4;
 
+    const tournamentName = localStorage.getItem('tournament-name') || 'Unnamed Tournament';
     const stats = WinningLogic(matches, goalsToWin);
 
-    const { players, addPlayer, removePlayer } = usePlayers();
-
+    const { players, removePlayer } = usePlayers();
 
     useEffect(() => {
         localStorage.setItem('matches', JSON.stringify(matches));
-    }, [matches])
+    }, [matches]);
 
     useEffect(() => {
         localStorage.setItem('playedPLayers', JSON.stringify(playedPlayers));
-    }, [playedPlayers])
-
+    }, [playedPlayers]);
 
     function startNewRound() {
         const unplayed = players.filter(p => !playedPlayers.includes(p));
@@ -69,6 +70,10 @@ export default function PlayerTable() {
         setMatches(prevMatches => [...prevMatches, newMatch]);
     }
 
+    function shuffle(array) {
+        return [...array].sort(() => 0.5 - Math.random());
+    }
+
     function toggleMatchResult(index) {
         setShowMatchResults(prev => ({
             ...prev,
@@ -78,22 +83,22 @@ export default function PlayerTable() {
 
     function confirmDeleteMatch(index) {
         setMatchToDelete(index);
-        setShowDeleteModal(true)
+        setShowDeleteModal(true);
     }
+
     function removeMatch() {
         if (matchToDelete !== null) {
             setMatches(prevMatches => prevMatches.filter((_, i) => i !== matchToDelete));
-            setMatchToDelete(null)
+            setMatchToDelete(null);
             setShowDeleteModal(false);
-
         }
     }
+
     function handleResultConfirm(result, index, matchPlayers) {
         const newMatch = {
             players: matchPlayers,
             result: result
         };
-        console.log("New Match gespeichert:", newMatch);
 
         setMatches(prevMatches => {
             const updatedMatches = [...prevMatches];
@@ -107,39 +112,39 @@ export default function PlayerTable() {
         }));
     }
 
-    function shuffle(array) {
-        return [...array].sort(() => 0.5 - Math.random());
-    }
+    function saveTournament() {
+        const newTournament = {
+            name: tournamentName,
+            date: new Date().toISOString(),
+            players,
+            matches,
+            stats
+        };
 
-    useEffect(() => {
-        const storedForm = localStorage.getItem('form');
-        if (storedForm) {
-            setFormData(JSON.parse(storedForm));
-        }
-    }, []);
-    useEffect(() => {
-        console.log("Matches", matches);
-        console.log("Stats", stats);
-    }, [matches])
+        const saved = JSON.parse(localStorage.getItem('saved-tournaments') || '[]');
+        saved.push(newTournament);
+        localStorage.setItem('saved-tournaments', JSON.stringify(saved));
+
+        
+        localStorage.removeItem('matches');
+        localStorage.removeItem('playedPLayers');
+        localStorage.removeItem('form');
+        localStorage.removeItem('tournament-name');
+
+       
+        window.location.reload(); 
+    }
 
     return (
         <div className="layout">
             <div className="match-section">
-
                 {matches.map((match, index) => (
                     <div key={index}>
-                        <div className='remove-match-button-section'>
-                        <button
-                            className='remove-match-button'
-                            onClick={() => confirmDeleteMatch(index)}
-                        >
-                            <img src={Trashbin} alt="trash" />
-                        </button>
-                        </div>
                         <div className="match-table-players-container">
-                            {/* Team A */}
                             <div className='teams'>
-
+                                <button className='remove-match-button' onClick={() => confirmDeleteMatch(index)}>
+                                    <img src={Trashbin} alt="trash" />
+                                </button>
                                 <span className='team-border'>Team A</span>
                                 <div className="player-side">
                                     <span>{match.players[0]}</span>
@@ -147,7 +152,6 @@ export default function PlayerTable() {
                                 </div>
                             </div>
 
-                            { }
                             <div className="center-button">
                                 <FormatResults resultArray={match.result} />
                                 <button
@@ -157,7 +161,7 @@ export default function PlayerTable() {
                                     {showMatchResults[index] ? "Close Match Results" : "Enter Match Results"}
                                 </button>
                             </div>
-                            { }
+
                             <div className='teams'>
                                 <span className='team-border'>Team B</span>
                                 <div className='teams'>
@@ -167,12 +171,8 @@ export default function PlayerTable() {
                                     </div>
                                 </div>
                             </div>
-
-                            { }
-
                         </div>
 
-                        { }
                         {showMatchResults[index] && (
                             <div className="match-table-wrapper">
                                 <WinningSets
@@ -193,8 +193,9 @@ export default function PlayerTable() {
             </div>
 
             <div className="tournament-container">
-                <h2>Participants</h2>
-                <AddPlayer onAdd={addPlayer} />
+                <h2>{tournamentName}</h2>
+                <h3>Participants</h3>
+                <AddPlayer />
                 <table className='player-table' id='costomers'>
                     <thead>
                         <tr>
@@ -242,14 +243,32 @@ export default function PlayerTable() {
                             ))}
                     </tbody>
                 </table>
+                <div className="center-button">
+                    <button className="save-tournament-button" onClick={() => setShowSaveModal(true)}>
+                        Save Tournament
+                    </button>
+                </div>
             </div>
+
             {showDeleteModal && (
                 <div className='modal-overlay'>
                     <div className='modal'>
-                        <p>Are you sure you Want to delete this MAtch</p>
+                        <p>Are you sure you want to delete this match?</p>
                         <div className='modal-buttons'>
                             <button className='cancel-button' onClick={() => setShowDeleteModal(false)}>Cancel</button>
-                            <button className='confirm-button' onClick={removeMatch}>Yes,delete</button>
+                            <button className='confirm-button' onClick={removeMatch}>Yes, delete</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {showSaveModal && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h3>Save Tournament "{tournamentName}"?</h3>
+                        <div className="modal-buttons">
+                            <button className="confirm-button" onClick={saveTournament}>Yes, Save</button>
+                            <button className="cancel-button" onClick={() => setShowSaveModal(false)}>Cancel</button>
                         </div>
                     </div>
                 </div>
