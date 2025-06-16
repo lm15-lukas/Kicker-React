@@ -18,7 +18,7 @@ export default function HeadHeader() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Configure your Game
+        Kickr
       </motion.h1>
     </header>
   );
