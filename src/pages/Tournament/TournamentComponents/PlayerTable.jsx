@@ -39,14 +39,6 @@ export default function PlayerTable() {
         localStorage.setItem('playedPLayers',JSON.stringify(playedPlayers));
     },[playedPlayers])
 
-    useEffect(()=>{
-        
-        const storedMaatches = JSON.parse(localStorage.getItem('matches'))||[];
-        const storedPlayedPlayers = JSON.parse(localStorage.getItem('playedPlayers')) ||[];
-
-        setMatches(storedMaatches);
-        setPlayedPlayers(storedPlayedPlayers);
-    },[])
 
     function startNewRound() {
         const unplayed = players.filter(p => !playedPlayers.includes(p));
