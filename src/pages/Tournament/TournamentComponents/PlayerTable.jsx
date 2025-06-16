@@ -5,6 +5,7 @@ import AddPlayer from './AddPlayer.jsx';
 import { WinningLogic } from '../logic/WinningLogic.jsx';
 import WinningSets from './WinningSets.jsx';
 import FormatResults from './FormatResults.jsx';
+import Trashbin from '../assets/images/trash-solid.svg';
 
 export default function PlayerTable() {
     const [, setFormData] = useState({
@@ -14,13 +15,15 @@ export default function PlayerTable() {
         date: "",
         sets: "",
     });
-    const [matches, setMatches] = useState(()=>{
+    const [matchToDelete,setMatchToDelete] = useState(null);
+    const [showDeleteModal,setShowDeleteModal] = useState(false);
+    const [matches, setMatches] = useState(() => {
         const saved = localStorage.getItem('matches');
         return saved ? JSON.parse(saved) : [];
     });
-    const [playedPlayers, setPlayedPlayers] = useState(()=>{
+    const [playedPlayers, setPlayedPlayers] = useState(() => {
         const saved = localStorage.getItem('playedPLayers');
-        return saved ? JSON.parse(saved) :[];
+        return saved ? JSON.parse(saved) : [];
     });
     const [showMatchResults, setShowMatchResults] = useState({});
 
@@ -31,13 +34,14 @@ export default function PlayerTable() {
 
     const { players, addPlayer, removePlayer } = usePlayers();
 
-    useEffect(()=>{
-        localStorage.setItem('matches',JSON.stringify(matches));
-    },[matches])
 
-    useEffect(()=> {
-        localStorage.setItem('playedPLayers',JSON.stringify(playedPlayers));
-    },[playedPlayers])
+    useEffect(() => {
+        localStorage.setItem('matches', JSON.stringify(matches));
+    }, [matches])
+
+    useEffect(() => {
+        localStorage.setItem('playedPLayers', JSON.stringify(playedPlayers));
+    }, [playedPlayers])
 
 
     function startNewRound() {
@@ -72,6 +76,18 @@ export default function PlayerTable() {
         }));
     }
 
+    function confirmDeleteMatch(index){
+        setMatchToDelete(index);
+        setShowDeleteModal(true)
+    }
+    function removeMatch(){
+        if(matchToDelete !== null){
+            setMatches(prevMatches => prevMatches.filter((_,i) => i !== matchToDelete));
+            setMatchToDelete(null)
+            setShowDeleteModal(false);
+
+        }
+    }
     function handleResultConfirm(result, index, matchPlayers) {
         const newMatch = {
             players: matchPlayers,
@@ -110,53 +126,61 @@ export default function PlayerTable() {
         <div className="layout">
             <div className="match-section">
 
-{matches.map((match, index) => (
-    <div key={index}>
-        <div className="match-table-players-container">
-            {/* Team A */}
-            <div className='teams'>
-                <span className='team-border'>Team A</span>
-                <div className="player-side">
-                    <span>{match.players[0]}</span>
-                    <span>{match.players[1]}</span>
-                </div>
-            </div>
+                {matches.map((match, index) => (
+                    <div key={index}>
+                        <div className="match-table-players-container">
+                            {/* Team A */}
+                            <div className='teams'>
+                                <button
+                                className='remove-match-button'
+                                    onClick={() => confirmDeleteMatch(index)}
+                                >
+                                    <img src={Trashbin} alt="trash" />
+                                </button>
+                                <span className='team-border'>Team A</span>
+                                <div className="player-side">
+                                    <span>{match.players[0]}</span>
+                                    <span>{match.players[1]}</span>
+                                </div>
+                            </div>
 
-            {}
-            <div className="center-button">
-                <FormatResults resultArray={match.result} />   
-                <button
-                    className="enter-results-button"
-                    onClick={() => toggleMatchResult(index)}
-                >
-                    {showMatchResults[index] ? "Close Match Results" : "Enter Match Results"}
-                </button>
-            </div>
-            {}
-            <div className='teams'>
-                <span className='team-border'>Team B</span>
-                <div className="player-side">
-                    <span>{match.players[2]}</span>
-                    <span>{match.players[3]}</span>
-                </div>
-            </div>
+                            { }
+                            <div className="center-button">
+                                <FormatResults resultArray={match.result} />
+                                <button
+                                    className="enter-results-button"
+                                    onClick={() => toggleMatchResult(index)}
+                                >
+                                    {showMatchResults[index] ? "Close Match Results" : "Enter Match Results"}
+                                </button>
+                            </div>
+                            { }
+                            <div className='teams'>
+                                <span className='team-border'>Team B</span>
+                                <div className='teams'>
+                                    <div className="player-side">
+                                        <span>{match.players[2]}</span>
+                                        <span>{match.players[3]}</span>
+                                    </div>
+                                </div>
+                            </div>
 
-            {}
+                            { }
 
-        </div>
+                        </div>
 
-        {}
-        {showMatchResults[index] && (
-            <div className="match-table-wrapper">
-                <WinningSets
-                    matchPlayers={match.players}
-                    index={index}
-                    onResultConfirm={handleResultConfirm}
-                />
-            </div>
-        )}
-    </div>
-))}
+                        { }
+                        {showMatchResults[index] && (
+                            <div className="match-table-wrapper">
+                                <WinningSets
+                                    matchPlayers={match.players}
+                                    index={index}
+                                    onResultConfirm={handleResultConfirm}
+                                />
+                            </div>
+                        )}
+                    </div>
+                ))}
 
                 <div className="center-button">
                     <button onClick={startNewRound}>
@@ -216,6 +240,15 @@ export default function PlayerTable() {
                     </tbody>
                 </table>
             </div>
+            {showDeleteModal &&(
+                <div className='modal-overlay'>
+                    <div className='modal'>
+                    <p>Are you sure you Want to delete this MAtch</p>
+                    <button onClick={removeMatch}>Yes,delete</button>
+                    <button onClick={()=> setShowDeleteModal(false)}>Cancel</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
