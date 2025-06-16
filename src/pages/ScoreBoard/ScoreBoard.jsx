@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import HeadHeader from "../ConfigureGame/ConGamcomponents/Header";
 
 const mockTournamentData = [
@@ -8,10 +9,11 @@ const mockTournamentData = [
   { name: "Team Delta", wins: 0, draws: 2, losses: 2 },
 ];
 
-// Punktevergabe: Sieg = 3, Unentschieden = 1, Niederlage = 0
 const calculatePoints = (team) => team.wins * 3 + team.draws;
 
 const ScoreboardPage = () => {
+  const navigate = useNavigate();
+
   const teamsWithPoints = mockTournamentData.map((team) => ({
     ...team,
     points: calculatePoints(team),
@@ -20,7 +22,7 @@ const ScoreboardPage = () => {
   const sortedTeams = teamsWithPoints.sort((a, b) => b.points - a.points);
 
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="min-h-screen bg-gradient-to-r from-red-900 to-black text-white relative">
       <HeadHeader />
 
       <main className="pt-24 px-4 pb-16 max-w-4xl mx-auto">
@@ -53,6 +55,26 @@ const ScoreboardPage = () => {
           ))}
         </div>
       </main>
+
+      {/* Navigation Buttons unten links */}
+      <div className="fixed bottom-4 left-4 flex space-x-2 z-50">
+        <motion.button
+          onClick={() => navigate(-1)}
+          className="bg-gray-700 text-white px-3 py-2 rounded-lg text-sm hover:bg-gray-600 transition-all"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Zurück
+        </motion.button>
+        <motion.button
+          onClick={() => navigate("/")}
+          className="bg-red-600 text-white px-3 py-2 rounded-lg text-sm hover:bg-red-700 transition-all"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Startseite
+        </motion.button>
+      </div>
     </div>
   );
 };
