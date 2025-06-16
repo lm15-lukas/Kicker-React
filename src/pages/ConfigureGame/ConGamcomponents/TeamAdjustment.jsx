@@ -4,6 +4,8 @@ import MonsterLogo from './monster.svg';
 
 export default function PlayerInputList() {
   const [error,setError] =useState('');
+  const[showTournamentNameInput,setShowTournamentInput] =useState(false);
+  const [ tournamentName,setTournamentName]= useState("");
 
   const hasDuplicateNames = () => {
   const trimmedNames = players.map(name => name.trim()).filter(name => name !== "");
@@ -28,10 +30,6 @@ const findDuplicateName = () => {
 
   return null;
 };
-
-
-
-  
     const navigateTournament = useNavigate();
 
   const [players, setPlayers] = useState(() => {
@@ -85,8 +83,17 @@ const handleCreateTournament = () => {
   }
 
   setError("");
-  navigateTournament('/tournament');
+  setShowTournamentInput(true);
 };
+const handleConfirmTournament = ()=>{
+  if(tournamentName.trim() === ""){
+    setError("Please enter a tournament Name")
+    return;
+  }
+  localStorage.setItem('tournament-name',tournamentName.trim());
+
+  navigateTournament('/tournament');
+}
 
 
 const isValidPlayerList = () => {
@@ -138,6 +145,22 @@ const isValidPlayerList = () => {
           ))}
         </ul>
       </div>
+      {showTournamentNameInput &&(
+        <div className="tournament-name-modal">
+          <h3>Enter Tournament Name</h3>
+          <input 
+          type="text" 
+          value={tournamentName}
+          onChange={(e) => setTournamentName(e.target.value)}
+          placeholder="Tournament Name"
+          className="tournament-name-input"
+          />
+          <div className="modal-buttons">
+            <button  className="confirm-button" onClick={handleConfirmTournament}> Start Tournament</button>
+            <button  className="cancel-modal-button" onClick={()=> setShowTournamentInput(false)}>Cancel</button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
