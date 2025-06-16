@@ -297,13 +297,38 @@
   border-color: #2a2a2a;
 }
 .remove-match-button {
-  background-color: #455559;
+  display: flex;
+  justify-content: right;
+  background: transparent;
   border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.remove-match-button:hover {
-    color: #e00;
-    transform: scale(1.2);
+.remove-match-button img {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  filter: grayscale(100%);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.remove-match-button:hover img {
+  opacity: 1;
+  transform: scale(1.15);
+  filter: none;
+}
+.remove-match-button-section{
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  border-style: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 8px;
 }
 
 .match-table-players-container {

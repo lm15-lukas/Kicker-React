@@ -15,8 +15,8 @@ export default function PlayerTable() {
         date: "",
         sets: "",
     });
-    const [matchToDelete,setMatchToDelete] = useState(null);
-    const [showDeleteModal,setShowDeleteModal] = useState(false);
+    const [matchToDelete, setMatchToDelete] = useState(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [matches, setMatches] = useState(() => {
         const saved = localStorage.getItem('matches');
         return saved ? JSON.parse(saved) : [];
@@ -76,13 +76,13 @@ export default function PlayerTable() {
         }));
     }
 
-    function confirmDeleteMatch(index){
+    function confirmDeleteMatch(index) {
         setMatchToDelete(index);
         setShowDeleteModal(true)
     }
-    function removeMatch(){
-        if(matchToDelete !== null){
-            setMatches(prevMatches => prevMatches.filter((_,i) => i !== matchToDelete));
+    function removeMatch() {
+        if (matchToDelete !== null) {
+            setMatches(prevMatches => prevMatches.filter((_, i) => i !== matchToDelete));
             setMatchToDelete(null)
             setShowDeleteModal(false);
 
@@ -128,15 +128,18 @@ export default function PlayerTable() {
 
                 {matches.map((match, index) => (
                     <div key={index}>
+                        <div className='remove-match-button-section'>
+                        <button
+                            className='remove-match-button'
+                            onClick={() => confirmDeleteMatch(index)}
+                        >
+                            <img src={Trashbin} alt="trash" />
+                        </button>
+                        </div>
                         <div className="match-table-players-container">
                             {/* Team A */}
                             <div className='teams'>
-                                <button
-                                className='remove-match-button'
-                                    onClick={() => confirmDeleteMatch(index)}
-                                >
-                                    <img src={Trashbin} alt="trash" />
-                                </button>
+
                                 <span className='team-border'>Team A</span>
                                 <div className="player-side">
                                     <span>{match.players[0]}</span>
@@ -240,12 +243,14 @@ export default function PlayerTable() {
                     </tbody>
                 </table>
             </div>
-            {showDeleteModal &&(
+            {showDeleteModal && (
                 <div className='modal-overlay'>
                     <div className='modal'>
-                    <p>Are you sure you Want to delete this MAtch</p>
-                    <button onClick={removeMatch}>Yes,delete</button>
-                    <button onClick={()=> setShowDeleteModal(false)}>Cancel</button>
+                        <p>Are you sure you Want to delete this MAtch</p>
+                        <div className='modal-buttons'>
+                            <button className='cancel-button' onClick={() => setShowDeleteModal(false)}>Cancel</button>
+                            <button className='confirm-button' onClick={removeMatch}>Yes,delete</button>
+                        </div>
                     </div>
                 </div>
             )}
