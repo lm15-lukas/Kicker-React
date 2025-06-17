@@ -11,7 +11,7 @@ export default function TournamentHeader() {
             <div>
             <img src={Trophy} alt="trophy" className="trophy"/>
             <button className="tournament-End" onClick={handleEndTournament}>End Tournament</button>
-            <h1>Tournament {tournamentName}</h1> 
+            <h1>Tournament: "{tournamentName}"</h1> 
             </div>
         </header>
     )

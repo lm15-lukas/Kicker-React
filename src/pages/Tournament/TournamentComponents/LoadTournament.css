@@ -2,7 +2,7 @@
     max-width: 600px;
     margin: 2rem auto;
     padding: 1.5rem;
-    background-color: #f9f9f9;
+    background-color: #2a2a2a;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -10,7 +10,8 @@
 .load-tournament-container h2 {
     text-align: center;
     margin-bottom: 1.5rem;
-    color: #333;
+    color: white;
+    text-decoration: underline;
 }
 
 .tournament-list {
@@ -23,20 +24,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
+    background-color: #2a2a2a;
     padding: 0.75rem 1rem;
     margin-bottom: 0.75rem;
+    border-style: groove;
     border-radius: 6px;
+    border-color: white;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .tournament-item strong {
     font-size: 1rem;
-    color: #222;
+    color: white;
 }
 
 .tournament-item small {
-    color: #666;
+    color: white;
     font-size: 0.85rem;
 }
 
