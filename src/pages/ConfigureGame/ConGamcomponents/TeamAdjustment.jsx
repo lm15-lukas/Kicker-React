@@ -91,6 +91,10 @@ const handleConfirmTournament = ()=>{
     return;
   }
   localStorage.setItem('tournament-name',tournamentName.trim());
+  localStorage.setItem('player',JSON.stringify(players.filter(name => name.trim()!== "")));
+  localStorage.setItem('matches',JSON.stringify([]));
+  localStorage.setItem('playedPlayer',JSON.stringify([]));
+  localStorage.setItem('results',JSON.stringify([]));
 
   navigateTournament('/tournament');
 }
