@@ -12,7 +12,7 @@ function App() {
     <PlayerProvider>
     <Router>
       <Routes>
-        <Route path="/" element={<ConfigureGame/>}></Route>
+        <Route path="/configure-game-page" element={<ConfigureGame/>}></Route>
         <Route path="/team-adjustment" element={<TeamAdjustment/>}></Route>
         <Route path="/select-game-mode" element={<SelectGameMode/>}></Route>
         <Route path="/tournament" element={<Tournament/>}></Route>

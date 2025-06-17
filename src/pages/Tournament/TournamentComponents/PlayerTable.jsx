@@ -6,6 +6,7 @@ import { WinningLogic } from '../logic/WinningLogic.jsx';
 import WinningSets from './WinningSets.jsx';
 import FormatResults from './FormatResults.jsx';
 import Trashbin from '../assets/images/trash-solid.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function PlayerTable() {
     const [, setFormData] = useState({
@@ -15,7 +16,7 @@ export default function PlayerTable() {
         date: "",
         sets: "",
     });
-
+const handleSaveTournamentNavigate= useNavigate();
     const [matches, setMatches] = useState(() => {
         const saved = localStorage.getItem('matches');
         return saved ? JSON.parse(saved) : [];
@@ -132,7 +133,9 @@ export default function PlayerTable() {
         localStorage.removeItem('tournament-name');
 
        
-        window.location.reload(); 
+        
+        
+        handleSaveTournamentNavigate('/configure-game-page')
     }
 
     return (
