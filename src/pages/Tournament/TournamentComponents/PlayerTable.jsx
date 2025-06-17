@@ -9,14 +9,18 @@ import Trashbin from '../assets/images/trash-solid.svg';
 import { useNavigate } from 'react-router-dom';
 
 export default function PlayerTable() {
-    const [, setFormData] = useState({
+const [formData, setFormData] = useState(() => {
+    const stored = localStorage.getItem('form');
+    return stored ? JSON.parse(stored) : {
         goals: "",
         length: "",
         points: "",
         date: "",
         sets: "",
-    });
-const handleSaveTournamentNavigate= useNavigate();
+    };
+});
+
+    const handleSaveTournamentNavigate = useNavigate();
     const [matches, setMatches] = useState(() => {
         const saved = localStorage.getItem('matches');
         return saved ? JSON.parse(saved) : [];
@@ -119,22 +123,24 @@ const handleSaveTournamentNavigate= useNavigate();
             date: new Date().toISOString(),
             players,
             matches,
-            stats
+            stats,
+            formData,
+            playedPlayers
+
         };
 
         const saved = JSON.parse(localStorage.getItem('saved-tournaments') || '[]');
         saved.push(newTournament);
         localStorage.setItem('saved-tournaments', JSON.stringify(saved));
 
-        
+
         localStorage.removeItem('matches');
         localStorage.removeItem('playedPLayers');
         localStorage.removeItem('form');
         localStorage.removeItem('tournament-name');
 
-       
-        
-        
+
+
         handleSaveTournamentNavigate('/configure-game-page')
     }
 
@@ -182,6 +188,7 @@ const handleSaveTournamentNavigate= useNavigate();
                                     matchPlayers={match.players}
                                     index={index}
                                     onResultConfirm={handleResultConfirm}
+
                                 />
                             </div>
                         )}

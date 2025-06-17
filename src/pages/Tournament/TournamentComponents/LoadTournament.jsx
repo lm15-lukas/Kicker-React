@@ -11,11 +11,26 @@ export default function LoadTournaments() {
         setSavedTournaments(stored);
     }, []);
 
-function handleLoad(tournament) {
+const handleLoad=(tournament) => {
     localStorage.setItem('tournament-name', tournament.name);
     localStorage.setItem('matches', JSON.stringify(tournament.matches));
     localStorage.setItem('playedPLayers', JSON.stringify([]));
     localStorage.setItem('players', JSON.stringify(tournament.players));
+    
+    
+    if(tournament.formData){
+        localStorage.setItem('form',JSON.stringify(tournament.formData))
+
+    }else{
+        localStorage.setItem('form',JSON.stringify({
+            goals:"",
+            length:"",
+            points:"",
+            sets:"",
+            date:"",
+        }));
+    }
+    localStorage.setItem('results',JSON.stringify(tournament.results ||[]));
     
     navigate('/tournament');
 }

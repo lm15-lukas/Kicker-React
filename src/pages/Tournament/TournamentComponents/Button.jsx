@@ -20,7 +20,7 @@ export default function Button({ onConfirm }) {
         }
     }, []);
 
-    const topButtons = Array.from({ length: goalsToWin }, (_, i) => i);
+    const topButtons = Array.from({ length: goalsToWin}, (_, i) => i);
     const bottomButtons = [...topButtons].reverse();
 
     function handleConfirmClick() {
