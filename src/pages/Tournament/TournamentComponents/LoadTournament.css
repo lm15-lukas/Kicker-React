@@ -1,0 +1,78 @@
+.load-tournament-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.load-tournament-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.tournament-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tournament-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tournament-item strong {
+    font-size: 1rem;
+    color: #222;
+}
+
+.tournament-item small {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.load-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.load-button, .delete-button {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.load-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+.load-button:hover {
+    background-color: #43a047;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #e53935;
+}
+
+.load-tournament-container p {
+    text-align: center;
+    color: #555;
+}
