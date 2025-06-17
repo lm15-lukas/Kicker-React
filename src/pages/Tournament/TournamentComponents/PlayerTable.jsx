@@ -143,7 +143,7 @@ const [formData, setFormData] = useState(() => {
 
 
 
-        handleSaveTournamentNavigate('/configure-game-page')
+        handleSaveTournamentNavigate('/load')
     }
 
     return (
