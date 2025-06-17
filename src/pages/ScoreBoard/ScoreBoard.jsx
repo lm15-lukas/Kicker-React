@@ -19,10 +19,10 @@ const ScoreboardPage = () => {
     points: calculatePoints(team),
   }));
 
-  const sortedTeams = teamsWithPoints.sort((a, b) => b.points - a.points);
+  const sortedTeams = [...teamsWithPoints].sort((a, b) => b.points - a.points);
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-red-900 to-black text-white relative">
+    <div className="min-h-screen bg-gradient-to-r from-red-900 to-black text-white">
       <HeadHeader />
 
       <main className="pt-24 px-4 pb-16 max-w-4xl mx-auto">
@@ -36,27 +36,48 @@ const ScoreboardPage = () => {
         </motion.h1>
 
         <div className="space-y-4">
-          {sortedTeams.map((team, index) => (
-            <motion.div
-              key={team.name}
-              className={`flex justify-between items-center p-4 rounded-lg shadow-md ${
-                index === 0
-                  ? "bg-gradient-to-r from-yellow-500 to-yellow-300 text-black"
-                  : "bg-gray-800"
-              }`}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-            >
-              <span className="text-xl font-bold w-10">{index + 1}.</span>
-              <span className="text-xl flex-1">{team.name}</span>
-              <span className="text-xl font-bold">{team.points} pts</span>
-            </motion.div>
-          ))}
+          {sortedTeams.map((team, index) => {
+            const isTop = index === 0;
+
+            return (
+              <motion.div
+                key={team.name}
+                className={`relative flex justify-between items-center p-4 rounded-lg shadow-md ${
+                  isTop
+                    ? "bg-gradient-to-r from-yellow-400 to-yellow-200 text-black ring-4 ring-yellow-500"
+                    : "bg-gray-800 text-white"
+                }`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <span className="text-xl font-bold w-10">{index + 1}.</span>
+                <span className="text-xl flex-1 truncate">{team.name}</span>
+                <span className="text-xl font-bold">{team.points} pts</span>
+
+                {isTop && (
+                  <motion.div
+                    className="absolute -top-4 -right-4 text-3xl"
+                    initial={{ scale: 0 }}
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      rotate: [0, 10, -10, 0],
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 2,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    🏆
+                  </motion.div>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </main>
 
-      {/* Navigation Buttons unten links */}
       <div className="fixed bottom-4 left-4 flex space-x-2 z-50">
         <motion.button
           onClick={() => navigate(-1)}

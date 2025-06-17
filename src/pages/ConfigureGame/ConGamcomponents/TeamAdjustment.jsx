@@ -66,7 +66,6 @@ export default function TeamAdjustment() {
         ))}
       </ul>
 
-      {/* Spielen Button – nur aktiv bei mindestens 4 Teams */}
       <motion.button
         onClick={() => navigate("/tournament")}
         disabled={teams.length < 4}
@@ -81,7 +80,6 @@ export default function TeamAdjustment() {
         Spielen
       </motion.button>
 
-      {/* Navigation Buttons unten links */}
       <div className="fixed bottom-4 left-4 flex space-x-2 z-50">
         <motion.button
           onClick={() => navigate(-1)}

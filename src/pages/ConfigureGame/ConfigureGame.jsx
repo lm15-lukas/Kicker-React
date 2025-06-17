@@ -72,7 +72,7 @@ export default function ConfigureGame() {
     setFormData(resetData);
     setErrors(getInitialErrors(resetData));
     localStorage.removeItem("form");
-    localStorage.removeItem("teams"); // Reset TeamAdjustment
+    localStorage.removeItem("teams");
   };
 
   const handleFormDataChange = (event) => {
