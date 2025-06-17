@@ -34,7 +34,8 @@ const findDuplicateName = () => {
 
   const [players, setPlayers] = useState(() => {
   const saved = localStorage.getItem("player-names");
-  return saved ? JSON.parse(saved) : [""];
+  const parsed = saved ? JSON.parse(saved) : [];
+  return parsed.length > 0 ? parsed:[""];
 });
 
 const inputRefs = useRef([])
