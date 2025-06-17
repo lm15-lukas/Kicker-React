@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './LoadTournament.css';
 
 export default function LoadTournaments() {
+    
     const [savedTournaments, setSavedTournaments] = useState([]);
     const navigate = useNavigate();
 

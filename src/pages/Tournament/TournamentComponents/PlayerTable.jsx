@@ -20,6 +20,8 @@ const [formData, setFormData] = useState(() => {
     };
 });
 
+    
+
     const handleSaveTournamentNavigate = useNavigate();
     const [matches, setMatches] = useState(() => {
         const saved = localStorage.getItem('matches');
@@ -40,7 +42,7 @@ const [formData, setFormData] = useState(() => {
     const tournamentName = localStorage.getItem('tournament-name') || 'Unnamed Tournament';
     const stats = WinningLogic(matches, goalsToWin);
 
-    const { players, removePlayer } = usePlayers();
+    const { players, removePlayer,addPlayer } = usePlayers();
 
     useEffect(() => {
         localStorage.setItem('matches', JSON.stringify(matches));
@@ -201,11 +203,14 @@ const [formData, setFormData] = useState(() => {
                     </button>
                 </div>
             </div>
+            
 
             <div className="tournament-container">
                 <h2>{tournamentName}</h2>
                 <h3>Participants</h3>
-                <AddPlayer />
+                <AddPlayer
+                onAdd={addPlayer}
+                />
                 <table className='player-table' id='costomers'>
                     <thead>
                         <tr>
