@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { usePlayers } from '../context/PlayerContext.js';
+import { usePlayers } from '../context/PlayerContext.jsx';
 import './Tournament.css';
 import AddPlayer from './AddPlayer.jsx';
 import { WinningLogic } from '../logic/WinningLogic.jsx';

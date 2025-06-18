@@ -1,52 +1,17 @@
-import { useEffect, useState,useRef } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import MonsterLogo from './monster.svg';
 
 export default function TeamAdjustment() {
   const navigate = useNavigate();
-
   const [teams, setTeams] = useState(() => {
     const saved = localStorage.getItem("teams");
     return saved ? JSON.parse(saved) : [];
-
-export default function PlayerInputList() {
-  const [error,setError] =useState('');
-  const[showTournamentNameInput,setShowTournamentInput] =useState(false);
-  const [ tournamentName,setTournamentName]= useState("");
-
-  const hasDuplicateNames = () => {
-  const trimmedNames = players.map(name => name.trim()).filter(name => name !== "");
-  const nameSet = new Set(trimmedNames);
-  return nameSet.size !== trimmedNames.length;
-};
-
-const findDuplicateName = () => {
-  const seen = {};
-
-  for (let name of players) {
-    const trimmed = name.trim();
-    if (trimmed === "") continue;
-
-    const lower = trimmed.toLowerCase();
-    if (seen[lower]) {
-      return trimmed;
-    } else {
-      seen[lower] = true;
-    }
-  }
-
-  return null;
-};
-    const navigateTournament = useNavigate();
-
-  const [players, setPlayers] = useState(() => {
-  const saved = localStorage.getItem("player-names");
-  const parsed = saved ? JSON.parse(saved) : [];
-  return parsed.length > 0 ? parsed:[""];
   });
-
   const [newTeam, setNewTeam] = useState("");
+  const [showTournamentNameInput, setShowTournamentInput] = useState(false);
+  const [tournamentName, setTournamentName] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     localStorage.setItem("teams", JSON.stringify(teams));
@@ -65,34 +30,25 @@ const findDuplicateName = () => {
     setTeams(updated);
   };
 
-  const duplicateName = findDuplicateName();
-  if (duplicateName) {
-    setError(`The name "${duplicateName}" is used more than once.`);
-    return;
-  }
-
-  setError("");
-  setShowTournamentInput(true);
-};
-const handleConfirmTournament = ()=>{
-  if(tournamentName.trim() === ""){
-    setError("Please enter a tournament Name")
-    return;
-  }
-  localStorage.setItem('tournament-name',tournamentName.trim());
-  localStorage.setItem('player',JSON.stringify(players.filter(name => name.trim()!== "")));
-  localStorage.setItem('matches',JSON.stringify([]));
-  localStorage.setItem('playedPlayer',JSON.stringify([]));
-  localStorage.setItem('results',JSON.stringify([]));
-
-  navigateTournament('/tournament');
-}
-
-
-const isValidPlayerList = () => {
-    const nonEmptyPlayers = players.filter(name => name.trim() !== "");
-    return nonEmptyPlayers.length >= 4;
+  const handleStart = () => {
+    if (teams.length < 4) {
+      setError("Please add at least 4 teams.");
+      return;
+    }
+    setShowTournamentInput(true);
   };
+
+  const handleConfirmTournament = () => {
+    if (tournamentName.trim() === "") {
+      setError("Please enter a tournament name.");
+      return;
+    }
+    localStorage.setItem("tournament-name", tournamentName.trim());
+    localStorage.setItem("matches", JSON.stringify([]));
+    localStorage.setItem("results", JSON.stringify([]));
+    navigate("/tournament");
+  };
+
   return (
     <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center px-4 relative">
       <h1 className="text-3xl font-bold mb-6">Team Adjustment</h1>
@@ -113,7 +69,7 @@ const isValidPlayerList = () => {
         </button>
       </div>
 
-      <ul className="space-y-2 mb-10">
+      <ul className="space-y-2 mb-6">
         {teams.map((team, index) => (
           <li
             key={index}
@@ -130,8 +86,10 @@ const isValidPlayerList = () => {
         ))}
       </ul>
 
+      {error && <p className="text-red-400 mb-4">{error}</p>}
+
       <motion.button
-        onClick={() => navigate("/tournament")}
+        onClick={handleStart}
         disabled={teams.length < 4}
         className={`px-6 py-3 rounded-xl text-lg font-semibold transition-all ${
           teams.length >= 4
@@ -141,8 +99,35 @@ const isValidPlayerList = () => {
         whileHover={teams.length >= 4 ? { scale: 1.05 } : {}}
         whileTap={teams.length >= 4 ? { scale: 0.95 } : {}}
       >
-        Spielen
+        Start Tournament
       </motion.button>
+
+      {showTournamentNameInput && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center z-50 p-4 rounded-lg">
+          <h3 className="text-2xl mb-4">Enter Tournament Name</h3>
+          <input
+            type="text"
+            value={tournamentName}
+            onChange={(e) => setTournamentName(e.target.value)}
+            placeholder="Tournament Name"
+            className="bg-gray-700 text-white p-2 rounded-lg mb-4 w-full max-w-xs"
+          />
+          <div className="flex space-x-2">
+            <button
+              className="bg-green-600 px-4 py-2 rounded hover:bg-green-700"
+              onClick={handleConfirmTournament}
+            >
+              Confirm
+            </button>
+            <button
+              className="bg-red-600 px-4 py-2 rounded hover:bg-red-700"
+              onClick={() => setShowTournamentInput(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="fixed bottom-4 left-4 flex space-x-2 z-50">
         <motion.button
@@ -162,22 +147,6 @@ const isValidPlayerList = () => {
           Startseite
         </motion.button>
       </div>
-      {showTournamentNameInput &&(
-        <div className="tournament-name-modal">
-          <h3>Enter Tournament Name</h3>
-          <input
-          type="text"
-          value={tournamentName}
-          onChange={(e) => setTournamentName(e.target.value)}
-          placeholder="Tournament Name"
-          className="tournament-name-input"
-          />
-          <div className="modal-buttons">
-            <button  className="confirm-button" onClick={handleConfirmTournament}> Start Tournament</button>
-            <button  className="cancel-modal-button" onClick={()=> setShowTournamentInput(false)}>Cancel</button>
-          </div>
-        </div>
-      )}
-    </>
+    </div>
   );
 }
