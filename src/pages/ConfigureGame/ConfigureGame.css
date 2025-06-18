@@ -20,7 +20,6 @@ body {
     width: 90%;
     max-width: 400px;
 }
-
 .form-item {
     margin-bottom: 20px;
     display: flex;
@@ -59,6 +58,8 @@ body {
 
 .cancel-button {
     background-color: #991b1b;
+    row-gap: 50px;
+
     border: none;
     color: white;
     padding: 12px 24px;
@@ -290,4 +291,45 @@ body {
     font-weight: bold;
     margin: 0.5rem 0;
     text-align: center;
+}
+.tournament-name-modal {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  max-width: 400px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.tournament-name-input {
+  width: 80%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+  padding: 10px;
+}
+
+.confirm-button {
+  background-color: #e74c3c;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-modal-button {
+  background-color: red;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }

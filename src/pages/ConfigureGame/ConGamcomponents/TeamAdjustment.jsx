@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import MonsterLogo from './monster.svg';
 
 export default function TeamAdjustment() {
   const navigate = useNavigate();
@@ -8,6 +9,41 @@ export default function TeamAdjustment() {
   const [teams, setTeams] = useState(() => {
     const saved = localStorage.getItem("teams");
     return saved ? JSON.parse(saved) : [];
+
+export default function PlayerInputList() {
+  const [error,setError] =useState('');
+  const[showTournamentNameInput,setShowTournamentInput] =useState(false);
+  const [ tournamentName,setTournamentName]= useState("");
+
+  const hasDuplicateNames = () => {
+  const trimmedNames = players.map(name => name.trim()).filter(name => name !== "");
+  const nameSet = new Set(trimmedNames);
+  return nameSet.size !== trimmedNames.length;
+};
+
+const findDuplicateName = () => {
+  const seen = {};
+
+  for (let name of players) {
+    const trimmed = name.trim();
+    if (trimmed === "") continue;
+
+    const lower = trimmed.toLowerCase();
+    if (seen[lower]) {
+      return trimmed;
+    } else {
+      seen[lower] = true;
+    }
+  }
+
+  return null;
+};
+    const navigateTournament = useNavigate();
+
+  const [players, setPlayers] = useState(() => {
+  const saved = localStorage.getItem("player-names");
+  const parsed = saved ? JSON.parse(saved) : [];
+  return parsed.length > 0 ? parsed:[""];
   });
 
   const [newTeam, setNewTeam] = useState("");
@@ -29,6 +65,34 @@ export default function TeamAdjustment() {
     setTeams(updated);
   };
 
+  const duplicateName = findDuplicateName();
+  if (duplicateName) {
+    setError(`The name "${duplicateName}" is used more than once.`);
+    return;
+  }
+
+  setError("");
+  setShowTournamentInput(true);
+};
+const handleConfirmTournament = ()=>{
+  if(tournamentName.trim() === ""){
+    setError("Please enter a tournament Name")
+    return;
+  }
+  localStorage.setItem('tournament-name',tournamentName.trim());
+  localStorage.setItem('player',JSON.stringify(players.filter(name => name.trim()!== "")));
+  localStorage.setItem('matches',JSON.stringify([]));
+  localStorage.setItem('playedPlayer',JSON.stringify([]));
+  localStorage.setItem('results',JSON.stringify([]));
+
+  navigateTournament('/tournament');
+}
+
+
+const isValidPlayerList = () => {
+    const nonEmptyPlayers = players.filter(name => name.trim() !== "");
+    return nonEmptyPlayers.length >= 4;
+  };
   return (
     <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center px-4 relative">
       <h1 className="text-3xl font-bold mb-6">Team Adjustment</h1>
@@ -98,6 +162,22 @@ export default function TeamAdjustment() {
           Startseite
         </motion.button>
       </div>
-    </div>
+      {showTournamentNameInput &&(
+        <div className="tournament-name-modal">
+          <h3>Enter Tournament Name</h3>
+          <input
+          type="text"
+          value={tournamentName}
+          onChange={(e) => setTournamentName(e.target.value)}
+          placeholder="Tournament Name"
+          className="tournament-name-input"
+          />
+          <div className="modal-buttons">
+            <button  className="confirm-button" onClick={handleConfirmTournament}> Start Tournament</button>
+            <button  className="cancel-modal-button" onClick={()=> setShowTournamentInput(false)}>Cancel</button>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

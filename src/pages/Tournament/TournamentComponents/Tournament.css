@@ -1,0 +1,413 @@
+.layout {
+  margin-top: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  position: relative;
+  height: 100vh;
+  padding: 20px;
+  margin-top:0%;
+}
+
+.tournament-container {
+  position: fixed;
+  margin-left: auto;
+  background-color: #2a2a2a;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+}
+
+.player-table {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    background-color: #333;
+    color: #fff;
+    z-index: 100;
+}
+
+.tournament-End{
+  display: flex;
+  margin-left: auto;
+  background-color: #8e4646;
+  margin-right: 50px;
+  padding: 24px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  
+}
+
+.trophy {
+  margin-top: 15px;
+  height: 100px;
+}
+
+.match-table-container-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #28403D;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 850px;
+  margin-bottom: 20px;
+}
+
+.match-table-players-container {
+  display: flex;
+  border-style: solid;
+  border-color: #26313d;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 40px;
+  gap: 247px;
+  margin-bottom: 0%;
+}
+
+.match-table-buttons:hover {
+  background-color: #115e59;
+}
+
+.match-table-player-container-span {
+  background-color: #115e59;
+}
+
+.match-section {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  gap: 20px;
+  margin-left: 400px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.setting-button-row {
+  row-gap: 50px;
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 45%;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  margin-right: 40px;
+}
+
+.colon {
+  font-size: 20px;
+  color: white;
+  padding: 20px;
+
+}
+
+
+.player-side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  size: 200rem;
+  margin-top: 10px;
+}
+
+.teams {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  border-color: #ffffff;
+}
+
+.team-border {
+  border-style: solid;
+  border-color: #2a2a2a;
+  border-radius: 0%;
+}
+
+
+.enter-results-button {
+  padding: 10px 20px;
+  background-color: #3d5d80;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: -66px;
+}
+
+.enter-results-button:hover {
+  background-color: #759ac3;
+}
+
+.center-button button {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  background-color: #3d5d80;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.center-button button:hover {
+  background-color: #759ac3;
+}
+
+.toggle-button {
+  width: 20px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 16px;
+}
+
+.toggle-button.inactive {
+  margin: 4px;
+  border-radius: 50%;
+  border: none;
+  background-color: #28403D;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-button.active {
+  background-color: green;
+  margin: 4px;
+  border-radius: 50%;
+  border: none;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+
+.plus-area {
+
+  height: 50px;
+  color: white;
+  display: flex;
+  justify-content: right;
+  margin-right: 27px;
+}
+
+.add {
+  size: 20rem;
+}
+
+.remove-button {
+  margin-left: 8px;
+  background: transparent;
+  border: none;
+  color: #ff4444;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.match-table-container-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #28403D;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 850px;
+  margin-bottom: 20px;
+}
+
+.match-table-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.match-table-container-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #28403D;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 850px;
+  margin-bottom: 20px;
+}
+
+.Button-Column {
+  display: flex;
+  flex-direction: column;
+}
+
+#costomers {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#costomers td,th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.score-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+.score-number {
+  width: 2rem;
+  text-align: center;
+}
+.Result{
+  border: #115e59;
+  border-color: #2a2a2a;
+}
+.remove-match-button {
+  display: flex;
+  justify-content: right;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-match-button img {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  filter: grayscale(100%);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.remove-match-button:hover img {
+  opacity: 1;
+  transform: scale(1.15);
+  filter: none;
+}
+.remove-match-button-section{
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  border-style: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.match-table-players-container {
+    position: relative;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.modal-buttons {
+  padding: 10px;
+  margin-top: 1rem;
+
+}
+
+.confirm-button {
+  background-color: #e74c3c;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: red;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

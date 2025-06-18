@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import HeadHeader from "./ConGamcomponents/Header.jsx";
@@ -6,11 +7,11 @@ import { motion } from "framer-motion";
 
 const getInitialErrors = (data) => {
   const errs = {};
-  if (!data.players) errs.players = "Please enter a number of players";
   if (!data.goals) errs.goals = "Please enter goals to win";
   if (!data.length || data.length === "null") errs.length = "Please enter a Match length";
   if (!data.points) errs.points = "Please enter points per win";
   if (!data.date) errs.date = "Please select a date";
+    if(!data.sets) errs.sets = "Please select sets";
   return errs;
 };
 
@@ -18,11 +19,12 @@ function getFormValues() {
   const storedValues = localStorage.getItem("form");
   if (!storedValues)
     return {
-      players: "",
+
       goals: "",
       length: "",
       points: "",
-      date: "",
+      sets:"",
+        date: "",
     };
   return JSON.parse(storedValues);
 }
@@ -63,11 +65,12 @@ export default function ConfigureGame() {
 
   const handleReset = () => {
     const resetData = {
-      players: "",
+            players: "",
       goals: "",
       length: "",
       points: "",
       date: "",
+            sets:"",
     };
     setFormData(resetData);
     setErrors(getInitialErrors(resetData));
@@ -120,6 +123,81 @@ export default function ConfigureGame() {
               {field === "date" ? "Date" : `Enter ${field.replace("-", " ")}`}
             </label>
             {field === "date" ? (
+        <div className="header">
+            <Header />
+            <div className="configure-game-page">
+                <div className="form-container">
+                    { }
+                    <div className="form-item">
+                        <label htmlFor="goals" className="form-label">Goals to win</label>
+                        <select
+                            id="goals"
+                            className="form-input"
+                            value={formData.goals}
+                            onChange={handleFormDataChange}
+                        >
+                            <option value="null">-- Please enter --</option>
+                            {[...Array(10).keys()].map(i => (
+                                <option key={i + 1} value={i + 1}>{i + 1}</option>
+                            ))}
+                        </select>
+                        {errors.goals && <h3 className="error-text">{errors.goals}</h3>}
+                    </div>
+                    {}
+                    <div className="form-item">
+                        <label htmlFor="sets" className="form-label">Sets to Win</label>
+                        <select
+                             id="sets"
+                            className="form-input"
+                            value={formData.sets}
+                            onChange={handleFormDataChange}
+                        >
+                            <option value="null">--Please enter --</option>
+                            {[...Array(3).keys()].map(i => (
+                                <option key={i + 1} value={i + 1}>{i + 1}</option>
+                            ))}
+                            </select>
+                            {errors.sets && <h3 className="error-text">{errors.sets}</h3>}
+                    </div>
+
+                    { }
+                    <div className="form-item">
+                        <label htmlFor="length" className="form-label">Match length in minutes</label>
+                        <select
+                            id="length"
+                            className="form-input"
+                            value={formData.length}
+                            onChange={handleFormDataChange}
+                        >
+                            <option value="null">--Please Select--</option>
+                            <option value="2">No time Tracking</option>
+                            {[5, 6, 7, 8, 9, 10].map(i => (
+                                <option key={i} value={i}>{i}</option>
+                            ))}
+                        </select>
+                        {errors.length && <h3 className="error-text">{errors.length}</h3>}
+                    </div>
+
+                    { }
+                    <div className="form-item">
+                        <label htmlFor="points" className="form-label">Points per win</label>
+                        <select
+                            id="points"
+                            className="form-input"
+                            value={formData.points}
+                            onChange={handleFormDataChange}
+                        >
+                            <option value="null">--Please enter--</option>
+                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i => (
+                                <option key={i} value={i}>{i}</option>
+                            ))}
+                        </select>
+                        {errors.points && <h3 className="error-text">{errors.points}</h3>}
+                    </div>
+
+                    { }
+                    <div className="form-item">
+                        <label htmlFor="date" className="form-label">Date</label>
               <input
                 id="date"
                 type="date"
