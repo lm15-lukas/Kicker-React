@@ -2,37 +2,37 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-export default function TeamAdjustment() {
+export default function PlayerAdjustment() {
   const navigate = useNavigate();
-  const [teams, setTeams] = useState(() => {
-    const saved = localStorage.getItem("teams");
+  const [players, setPlayers] = useState(() => {
+    const saved = localStorage.getItem("player-names");
     return saved ? JSON.parse(saved) : [];
   });
-  const [newTeam, setNewTeam] = useState("");
+  const [newPlayer, setNewPlayer] = useState("");
   const [showTournamentNameInput, setShowTournamentInput] = useState(false);
   const [tournamentName, setTournamentName] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
-    localStorage.setItem("teams", JSON.stringify(teams));
-  }, [teams]);
+    localStorage.setItem("player-names", JSON.stringify(players));
+  }, [players]);
 
-  const handleAddTeam = () => {
-    if (newTeam.trim() !== "") {
-      setTeams([...teams, newTeam.trim()]);
-      setNewTeam("");
+  const handleAddPlayer = () => {
+    if (newPlayer.trim() !== "") {
+      setPlayers([...players, newPlayer.trim()]);
+      setNewPlayer("");
     }
   };
 
-  const handleRemoveTeam = (index) => {
-    const updated = [...teams];
+  const handleRemovePlayer = (index) => {
+    const updated = [...players];
     updated.splice(index, 1);
-    setTeams(updated);
+    setPlayers(updated);
   };
 
   const handleStart = () => {
-    if (teams.length < 4) {
-      setError("Please add at least 4 teams.");
+    if (players.length < 4) {
+      setError("Please add at least 4 players.");
       return;
     }
     setShowTournamentInput(true);
@@ -51,18 +51,18 @@ export default function TeamAdjustment() {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center px-4 relative">
-      <h1 className="text-3xl font-bold mb-6">Team Adjustment</h1>
+      <h1 className="text-3xl font-bold mb-6">Player Adjustment</h1>
 
       <div className="flex space-x-2 mb-4">
         <input
           type="text"
-          value={newTeam}
-          onChange={(e) => setNewTeam(e.target.value)}
-          placeholder="Team Name"
+          value={newPlayer}
+          onChange={(e) => setNewPlayer(e.target.value)}
+          placeholder="Player Name"
           className="bg-gray-700 text-white p-2 rounded-lg"
         />
         <button
-          onClick={handleAddTeam}
+          onClick={handleAddPlayer}
           className="bg-green-600 px-4 py-2 rounded-lg hover:bg-green-700"
         >
           Add
@@ -70,14 +70,14 @@ export default function TeamAdjustment() {
       </div>
 
       <ul className="space-y-2 mb-6">
-        {teams.map((team, index) => (
+        {players.map((player, index) => (
           <li
             key={index}
             className="flex justify-between items-center bg-gray-800 px-4 py-2 rounded-lg w-64"
           >
-            <span>{team}</span>
+            <span>{player}</span>
             <button
-              onClick={() => handleRemoveTeam(index)}
+              onClick={() => handleRemovePlayer(index)}
               className="text-red-500 hover:text-red-700 font-bold"
             >
               ✕
@@ -90,14 +90,13 @@ export default function TeamAdjustment() {
 
       <motion.button
         onClick={handleStart}
-        disabled={teams.length < 4}
         className={`px-6 py-3 rounded-xl text-lg font-semibold transition-all ${
-          teams.length >= 4
+          players.length >= 4
             ? "bg-gradient-to-r from-red-600 to-green-600 text-white hover:from-red-700 hover:to-green-700"
             : "bg-gray-700 text-gray-400 cursor-not-allowed"
         }`}
-        whileHover={teams.length >= 4 ? { scale: 1.05 } : {}}
-        whileTap={teams.length >= 4 ? { scale: 0.95 } : {}}
+        whileHover={players.length >= 4 ? { scale: 1.05 } : {}}
+        whileTap={players.length >= 4 ? { scale: 0.95 } : {}}
       >
         Start Tournament
       </motion.button>

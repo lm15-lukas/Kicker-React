@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import HeadHeader from "./ConGamcomponents/Header.jsx";
 import SelectGameMode from "./ConGamcomponents/SelectGameMode.jsx";
+import './ConfigureGame.css';
 import { motion } from "framer-motion";
 
 const getInitialErrors = (data) => {
