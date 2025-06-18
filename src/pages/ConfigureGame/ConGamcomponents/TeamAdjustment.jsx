@@ -1,6 +1,14 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState,useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import MonsterLogo from './monster.svg';
+
+export default function TeamAdjustment() {
+  const navigate = useNavigate();
+
+  const [teams, setTeams] = useState(() => {
+    const saved = localStorage.getItem("teams");
+    return saved ? JSON.parse(saved) : [];
 
 export default function PlayerInputList() {
   const [error,setError] =useState('');
@@ -15,7 +23,7 @@ export default function PlayerInputList() {
 
 const findDuplicateName = () => {
   const seen = {};
-  
+
   for (let name of players) {
     const trimmed = name.trim();
     if (trimmed === "") continue;
@@ -36,46 +44,26 @@ const findDuplicateName = () => {
   const saved = localStorage.getItem("player-names");
   const parsed = saved ? JSON.parse(saved) : [];
   return parsed.length > 0 ? parsed:[""];
-});
+  });
 
-const inputRefs = useRef([])
+  const [newTeam, setNewTeam] = useState("");
 
-useEffect(() =>{
-  const lastIndex = players.length -1;
-  if(inputRefs.current[lastIndex]){
-    inputRefs.current[lastIndex].focus();
-  }
-},[players.length])
+  useEffect(() => {
+    localStorage.setItem("teams", JSON.stringify(teams));
+  }, [teams]);
 
-useEffect(()=>{
-  localStorage.setItem('player-names', JSON.stringify(players))
-},[players])
-
-
-  const handlePlayerChange = (index, value) => {
-    const updatedPlayers = [...players];
-    updatedPlayers[index] = value;
-    setPlayers(updatedPlayers);
-  };
-
-  const handleKeyDown = (event, index) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      if (players[index].trim() !== "") {
-        setPlayers([...players, ""]);
-      }
+  const handleAddTeam = () => {
+    if (newTeam.trim() !== "") {
+      setTeams([...teams, newTeam.trim()]);
+      setNewTeam("");
     }
   };
 
-  const handleRemovePlayer = (index) => {
-    const updatedPlayers = players.filter((_,i) => i !== index);
-    setPlayers(updatedPlayers.length > 0 ? updatedPlayers : [""]);
+  const handleRemoveTeam = (index) => {
+    const updated = [...teams];
+    updated.splice(index, 1);
+    setTeams(updated);
   };
-const handleCreateTournament = () => {
-  if (!isValidPlayerList()) {
-    setError("At least 4 player names are required.");
-    return;
-  }
 
   const duplicateName = findDuplicateName();
   if (duplicateName) {
@@ -106,55 +94,79 @@ const isValidPlayerList = () => {
     return nonEmptyPlayers.length >= 4;
   };
   return (
-    <>
-      <header className="team-header">
-        <h1>Monster DYP </h1>
-        <div className="button-container">
+    <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center px-4 relative">
+      <h1 className="text-3xl font-bold mb-6">Team Adjustment</h1>
+
+      <div className="flex space-x-2 mb-4">
+        <input
+          type="text"
+          value={newTeam}
+          onChange={(e) => setNewTeam(e.target.value)}
+          placeholder="Team Name"
+          className="bg-gray-700 text-white p-2 rounded-lg"
+        />
         <button
-  className="create-tournament"
-  onClick={handleCreateTournament}
+          onClick={handleAddTeam}
+          className="bg-green-600 px-4 py-2 rounded-lg hover:bg-green-700"
+        >
+          Add
+        </button>
+      </div>
 
->
-  Create Tournament
-</button>
+      <ul className="space-y-2 mb-10">
+        {teams.map((team, index) => (
+          <li
+            key={index}
+            className="flex justify-between items-center bg-gray-800 px-4 py-2 rounded-lg w-64"
+          >
+            <span>{team}</span>
+            <button
+              onClick={() => handleRemoveTeam(index)}
+              className="text-red-500 hover:text-red-700 font-bold"
+            >
+              ✕
+            </button>
+          </li>
+        ))}
+      </ul>
 
-        </div>  
-        <img src={MonsterLogo} alt="ghost" className="ghost-in-team" />
-      </header>
-      <div>
-        <h2 className="center">Enter Player Names</h2>
-        <h3 className="center">Minimum 4 Players</h3>
-        {error && <p className="error-message ">{error}</p>}
+      <motion.button
+        onClick={() => navigate("/tournament")}
+        disabled={teams.length < 4}
+        className={`px-6 py-3 rounded-xl text-lg font-semibold transition-all ${
+          teams.length >= 4
+            ? "bg-gradient-to-r from-red-600 to-green-600 text-white hover:from-red-700 hover:to-green-700"
+            : "bg-gray-700 text-gray-400 cursor-not-allowed"
+        }`}
+        whileHover={teams.length >= 4 ? { scale: 1.05 } : {}}
+        whileTap={teams.length >= 4 ? { scale: 0.95 } : {}}
+      >
+        Spielen
+      </motion.button>
 
-        <ul className="ul-t">
-          {players.map((name, index) => (
-            <li key={index}>
-              <input
-                type="text"
-                value={name}
-                ref={el => inputRefs.current[index] = el}
-                onChange={(e) => handlePlayerChange(index, e.target.value)}
-                onKeyDown={(e) => handleKeyDown(e, index)}
-                placeholder={`Player ${index + 1}`}
-                className="player-input"
-              />
-              <button
-                type="button"
-                onClick={() => handleRemovePlayer(index)}
-                title="Remove"
-                className="remove-btn"
-              >
-                ×
-              </button>
-            </li>
-          ))}
-        </ul>
+      <div className="fixed bottom-4 left-4 flex space-x-2 z-50">
+        <motion.button
+          onClick={() => navigate(-1)}
+          className="bg-gray-700 text-white px-3 py-2 rounded-lg text-sm hover:bg-gray-600 transition-all"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Zurück
+        </motion.button>
+        <motion.button
+          onClick={() => navigate("/")}
+          className="bg-red-600 text-white px-3 py-2 rounded-lg text-sm hover:bg-red-700 transition-all"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Startseite
+        </motion.button>
       </div>
       {showTournamentNameInput &&(
         <div className="tournament-name-modal">
           <h3>Enter Tournament Name</h3>
-          <input 
-          type="text" 
+          <input
+          type="text"
           value={tournamentName}
           onChange={(e) => setTournamentName(e.target.value)}
           placeholder="Tournament Name"
