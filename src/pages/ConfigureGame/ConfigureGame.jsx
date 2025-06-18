@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./ConfigureGame.css";
 import Header from "./ConGamcomponents/Header.jsx";
 import SelectGameMode from "./ConGamcomponents/SelectGameMode.jsx";
@@ -8,21 +8,21 @@ import SelectGameMode from "./ConGamcomponents/SelectGameMode.jsx";
 
 const getInitialErrors = (data) => {
     const errs = {};
-    if (!data.players) errs.players = "Please enter a number of players";
     if (!data.goals) errs.goals = "Please enter goals to win";
     if (!data.length || data.length === "null") errs.length = "Please enter a Match length";
     if (!data.points) errs.points = "Please enter points per win";
     if (!data.date) errs.date = "Please select a date";
+    if(!data.sets) errs.sets = "Please select sets";
     return errs;
 };
 
-function getFormValues(){
+function getFormValues() {
     const storedValues = localStorage.getItem('form')
-    if(!storedValues) return{
-        players: "",
+    if (!storedValues) return {
         goals: "",
         length: "",
         points: "",
+        sets:"",
         date: ""
     };
     return JSON.parse(storedValues);
@@ -32,9 +32,9 @@ export default function ConfigureGame() {
     const navigateSelectGameMode = useNavigate();
 
     const [formData, setFormData] = useState(getFormValues);
-        
-    useEffect(()=>{
-        localStorage.setItem('form',JSON.stringify(formData))
+
+    useEffect(() => {
+        localStorage.setItem('form', JSON.stringify(formData))
     }, [formData])
 
     const [errors, setErrors] = useState(getInitialErrors(formData));
@@ -42,10 +42,10 @@ export default function ConfigureGame() {
 
     const handleReset = () => {
         const resetData = {
-            players: "",
             goals: "",
             length: "",
             points: "",
+            sets:"",
             date: ""
         };
 
@@ -89,7 +89,7 @@ export default function ConfigureGame() {
     if (step === "setup-teams") {
         return (
             <>
-           
+
                 <Header />
                 <SelectGameMode />
             </>
@@ -101,28 +101,7 @@ export default function ConfigureGame() {
             <Header />
             <div className="configure-game-page">
                 <div className="form-container">
-                    {}
-                    <div className="form-item">
-                        <label htmlFor="players" className="form-label">
-                            Enter number of players
-                        </label>
-                        <select
-                            id="players"
-                            className="form-input"
-                            value={formData.players}
-                            onChange={handleFormDataChange}
-                        >
-                            <option value="">-- Please Select --</option>
-                            <option value="4">4</option>
-                            <option value="6">6</option>
-                            <option value="8">8</option>
-                            <option value="10">10</option>
-                            <option value="12">12</option>
-                        </select>
-                        {errors.players && <h3 className="error-text">{errors.players}</h3>}
-                    </div>
-
-                    {}
+                    { }
                     <div className="form-item">
                         <label htmlFor="goals" className="form-label">Goals to win</label>
                         <select
@@ -138,8 +117,24 @@ export default function ConfigureGame() {
                         </select>
                         {errors.goals && <h3 className="error-text">{errors.goals}</h3>}
                     </div>
-
                     {}
+                    <div className="form-item">
+                        <label htmlFor="sets" className="form-label">Sets to Win</label>
+                        <select
+                             id="sets"
+                            className="form-input"
+                            value={formData.sets}
+                            onChange={handleFormDataChange}
+                        >
+                            <option value="null">--Please enter --</option>
+                            {[...Array(3).keys()].map(i => (
+                                <option key={i + 1} value={i + 1}>{i + 1}</option>
+                            ))}
+                            </select>
+                            {errors.sets && <h3 className="error-text">{errors.sets}</h3>}
+                    </div>
+
+                    { }
                     <div className="form-item">
                         <label htmlFor="length" className="form-label">Match length in minutes</label>
                         <select
@@ -157,7 +152,7 @@ export default function ConfigureGame() {
                         {errors.length && <h3 className="error-text">{errors.length}</h3>}
                     </div>
 
-                    {}
+                    { }
                     <div className="form-item">
                         <label htmlFor="points" className="form-label">Points per win</label>
                         <select
@@ -174,7 +169,7 @@ export default function ConfigureGame() {
                         {errors.points && <h3 className="error-text">{errors.points}</h3>}
                     </div>
 
-                    {}
+                    { }
                     <div className="form-item">
                         <label htmlFor="date" className="form-label">Date</label>
                         <input
@@ -187,7 +182,7 @@ export default function ConfigureGame() {
                         {errors.date && <h3 className="error-text">{errors.date}</h3>}
                     </div>
 
-                    {}
+                    { }
                     <div>
                         <button className="cancel-button" onClick={handleReset}>Reset</button>
                         <button
