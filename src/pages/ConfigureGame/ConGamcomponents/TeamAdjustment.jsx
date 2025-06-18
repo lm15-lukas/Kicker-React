@@ -109,18 +109,15 @@ export default function PlayerAdjustment() {
 
       {error && <p className="text-red-400 mb-4">{error}</p>}
 
-      <motion.button
-        onClick={handleStart}
-        className={`px-6 py-3 rounded-xl text-lg font-semibold transition-all ${
-          players.length >= 4
-            ? "bg-gradient-to-r from-red-600 to-green-600 text-white hover:from-red-700 hover:to-green-700"
-            : "bg-gray-700 text-gray-400 cursor-not-allowed"
-        }`}
-        whileHover={players.length >= 4 ? { scale: 1.05 } : {}}
-        whileTap={players.length >= 4 ? { scale: 0.95 } : {}}
-      >
-        Start Tournament
-      </motion.button>
+<motion.button
+  onClick={handleStart}
+  className="px-6 py-3 rounded-xl text-lg font-semibold transition-all bg-blue-600 hover:bg-blue-700"
+  whileHover={players.length >= 4 ? { scale: 1.05 } : {}}
+  whileTap={players.length >= 4 ? { scale: 0.95 } : {}}
+>
+  Start Tournament
+</motion.button>
+
 
       {showTournamentNameInput && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center z-50 p-4 rounded-lg">
