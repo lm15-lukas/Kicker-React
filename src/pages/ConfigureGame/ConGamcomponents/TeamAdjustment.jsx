@@ -18,10 +18,18 @@ export default function PlayerAdjustment() {
   }, [players]);
 
   const handleAddPlayer = () => {
-    if (newPlayer.trim() !== "") {
-      setPlayers([...players, newPlayer.trim()]);
-      setNewPlayer("");
+    const trimmedName = newPlayer.trim();
+    if (trimmedName === "") {
+      setError("Player name cannot be empty.");
+      return;
     }
+    if (players.includes(trimmedName)) {
+      setError("This player name already exists.");
+      return;
+    }
+    setPlayers([...players, trimmedName]);
+    setNewPlayer("");
+    setError("");
   };
 
   const handleRemovePlayer = (index) => {
@@ -36,6 +44,7 @@ export default function PlayerAdjustment() {
       return;
     }
     setShowTournamentInput(true);
+    setError("");
   };
 
   const handleConfirmTournament = () => {
@@ -57,7 +66,10 @@ export default function PlayerAdjustment() {
         <input
           type="text"
           value={newPlayer}
-          onChange={(e) => setNewPlayer(e.target.value)}
+          onChange={(e) => {
+            setNewPlayer(e.target.value);
+            setError("");
+          }}
           placeholder="Player Name"
           className="bg-gray-700 text-white p-2 rounded-lg"
         />
