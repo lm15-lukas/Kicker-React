@@ -17,20 +17,21 @@ export default function PlayerAdjustment() {
     localStorage.setItem("player-names", JSON.stringify(players));
   }, [players]);
 
-  const handleAddPlayer = () => {
-    const trimmedName = newPlayer.trim();
-    if (trimmedName === "") {
-      setError("Player name cannot be empty.");
-      return;
-    }
-    if (players.includes(trimmedName)) {
-      setError("This player name already exists.");
-      return;
-    }
-    setPlayers([...players, trimmedName]);
-    setNewPlayer("");
-    setError("");
-  };
+ const handleAddPlayer = () => {
+  const trimmedName = newPlayer.trim();
+  if (trimmedName === "") {
+    setError("Player name cannot be empty.");
+    return;
+  }
+  if (players.some((p) => p.toLowerCase() === trimmedName.toLowerCase())) {
+    setError(`The Player Name "${trimmedName}" already exists.`);
+    return;
+  }
+  setPlayers([...players, trimmedName]);
+  setNewPlayer("");
+  setError("");
+};
+
 
   const handleRemovePlayer = (index) => {
     const updated = [...players];
@@ -58,6 +59,13 @@ export default function PlayerAdjustment() {
     navigate("/tournament");
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleAddPlayer();
+    }
+  };
+
   return (
     <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center px-4 relative">
       <h1 className="text-3xl font-bold mb-6">Player Adjustment</h1>
@@ -70,6 +78,7 @@ export default function PlayerAdjustment() {
             setNewPlayer(e.target.value);
             setError("");
           }}
+          onKeyDown={handleKeyDown}
           placeholder="Player Name"
           className="bg-gray-700 text-white p-2 rounded-lg"
         />
