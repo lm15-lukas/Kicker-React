@@ -163,7 +163,7 @@ export default function PlayerTable() {
                     onClick={() => toggleMatchResult(index)}
                     className="bg-green-600 px-3 py-1 rounded hover:bg-green-700"
                   >
-                    {showMatchResults[index] ? "Close" : "Enter Result"}
+                    {showMatchResults[index] ? "Close Results" : "Enter Result"}
                   </button>
                   <button onClick={() => confirmDeleteMatch(index)} className="text-red-400 hover:text-red-600">
                     <img src={Trashbin} alt="Delete" className="w-5 h-5" />
