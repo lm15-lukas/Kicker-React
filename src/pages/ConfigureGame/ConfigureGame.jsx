@@ -4,6 +4,7 @@ import HeadHeader from "./ConGamcomponents/Header.jsx";
 import SelectGameMode from "./ConGamcomponents/SelectGameMode.jsx";
 import './ConfigureGame.css';
 import { motion } from "framer-motion";
+import SideButtons from "../SideButtons.jsx";
 
 const getInitialErrors = (data) => {
   const errs = {};
@@ -29,30 +30,6 @@ function getFormValues() {
   return JSON.parse(storedValues);
 }
 
-const NavigationButtons = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="fixed bottom-4 left-4 flex space-x-2 z-50">
-      <motion.button
-        onClick={() => navigate(-1)}
-        className="bg-gray-700 text-white px-3 py-2 rounded-lg text-sm hover:bg-gray-600 transition-all"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        Back
-      </motion.button>
-      <motion.button
-        onClick={() => navigate("/")}
-        className="bg-red-600 text-white px-3 py-2 rounded-lg text-sm hover:bg-red-700 transition-all"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        Homepage
-      </motion.button>
-    </div>
-  );
-};
-
 export default function ConfigureGame() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(getFormValues);
@@ -75,7 +52,7 @@ export default function ConfigureGame() {
     setFormData(resetData);
     setErrors(getInitialErrors(resetData));
     localStorage.removeItem("form");
-    localStorage.removeItem("teams");
+    localStorage.removeItem("player-names");
   };
 
   const handleFormDataChange = (event) => {
@@ -209,7 +186,7 @@ export default function ConfigureGame() {
           <input
             id="date"
             type="date"
-            className="form-input bg-gray-700 text-white p-2 rounded-lg h-10"
+            className="form-input bg-gray-700 text-white p-2 rounded-lg h-10 appearance-none relative [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-80 hover:[&::-webkit-calendar-picker-indicator]:opacity-100"
             value={formData.date}
             onChange={handleFormDataChange}
           />
@@ -235,7 +212,7 @@ export default function ConfigureGame() {
           </motion.button>
         </div>
       </div>
-      <NavigationButtons />
+      <SideButtons/>
     </div>
   );
 }

@@ -35,7 +35,7 @@ const HeroSection = () => {
                     }}
                     className="text-xl md:text-1xl
                 lg:text-2xl text-purple-200 max-w-2xl">
-                    With Kickr, companies can easily manage their foosball tournaments – register teams,
+                    With Kickr, companies can easily manage their football tournaments – register teams,
                     record results, view rankings, and organize tournaments flexibly.
                 </motion.p>
             </div>
