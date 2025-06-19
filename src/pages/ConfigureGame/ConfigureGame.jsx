@@ -95,21 +95,6 @@ export default function ConfigureGame() {
       <HeadHeader />
       <div className="bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-md mx-auto space-y-6">
         {/* Players */}
-        <div className="form-item">
-          <label htmlFor="players" className="form-label">Number of Players</label>
-          <select
-            id="players"
-            className="form-input"
-            value={formData.players}
-            onChange={handleFormDataChange}
-          >
-            <option value="null">-- Please select --</option>
-            {[4, 6, 8, 10, 12].map(n => (
-              <option key={n} value={n}>{n}</option>
-            ))}
-          </select>
-          {errors.players && <p className="text-red-500">{errors.players}</p>}
-        </div>
 
         {/* Goals */}
         <div className="form-item">
