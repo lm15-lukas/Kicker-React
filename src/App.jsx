@@ -6,7 +6,7 @@ import TeamAdjustment from "./pages/ConfigureGame/ConGamcomponents/TeamAdjustmen
 import SelectGameMode from "./pages/ConfigureGame/ConGamcomponents/SelectGameMode.jsx";
 import LandingPage from "./pages/CreateGame/LandingPage.jsx";
 import HeroSection from "./pages/CreateGame/HeroSection.jsx";
-import ScoreBoard from "./pages/ScoreBoard/ScoreBoard.jsx";
+import ScoreBoard from "./pages/ScoreBoard/components/ScoreBoard.jsx";
 import LoadTournaments from "./pages/Tournament/TournamentComponents/LoadTournament.jsx";
 
 function App() {

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import HeadHeader from '../ConfigureGame/ConGamcomponents/Header';
+import { motion,AnimatePresence } from 'framer-motion';
+import HeadHeader from '../../ConfigureGame/ConGamcomponents/Header';
 
 const ScoreboardPage = () => {
+const [selectedPlayer,setSelectedPlayer] = useState(null);
   const navigate = useNavigate();
   const [tournament, setTournament] = useState(null);
 
@@ -27,6 +28,7 @@ const ScoreboardPage = () => {
   }));
 
   const sortedStats = [...statsArray].sort((a, b) => b.points - a.points || b.goalDiff - a.goalDiff);
+  const winner = sortedStats[0];
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-red-900 to-black text-white">
@@ -39,7 +41,7 @@ const ScoreboardPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          🏆 {tournament.name}
+          🏆 {winner.player} won the tournament!
         </motion.h1>
 
         <div className="space-y-4">
@@ -49,6 +51,7 @@ const ScoreboardPage = () => {
             return (
               <motion.div
                 key={entry.player}
+                onClick={()=> setSelectedPlayer(entry)}
                 className={`relative flex justify-between items-center p-4 rounded-lg shadow-md ${
                   isTop
                     ? "bg-gradient-to-r from-yellow-400 to-yellow-200 text-black ring-4 ring-yellow-500"
@@ -84,6 +87,18 @@ const ScoreboardPage = () => {
           })}
         </div>
       </main>
+      <AnimatePresence>
+        {selectedPlayer&&(
+          <motion.div className='fixed inset-0 bg-black bg-opacity-80 ...'>
+            <motion.div className='bg-gray-900 text-white rounded-xl ... '>
+            <h2>{selectedPlayer.player}</h2>
+            <ul>
+              <li></li>
+            </ul>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="fixed bottom-4 left-4 flex space-x-2 z-50">
         <motion.button
@@ -100,7 +115,7 @@ const ScoreboardPage = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Home
+          Homepage
         </motion.button>
       </div>
     </div>
