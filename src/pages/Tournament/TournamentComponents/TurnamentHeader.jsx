@@ -2,11 +2,12 @@ import { useNavigate } from "react-router-dom";
 import Trophy from "../assets/images/trophy-solid.svg";
 import { motion } from "framer-motion";
 
-export default function TournamentHeader() {
+export default function TournamentHeader({onEndTournament}) {
   const tournamentName = localStorage.getItem("tournament-name") || "Unnamed Tournament";
   const navigate = useNavigate();
 
   const handleEndTournament = () => {
+    onEndTournament();
     navigate("/scoreboard");
   };
 

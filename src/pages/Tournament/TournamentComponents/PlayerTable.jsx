@@ -7,8 +7,10 @@ import FormatResults from './FormatResults.jsx';
 import Trashbin from '../assets/images/trash-solid.svg';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import TournamentHeader from './TurnamentHeader.jsx';
 
 export default function PlayerTable() {
+  
   const [formData, setFormData] = useState(() => {
     const stored = localStorage.getItem('form');
     return stored ? JSON.parse(stored) : {
@@ -140,6 +142,10 @@ export default function PlayerTable() {
   }
 
   return (
+    <>
+    <TournamentHeader
+    onEndTournament={saveTournament}
+    />
     <div className="bg-gray-900 text-white min-h-screen px-4 py-6 relative flex flex-col">
 
       <h2 className="text-3xl font-bold mb-6">{tournamentName}</h2>
@@ -307,6 +313,6 @@ export default function PlayerTable() {
           Home Page
         </motion.button>
       </div>
-    </div>
+    </div></>
   );
 }
