@@ -1,25 +1,32 @@
-import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import HeadHeader from "../ConfigureGame/ConGamcomponents/Header";
-
-const mockTournamentData = [
-  { name: "Team Alpha", wins: 3, draws: 1, losses: 0 },
-  { name: "Team Bravo", wins: 2, draws: 2, losses: 0 },
-  { name: "Team Charlie", wins: 1, draws: 1, losses: 2 },
-  { name: "Team Delta", wins: 0, draws: 2, losses: 2 },
-];
-
-const calculatePoints = (team) => team.wins * 3 + team.draws;
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import HeadHeader from '../ConfigureGame/ConGamcomponents/Header';
 
 const ScoreboardPage = () => {
   const navigate = useNavigate();
+  const [tournament, setTournament] = useState(null);
 
-  const teamsWithPoints = mockTournamentData.map((team) => ({
-    ...team,
-    points: calculatePoints(team),
+  useEffect(() => {
+    const savedTournaments = JSON.parse(localStorage.getItem('saved-tournaments') || '[]');
+    const lastTournament = savedTournaments[savedTournaments.length - 1]; // → letztes gespeichertes Turnier
+    setTournament(lastTournament);
+  }, []);
+
+  if (!tournament) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <p>No tournament data available.</p>
+      </div>
+    );
+  }
+
+  const statsArray = Object.entries(tournament.stats).map(([player, stats]) => ({
+    player,
+    ...stats,
   }));
 
-  const sortedTeams = [...teamsWithPoints].sort((a, b) => b.points - a.points);
+  const sortedStats = [...statsArray].sort((a, b) => b.points - a.points || b.goalDiff - a.goalDiff);
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-red-900 to-black text-white">
@@ -32,16 +39,16 @@ const ScoreboardPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          🏆 Turnier-Scoreboard
+          🏆 {tournament.name}
         </motion.h1>
 
         <div className="space-y-4">
-          {sortedTeams.map((team, index) => {
+          {sortedStats.map((entry, index) => {
             const isTop = index === 0;
 
             return (
               <motion.div
-                key={team.name}
+                key={entry.player}
                 className={`relative flex justify-between items-center p-4 rounded-lg shadow-md ${
                   isTop
                     ? "bg-gradient-to-r from-yellow-400 to-yellow-200 text-black ring-4 ring-yellow-500"
@@ -52,8 +59,8 @@ const ScoreboardPage = () => {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
                 <span className="text-xl font-bold w-10">{index + 1}.</span>
-                <span className="text-xl flex-1 truncate">{team.name}</span>
-                <span className="text-xl font-bold">{team.points} pts</span>
+                <span className="text-xl flex-1 truncate">{entry.player}</span>
+                <span className="text-xl font-bold">{entry.points} pts</span>
 
                 {isTop && (
                   <motion.div
@@ -85,7 +92,7 @@ const ScoreboardPage = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Zurück
+          Back
         </motion.button>
         <motion.button
           onClick={() => navigate("/")}
@@ -93,7 +100,7 @@ const ScoreboardPage = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Startseite
+          Home
         </motion.button>
       </div>
     </div>
