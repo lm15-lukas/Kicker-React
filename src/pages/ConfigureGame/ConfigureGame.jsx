@@ -106,7 +106,7 @@ export default function ConfigureGame() {
             onChange={handleFormDataChange}
           >
             <option value="null">-- Please select --</option>
-            {[...Array(10).keys()].map(i => (
+            {[...Array(7).keys()].map(i => (
               <option key={i + 1} value={i + 1}>{i + 1}</option>
             ))}
           </select>

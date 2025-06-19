@@ -124,7 +124,7 @@ const ScoreboardPage = () => {
                    </li>
                 
               </ul>
-              <button onClick={() => setSelectedPlayer(null)} close
+              <button onClick={() => setSelectedPlayer(null)} 
               
                 className='bg-red-600 px-3 py-2 rounded text-white hover:bg-red-700'
               >close

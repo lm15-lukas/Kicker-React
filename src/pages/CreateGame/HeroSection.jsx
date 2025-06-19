@@ -6,7 +6,7 @@ const HeroSection = () => {
         <section className="h-screen bg-gradient-to-r from-red-900 to-black flex xl:flex-row 
     flex-col-reverse items-center justify-between lg:px-24 px-10 relative overflow-hidden">
 
-            <div classname="z-40 xl:mb-0 mb-[20%]">
+            <div className="z-40 xl:mb-0 mb-[20%]">
                 <motion.h1
                     initial={{ opacity: 0, y: 80 }}
                     animate={{ opacity: 1, y: 0 }}
