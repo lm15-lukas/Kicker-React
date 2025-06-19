@@ -16,7 +16,7 @@ const NavigationButtons = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        Zurück
+        Back
       </motion.button>
       <motion.button
         onClick={() => navigate("/")}
@@ -24,7 +24,7 @@ const NavigationButtons = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        Startseite
+        Homepage
       </motion.button>
     </div>
   );

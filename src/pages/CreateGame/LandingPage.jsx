@@ -27,7 +27,7 @@ const Header = () => {
 
         {/* Navigation */}
         <nav className="lg:flex hidden space-x-8">
-          {["Persöhnliche Statistikseite", "Ranking", "Kalender", "Gruppe", "Ausloggen/Verlassen"].map((item, index) => (
+          {["Player Profile", "Ranking", "Calender", "Group", "Log out/Leave"].map((item, index) => (
             <motion.a
               key={item}
               initial={{ opacity: 0, y: -20 }}
@@ -63,7 +63,7 @@ const Header = () => {
           transition={{ delay: 1.6, duration: 0.8, type: "spring", stiffness: 100, damping: 15 }}
           className="hidden md:block ml-4 px-4 py-2 rounded-xl bg-gradient-to-r from-gray-400 to-gray-100 text-red-700 font-bold hover:from-red-700 hover:to-green-700 hover:text-white transition-all duration-500"
         >
-          Spielen
+          Play
         </motion.button>
 
         {/* Mobile Menu Button */}
@@ -82,7 +82,7 @@ const Header = () => {
         className="md:hidden overflow-hidden bg-white dark:bg-gray-900 shadow-lg px-4 py-5 space-y-5"
       >
         <nav className="flex flex-col space-y-3">
-          {["Persöhnliche Statistikseite", "Ranking", "Kalender", "Gruppe", "Ausloggen/Verlassen"].map((item) => (
+          {["Player Profile", "Ranking", "Calender", "Group", "Log out/Leave"].map((item) => (
             <a onClick={toggleMenu} className="text-gray-300 font-medium py-2" key={item} href="#">
               {item}
             </a>
@@ -110,7 +110,7 @@ const Header = () => {
             }}
             className="mt-4 block w-full px-4 py-2 rounded-lg bg-gradient-to-r from-red-400 to-red-600 text-white font-bold"
           >
-            Spielen
+            Play
           </button>
         </div>
       </motion.div>
