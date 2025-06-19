@@ -6,14 +6,18 @@ import TeamAdjustment from "./pages/ConfigureGame/ConGamcomponents/TeamAdjustmen
 import SelectGameMode from "./pages/ConfigureGame/ConGamcomponents/SelectGameMode.jsx";
 import LandingPage from "./pages/CreateGame/LandingPage.jsx";
 import HeroSection from "./pages/CreateGame/HeroSection.jsx";
-import ScoreBoard from "./pages/ScoreBoard/components/ScoreBoard.jsx";
+import ScoreBoard from "./pages/ScoreBoard/components/ScoreBoard.jsx"
 import LoadTournaments from "./pages/Tournament/TournamentComponents/LoadTournament.jsx";
+import Sidebar from "./pages/Sidebar.jsx";
 
 function App() {
   return (
     <>
     <PlayerProvider>
     <Router>
+      <div style={{display:"flex"}}>
+        <Sidebar />
+        <main style={{flexGrow: 1}}>
       <Routes>
         <Route path="/configure-game-page" element={
           <>
@@ -28,6 +32,8 @@ function App() {
         <Route path="/scoreboard" element={<ScoreBoard />} />
         <Route path="/load" element={<LoadTournaments/>}></Route>
       </Routes>
+      </main>
+      </div>
     </Router>
       </PlayerProvider>
       </>

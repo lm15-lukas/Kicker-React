@@ -166,13 +166,15 @@ export default function PlayerTable() {
 
                 <div className="flex flex-col items-center space-y-2">
                   <FormatResults resultArray={match.result} />
-                  <button
+                  <motion.button
                     onClick={() => toggleMatchResult(index)}
                     className="bg-green-600 px-3 py-1 rounded hover:bg-green-700"
                   >
                     {showMatchResults[index] ? "Close Results" : "Enter Result"}
-                  </button>
-                  <button onClick={() => confirmDeleteMatch(index)} className="text-red-400 hover:text-red-600">
+                  </motion.button>
+                  <button onClick={() => confirmDeleteMatch(index)}
+                   className="text-red-400 hover:text-red-600"
+                   >
                     <img src={Trashbin} alt="Delete" className="w-5 h-5" />
                   </button>
                 </div>

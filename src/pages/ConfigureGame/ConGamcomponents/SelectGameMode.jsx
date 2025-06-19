@@ -5,6 +5,7 @@ import play from './play-solid.svg';
 import HeadHeader from './Header.jsx';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SideButtons from '../../SideButtons.jsx';
 
 const NavigationButtons = () => {
   const navigate = useNavigate();
@@ -74,7 +75,7 @@ export default function SelectGameMode() {
           </motion.div>
         </div>
       </div>
-      <NavigationButtons />
+      <SideButtons/>
     </>
   );
 }
