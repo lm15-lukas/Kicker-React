@@ -27,7 +27,7 @@ const Header = () => {
 
         {/* Navigation */}
         <nav className="lg:flex hidden space-x-8">
-          {["Player Profile", "Ranking", "Calender", "Group", "Log out/Leave"].map((item, index) => (
+          {["Tournaments","Player Profile", "Ranking", "Calender", "Group", "Log out/Leave"].map((item, index) => (
             <motion.a
               key={item}
               initial={{ opacity: 0, y: -20 }}
@@ -35,6 +35,10 @@ const Header = () => {
               transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.7 + index * 0.2 }}
               className="relative text-gray-800 dark:text-gray-200 hover:text-red-600 dark:hover:text-red-400 font-medium transition-colors duration-300 group"
               href="#"
+              onClick={(e) =>{
+                e.preventDefault();
+                if(item === "Tournaments") navigate("/load");
+              }}
             >
               {item}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 group-hover:w-full transition-all duration-300"></span>
@@ -82,7 +86,7 @@ const Header = () => {
         className="md:hidden overflow-hidden bg-white dark:bg-gray-900 shadow-lg px-4 py-5 space-y-5"
       >
         <nav className="flex flex-col space-y-3">
-          {["Player Profile", "Ranking", "Calender", "Group", "Log out/Leave"].map((item) => (
+          {["Tournaments","Player Profile", "Ranking", "Calender", "Group", "Log out/Leave"].map((item) => (
             <a onClick={toggleMenu} className="text-gray-300 font-medium py-2" key={item} href="#">
               {item}
             </a>

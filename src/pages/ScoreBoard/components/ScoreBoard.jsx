@@ -144,7 +144,7 @@ const ScoreboardPage = () => {
           Back
         </motion.button>
         <motion.button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/configure-game-page")}
           className="bg-red-600 text-white px-3 py-2 rounded-lg text-sm hover:bg-red-700 transition-all"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
