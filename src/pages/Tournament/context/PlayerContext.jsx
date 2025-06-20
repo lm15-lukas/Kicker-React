@@ -22,11 +22,9 @@ export function PlayerProvider({ children }) {
     }
   };
 
-  const removePlayer = (index) => {
-    setPlayers((prev) => {
-      const updated = prev.filter((_, i) => i !== index);
-      return updated.length > 0 ? updated : [""];
-    });
+  const removePlayer = (name) => {
+    setPlayers((prev) =>prev.filter((player) =>player!== name))
+
   };
 
   return (

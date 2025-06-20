@@ -254,7 +254,7 @@ export default function PlayerTable() {
                       <td className="p-2">{p.points}</td>
                       <td className="p-2">{p.goalDiff}</td>
                       <td className="p-2">
-                        <button onClick={() => removePlayer(players.indexOf(p.player))} className="text-red-400 hover:text-red-600">✕</button>
+                        <button onClick={() => removePlayer(p.player)} className="text-red-400 hover:text-red-600">✕</button>
                       </td>
                     </tr>
                   ))}
