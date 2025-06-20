@@ -18,20 +18,20 @@ export default function PlayerAdjustment() {
     localStorage.setItem("player-names", JSON.stringify(players));
   }, [players]);
 
- const handleAddPlayer = () => {
-  const trimmedName = newPlayer.trim();
-  if (trimmedName === "") {
-    setError("Player name cannot be empty.");
-    return;
-  }
-  if (players.some((p) => p.toLowerCase() === trimmedName.toLowerCase())) {
-    setError(`The Player Name "${trimmedName}" already exists.`);
-    return;
-  }
-  setPlayers([...players, trimmedName]);
-  setNewPlayer("");
-  setError("");
-};
+  const handleAddPlayer = () => {
+    const trimmedName = newPlayer.trim();
+    if (trimmedName === "") {
+      setError("Player name cannot be empty.");
+      return;
+    }
+    if (players.some((p) => p.toLowerCase() === trimmedName.toLowerCase())) {
+      setError(`The Player Name "${trimmedName}" already exists.`);
+      return;
+    }
+    setPlayers([...players, trimmedName]);
+    setNewPlayer("");
+    setError("");
+  };
 
 
   const handleRemovePlayer = (index) => {
@@ -110,14 +110,14 @@ export default function PlayerAdjustment() {
 
       {error && <p className="text-red-400 mb-4">{error}</p>}
 
-<motion.button
-  onClick={handleStart}
-  className="px-6 py-3 rounded-xl text-lg font-semibold transition-all bg-blue-600 hover:bg-blue-700"
-  whileHover={players.length >= 4 ? { scale: 1.05 } : {}}
-  whileTap={players.length >= 4 ? { scale: 0.95 } : {}}
->
-  Start Tournament
-</motion.button>
+      <motion.button
+        onClick={handleStart}
+        className="px-6 py-3 rounded-xl text-lg font-semibold transition-all bg-blue-600 hover:bg-blue-700"
+        whileHover={players.length >= 4 ? { scale: 1.05 } : {}}
+        whileTap={players.length >= 4 ? { scale: 0.95 } : {}}
+      >
+        Start Tournament
+      </motion.button>
 
 
       {showTournamentNameInput && (
@@ -129,6 +129,11 @@ export default function PlayerAdjustment() {
             onChange={(e) => setTournamentName(e.target.value)}
             placeholder="Tournament Name"
             className="bg-gray-700 text-white p-2 rounded-lg mb-4 w-full max-w-xs"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleConfirmTournament();
+              }
+            }}
           />
           <div className="flex space-x-2">
             <button
@@ -147,7 +152,7 @@ export default function PlayerAdjustment() {
         </div>
       )}
 
-   <SideButtons/>
+      <SideButtons />
     </div>
   );
 }
