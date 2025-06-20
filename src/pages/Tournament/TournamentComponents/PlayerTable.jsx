@@ -153,7 +153,7 @@ export default function PlayerTable() {
       
 
       <div className="w-full max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-6">{tournamentName}</h2>
+        
         {/* Matches */}
         <div className="space-y-4">
           {matches.map((match, index) => (
@@ -177,7 +177,7 @@ export default function PlayerTable() {
                   <button onClick={() => confirmDeleteMatch(index)}
                    className="text-red-400 hover:text-red-600"
                    >
-                    <img src={Trashbin} alt="Delete" className="w-5 h-5 mb-8" />
+                    <img src={Trashbin} alt="Delete" className="w-5 h-5 mb-5" />
                   </button>
                 </div>
 
@@ -189,7 +189,7 @@ export default function PlayerTable() {
               </div>
 
               {showMatchResults[index] && (
-                <div className="border-t border-gray-600 pt-4">
+                <div className="flex justify-center border-t border-gray-600 pt-4">
                   <WinningSets matchPlayers={match.players} index={index} onResultConfirm={handleResultConfirm} />
                 </div>
               )}
@@ -209,7 +209,12 @@ export default function PlayerTable() {
 
         {/* RIGHT: Participants Table */}
         <div className='mt-8 w-full flex justify-end'>
-        <div className="w-[500px] bg-gray-800 rounded-lg p-4 shadow-lg max-h-[80vh] overflow-y-auto">
+        < motion.div className="w-[500px] bg-gray-800 rounded-lg p-4 shadow-lg max-h-[50vh] overflow-y-auto"
+        animate={{height:"auto"}}
+        initial={{height:0}}
+        transition={{duration:0.3}}
+        >
+          <h2 className="text-3xl font-bold mb-6">"{tournamentName}"</h2>
           <h3 className="text-2xl font-semibold mb-4">Participants</h3>
           <AddPlayer onAdd={addPlayer} />
           <div className="overflow-x-auto mt-4">
@@ -266,7 +271,7 @@ export default function PlayerTable() {
               Save Tournament
             </motion.button>
           </div>
-        </div>
+        </motion.div>
         </div>
       </div>
 

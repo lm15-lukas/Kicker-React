@@ -30,7 +30,7 @@ useEffect(() => {
 
     if (setsCount === 0) return null;
 
-    const topButtons = Array.from({ length: goalsToWin }, (_, i) => i);
+    const topButtons = Array.from({ length: goalsToWin}, (_, i) => i);
     const bottomButtons = [...topButtons].reverse();
 
     function handleResultChange(setIndex, teamAScore, teamBScore) {
@@ -71,7 +71,7 @@ function ResultSelector({ goalsToWin, onResultSelected }) {
     const [teamAScore, setTeamAScore] = useState(null);
     const [teamBScore, setTeamBScore] = useState(null);
 
-    const topButtons = Array.from({ length: goalsToWin }, (_, i) => i);
+    const topButtons = Array.from({ length: goalsToWin +1 }, (_, i) => i);
     const bottomButtons = [...topButtons].reverse();
 
     useEffect(() => {

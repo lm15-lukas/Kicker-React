@@ -12,7 +12,7 @@ export default function TournamentHeader({onEndTournament}) {
   };
 
   return (
-    <header className="bg-gray-900 text-white py-4 px-6 flex justify-between items-center shadow-lg rounded-b-xl">
+    <header className="bg-gray-900 text-white py-4 px-6 pl-64 flex justify-between items-center shadow-lg rounded-b-xl">
       <div className="flex items-center space-x-4">
         <img src={Trophy} alt="Trophy" className="w-8 h-8 text-yellow-400" />
         <h1 className="text-2xl font-semibold">Tournament: "{tournamentName}"</h1>

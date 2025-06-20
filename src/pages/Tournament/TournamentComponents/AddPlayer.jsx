@@ -19,12 +19,12 @@ export default function AddPlayer({onAdd}) {
     }
     return (
         <>
-            <div className='plus-area'>
-                <h2 className='add'>Add</h2>
+            <div className='plus-area flex items-center gap-2 cursor-pointer'>
+                <h2 className='add text-lg font-medium'>Add</h2>
                 <img 
-                src={logoimg} 
+                src={logoimg}
                 alt='plus' 
-                className='plus-sign'
+                className='plus-sign w-5 h-5'
                 onClick={handleAddPlayer}
                 ></img>
                 {showInput &&(
@@ -33,6 +33,7 @@ export default function AddPlayer({onAdd}) {
                         value={newPlayerName}
                         onChange={e => setNewPlayerName(e.target.value)}
                         placeholder='Player Name'
+                        className='text-black'
                         />
                     </form>
                 )}
