@@ -21,7 +21,7 @@ export default function TournamentHeader({onEndTournament}) {
         <img src={Trophy} alt="Trophy" className="w-8 h-8 text-yellow-400" />
         <h1 className="text-2xl font-semibold">Tournament: "{tournamentName}"</h1>
       </div>
-      <div>
+      <div className="flex gap-5">
       <motion.button
         onClick={handleEndTournament}
         className="px-4 py-2 rounded-lg bg-gradient-to-r from-red-600 to-green-600 hover:from-red-700 hover:to-green-700 text-white font-medium"
