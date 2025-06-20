@@ -9,6 +9,7 @@ import HeroSection from "./pages/CreateGame/HeroSection.jsx";
 import ScoreBoard from "./pages/ScoreBoard/components/ScoreBoard.jsx"
 import LoadTournaments from "./pages/Tournament/TournamentComponents/LoadTournament.jsx";
 import Sidebar from "./pages/Sidebar.jsx";
+import FinalRound from "./pages/Tournament/TournamentComponents/FinalRound.jsx";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/tournament" element={<Tournament />} />
         <Route path="/scoreboard" element={<ScoreBoard />} />
         <Route path="/load" element={<LoadTournaments/>}></Route>
+        <Route path="/finalRound" element={<FinalRound/>}></Route>
       </Routes>
       </main>
       </div>
