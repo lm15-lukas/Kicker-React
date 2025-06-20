@@ -16,6 +16,7 @@
   padding: 10px;
   border-radius: 8px;
   color: white;
+  
 }
 
 .player-table {
@@ -190,7 +191,6 @@
   margin: 4px;
   border-radius: 50%;
   border: none;
-  background-color: #28403D;
   color: rgb(255, 255, 255);
   font-size: 20px;
   cursor: pointer;
@@ -236,10 +236,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #28403D;
   padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 850px;
   margin-bottom: 20px;

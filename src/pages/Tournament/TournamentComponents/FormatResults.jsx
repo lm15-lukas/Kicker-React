@@ -2,7 +2,9 @@ export default function FormatResults({ resultArray }) {
     if (!resultArray || resultArray.length === 0) {
         return (
             <>
+            <div className="flex">
                 <span className="Result">-</span> : <span className="Result">-</span>
+                </div>
             </>
         );
     }
@@ -11,7 +13,9 @@ export default function FormatResults({ resultArray }) {
 
     return (
         <>
+        <div className="flex">
             <span>{goalsA}</span> : <span>{goalsB}</span>
+            </div>
         </>
     );
 }

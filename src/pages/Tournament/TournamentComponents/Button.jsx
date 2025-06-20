@@ -39,8 +39,8 @@ export default function Button({ onConfirm }) {
     const selectedBottom = bottomButtonActive !== null ? bottomButtons[bottomButtonActive] : "-";
 
 return (
-    <div className="button-wrapper">
-        <div className="button-row">
+    <div className="">
+        <div className="">
             {topButtons.map((num, index) => (
                 <button
                     key={`top-${index}`}

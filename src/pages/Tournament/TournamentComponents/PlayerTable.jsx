@@ -147,15 +147,17 @@ export default function PlayerTable() {
     <TournamentHeader
     onEndTournament={saveTournament}
     />
-    <div className="bg-gray-900 text-white min-h-screen px-4 py-6 relative flex flex-col">
+    <div className='w-full min-h-screen bg-gray-900 text-white p-4'>
+    <div className="flex ml-60">
 
-      <h2 className="text-3xl font-bold mb-6">{tournamentName}</h2>
+      
 
-      <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6 w-full flex-grow">
-        {/* LEFT: Matches */}
-        <div className="space-y-6 overflow-y-auto pr-2">
+      <div className="w-full max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold mb-6">{tournamentName}</h2>
+        {/* Matches */}
+        <div className="space-y-4">
           {matches.map((match, index) => (
-            <div key={index} className="bg-gray-800 rounded-xl p-4 shadow-lg space-y-4">
+            <div key={index} className="bg-gray-800 rounded-xl p-4 shadow-lg">
 
               <div className="flex justify-between items-center">
                 <div>
@@ -175,7 +177,7 @@ export default function PlayerTable() {
                   <button onClick={() => confirmDeleteMatch(index)}
                    className="text-red-400 hover:text-red-600"
                    >
-                    <img src={Trashbin} alt="Delete" className="w-5 h-5" />
+                    <img src={Trashbin} alt="Delete" className="w-5 h-5 mb-8" />
                   </button>
                 </div>
 
@@ -203,9 +205,11 @@ export default function PlayerTable() {
             {matches.length === 0 ? "Start First Round" : "Start New Round"}
           </motion.button>
         </div>
+        </div>
 
         {/* RIGHT: Participants Table */}
-        <div className="bg-gray-800 rounded-xl p-4 shadow-lg flex flex-col h-full overflow-y-auto">
+        <div className='mt-8 w-full flex justify-end'>
+        <div className="w-[500px] bg-gray-800 rounded-lg p-4 shadow-lg max-h-[80vh] overflow-y-auto">
           <h3 className="text-2xl font-semibold mb-4">Participants</h3>
           <AddPlayer onAdd={addPlayer} />
           <div className="overflow-x-auto mt-4">
@@ -263,6 +267,7 @@ export default function PlayerTable() {
             </motion.button>
           </div>
         </div>
+        </div>
       </div>
 
       {/* Modals & Navigation bleiben unverändert */}
@@ -301,6 +306,7 @@ export default function PlayerTable() {
       <div className="fixed bottom-4 left-4 flex space-x-2 z-50">
       <SideButtons/>
       </div>
+    
     </div></>
   );
 }

@@ -4,11 +4,11 @@ import { Home, Settings, Table, FolderPlus, PlayCircle } from "lucide-react";
 
 export default function Sidebar() {
   const links = [
-    { to: "/configure-game-pgae", label: "Home", icon: <Home size={20} /> },
+    { to: "/configure-game-page", label: "Home", icon: <Home size={20} /> },
     { to: "/configure", label: "Configure", icon: <FolderPlus size={20} /> },
     { to: "/tournament", label: "Player Table", icon: <Table size={20} /> },
     { to: "/load", label: "Load Tournament", icon: <PlayCircle size={20} /> },
-    { to: "/configure", label: "Configure", icon: <Settings size={20} /> },
+    { to: "/team-adjustment", label: "Team Adjustment", icon: <Settings size={20} /> },
   ];
 
   return (
