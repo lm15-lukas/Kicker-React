@@ -18,7 +18,8 @@ export default function HeadHeader() {
       </motion.div>
 
       <motion.h1
-        className="text-2xl font-bold"
+      
+        className="text-5xl font-bold"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

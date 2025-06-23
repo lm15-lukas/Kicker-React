@@ -8,7 +8,6 @@ import { motion } from "framer-motion";
 const getInitialErrors = (data) => {
   const errs = {};
   if (!data.goals) errs.goals = "Please enter goals to win";
-  if (!data.length || data.length === "null") errs.length = "Please enter a match length";
   if (!data.points) errs.points = "Please enter points per win";
   if (!data.date) errs.date = "Please select a date";
   if (!data.sets) errs.sets = "Please select sets";
@@ -19,9 +18,7 @@ function getFormValues() {
   const storedValues = localStorage.getItem("form");
   if (!storedValues)
     return {
-      players: "",
       goals: "",
-      length: "",
       points: "",
       sets: "",
       date: "",
@@ -41,9 +38,7 @@ export default function ConfigureGame() {
 
   const handleReset = () => {
     const resetData = {
-      players: "",
       goals: "",
-      length: "",
       points: "",
       sets: "",
       date: "",
@@ -51,7 +46,6 @@ export default function ConfigureGame() {
     setFormData(resetData);
     setErrors(getInitialErrors(resetData));
     localStorage.removeItem("form");
-    localStorage.removeItem("players");
     localStorage.removeItem('player-names')
   };
 
@@ -94,7 +88,6 @@ export default function ConfigureGame() {
     <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
       <HeadHeader />
       <div className="bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-md mx-auto space-y-6">
-        {/* Players */}
 
         {/* Goals */}
         <div className="form-item">
@@ -128,24 +121,6 @@ export default function ConfigureGame() {
             ))}
           </select>
           {errors.sets && <p className="text-red-500">{errors.sets}</p>}
-        </div>
-
-        {/* Match Length */}
-        <div className="form-item">
-          <label htmlFor="length" className="form-label">Match length in minutes</label>
-          <select
-            id="length"
-            className="form-input"
-            value={formData.length}
-            onChange={handleFormDataChange}
-          >
-            <option value="null">-- Please select --</option>
-            <option value="2">No time tracking</option>
-            {[5, 6, 7, 8, 9, 10].map(n => (
-              <option key={n} value={n}>{n}</option>
-            ))}
-          </select>
-          {errors.length && <p className="text-red-500">{errors.length}</p>}
         </div>
 
         {/* Points */}
