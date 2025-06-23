@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Trophy from "../assets/images/trophy-solid.svg";
 import { motion } from "framer-motion";
-import FinalRound from "./FinalRound";
 
 export default function TournamentHeader({onEndTournament}) {
   const tournamentName = localStorage.getItem("tournament-name") || "Unnamed Tournament";
