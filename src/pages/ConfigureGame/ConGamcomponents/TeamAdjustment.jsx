@@ -1,21 +1,13 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { usePlayers } from "../../Tournament/context/PlayerContext";
 
 export default function PlayerAdjustment() {
-  const navigate = useNavigate();
-  const [players, setPlayers] = useState(() => {
-    const saved = localStorage.getItem("player-names");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const { players, addPlayer, removePlayer } = usePlayers();
+
   const [newPlayer, setNewPlayer] = useState("");
   const [showTournamentNameInput, setShowTournamentInput] = useState(false);
   const [tournamentName, setTournamentName] = useState("");
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    localStorage.setItem("player-names", JSON.stringify(players));
-  }, [players]);
 
   const handleAddPlayer = () => {
     const trimmedName = newPlayer.trim();
@@ -27,16 +19,13 @@ export default function PlayerAdjustment() {
       setError(`The Player Name "${trimmedName}" already exists.`);
       return;
     }
-    setPlayers([...players, trimmedName]);
+    addPlayer(trimmedName);
     setNewPlayer("");
     setError("");
   };
 
-
   const handleRemovePlayer = (index) => {
-    const updated = [...players];
-    updated.splice(index, 1);
-    setPlayers(updated);
+    removePlayer(players[index]);
   };
 
   const handleStart = () => {
@@ -56,7 +45,7 @@ export default function PlayerAdjustment() {
     localStorage.setItem("tournament-name", tournamentName.trim());
     localStorage.setItem("matches", JSON.stringify([]));
     localStorage.setItem("results", JSON.stringify([]));
-    navigate("/tournament");
+    window.location.href = "/tournament";
   };
 
   const handleKeyDown = (e) => {
@@ -109,15 +98,12 @@ export default function PlayerAdjustment() {
 
       {error && <p className="text-red-400 mb-4">{error}</p>}
 
-      <motion.button
+      <button
         onClick={handleStart}
         className="px-6 py-3 rounded-xl text-lg font-semibold transition-all bg-blue-600 hover:bg-blue-700"
-        whileHover={players.length >= 4 ? { scale: 1.05 } : {}}
-        whileTap={players.length >= 4 ? { scale: 0.95 } : {}}
       >
         Start Tournament
-      </motion.button>
-
+      </button>
 
       {showTournamentNameInput && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center z-50 p-4 rounded-lg">
@@ -129,7 +115,7 @@ export default function PlayerAdjustment() {
             placeholder="Tournament Name"
             className="bg-gray-700 text-white p-2 rounded-lg mb-4 w-full max-w-xs"
             onKeyDown={(e) => {
-              if (e.key === 'Enter') {
+              if (e.key === "Enter") {
                 handleConfirmTournament();
               }
             }}
