@@ -52,7 +52,8 @@ export default function ConfigureGame() {
     setFormData(resetData);
     setErrors(getInitialErrors(resetData));
     localStorage.removeItem("form");
-    localStorage.removeItem("player-names");
+    localStorage.removeItem("players");
+    localStorage.removeItem('player-names')
   };
 
   const handleFormDataChange = (event) => {
