@@ -71,8 +71,8 @@ export default function PlayerTable() {
 
     const newMatch = {
       players: [
-        selectedPlayers.slice(0, 2), // Team A als Array [p1, p2]
-        selectedPlayers.slice(2, 4), // Team B als Array [p3, p4]
+        selectedPlayers.slice(0, 2), 
+        selectedPlayers.slice(2, 4), 
       ],
       result: null,
     };

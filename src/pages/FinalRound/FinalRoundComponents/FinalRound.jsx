@@ -1,130 +1,104 @@
-import { Trophy } from "lucide-react";
-import { usePlayers } from "../../Tournament/context/PlayerContext";
-import { useState } from "react";
-import Button from "../../Tournament/TournamentComponents/Button";
+import { useState } from 'react';
+import { usePlayers } from '../../Tournament/context/PlayerContext';
 
 export default function FinalRound() {
-    const [showOverlay, setShowOverlay] = useState(false);
-    const [activeMatch, setActiveMatch] = useState(null);
+  const { players, stats } = usePlayers();
+  const [matches, setMatches] = useState([]);
 
-    const { players } = usePlayers();
-    const top8 = [...players].slice(0, 8);
+  
+  function shuffle(array) {
+    return [...array].sort(() => Math.random() - 0.5);
+  }
 
-    const quarterFinals = [
-        [top8[0], top8[1]],
-        [top8[2], top8[3]],
-        [top8[4], top8[5]],
-        [top8[6], top8[7]],
-    ];
+  
+  function createTeams(playerList) {
+    const shuffled = shuffle(playerList);
+    const teams = [];
+    for (let i = 0; i < shuffled.length; i += 2) {
+      teams.push(shuffled.slice(i, i + 2));
+    }
+    return teams;
+  }
 
-    const handleOpenOverlay = (matchIndex) => {
-        setActiveMatch(matchIndex);
-        setShowOverlay(true);
-    };
+  
+  function generateBracket() {
+    const topPlayers = [...players]
+      .map((player) => ({
+        player,
+        ...(stats?.[player] || {}), 
+      }))
+      .sort((a, b) => b.points - a.points || b.goalDiff - a.goalDiff)
+      .map((entry) => entry.player);
 
-    return (
-        <div className="min-h-screen bg-gray-900 text-white p-8 overflow-x-auto">
-            <Trophy size={48} color="#facc15" className="mx-auto mb-4" />
-            <h1 className="text-3xl font-bold text-center mb-12">KO-Tournament</h1>
+    if (topPlayers.length < 8) {
+      alert('Mindestens 8 Spieler benötigt für einen KO-Baum.');
+      return [];
+    }
 
-            <div className="flex justify-center space-x-16">
-                {/* Quarter Finals */}
-                <div className="flex flex-col space-y-8">
-                    <h2 className="text-center font-bold text-lg">Quarter Final</h2>
-                    {quarterFinals.map((match, index) => (
-                        <div
-                            key={index}
-                            className="w-48 bg-gray-800 p-4 rounded-lg text-center shadow-md border-l-4 border-green-500"
-                        >
-                            <p className="text-green-400 font-semibold">{match[0] || "Team A"}</p>
-                            <p className="text-blue-400 font-semibold">{match[1] || "Team B"}</p>
+    if (topPlayers.length >= 8 && topPlayers.length < 16) {
+      const top8 = topPlayers.slice(0, 8);
+      const teams = createTeams(top8);
+      return [
+        { round: 'Semi-Final 1', players: [teams[0], teams[1]], result: null },
+        { round: 'Semi-Final 2', players: [teams[2], teams[3]], result: null },
+        { round: 'Final', players: [null, null], result: null },
+      ];
+    } else {
+      const top16 = topPlayers.slice(0, 16);
+      const teams = createTeams(top16);
+      return [
+        { round: 'Viertelfinale 1', players: [teams[0], teams[1]], result: null },
+        { round: 'Viertelfinale 2', players: [teams[2], teams[3]], result: null },
+        { round: 'Viertelfinale 3', players: [teams[4], teams[5]], result: null },
+        { round: 'Viertelfinale 4', players: [teams[6], teams[7]], result: null },
+        { round: 'Semi-Final 1', players: [null, null], result: null },
+        { round: 'Semi-Final 2', players: [null, null], result: null },
+        { round: 'Final', players: [null, null], result: null },
+      ];
+    }
+  }
 
-                            <button
-                                onClick={() => handleOpenOverlay(index)}
-                                className="mt-4 px-3 py-1 bg-green-600 rounded hover:bg-green-700 text-sm"
-                            >
-                                Enter Results
-                            </button>
-                        </div>
-                    ))}
-                </div>
+  function startBracket() {
+    const bracket = generateBracket();
+    setMatches(bracket);
+  }
 
-                {/* Semi Finals */}
-                <div className="flex flex-col space-y-16 mt-16">
-                    <h2 className="text-center font-bold text-lg">Semi Final</h2>
-                    {[...Array(2)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="w-48 bg-gray-800 p-4 rounded-lg text-center shadow-md border-l-4 border-yellow-400"
-                        >
-                            <p className="text-green-400 font-semibold">Winner {i * 2 + 1}</p>
-                            <p className="text-blue-400 font-semibold">Winner {i * 2 + 2}</p>
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-6">
+      <h1 className="text-3xl font-bold mb-6">KO-Baum</h1>
 
-                            <button
-                                onClick={() => handleOpenOverlay(4 + i)}
-                                className="mt-4 px-3 py-1 bg-green-600 rounded hover:bg-green-700 text-sm"
-                            >
-                               Enter Results
-                            </button>
-                        </div>
-                    ))}
-                </div>
+      <button
+        onClick={startBracket}
+        className="mb-6 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold"
+      >
+        Start K-O (Top 8 oder Top 16)
+      </button>
 
-                {/* Final */}
-                <div className="flex flex-col justify-center mt-32">
-                    <h2 className="text-center font-bold text-lg mb-8">Finale</h2>
-                    <div className="w-48 bg-gray-800 p-4 rounded-lg text-center shadow-md border-l-4 border-red-500">
-                        <p className="text-green-400 font-semibold">Finalist 1</p>
-                        <p className="text-blue-400 font-semibold">Finalist 2</p>
+      {matches.length === 0 && (
+        <p className="text-gray-400">Noch keine Matches im KO-Baum vorhanden.</p>
+      )}
 
-                        <button
-                            onClick={() => handleOpenOverlay(6)}
-                            className="mt-4 px-3 py-1 bg-green-600 rounded hover:bg-green-700 text-sm"
-                        >
-                            Enter Results
-                        </button>
-                    </div>
-                </div>
-
-                {/* Sieger */}
-                <div className="flex flex-col justify-center mt-40">
-                    <div className="flex mr-10 gap-0">
-                        <Trophy size={48} color="#facc15" className="mx-auto mb-4 h-10" />
-                        <h2 className="text-center font-bold text-lg mb-4">Sieger</h2>
-                    </div>
-                    <div className="w-48 bg-green-700 p-4 rounded-lg text-center shadow-xl border-2 border-white">
-                        <p className="font-bold text-xl">🏅 Team XYZ</p>
-                    </div>
-                </div>
+      <div className="space-y-6 w-full max-w-2xl">
+        {matches.map((match, idx) => (
+          <div key={idx} className="bg-gray-800 p-4 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold text-center mb-3">
+              {match.round}
+            </h3>
+            <div className="flex justify-between px-4">
+              <div>
+                <p className="text-green-400 font-semibold">Team A</p>
+                <p>{match.players?.[0]?.[0] || '-'}</p>
+                <p>{match.players?.[0]?.[1] || '-'}</p>
+              </div>
+              <div>
+                <p className="text-blue-400 font-semibold">Team B</p>
+                <p>{match.players?.[1]?.[0] || '-'}</p>
+                <p>{match.players?.[1]?.[1] || '-'}</p>
+              </div>
             </div>
-
-            {/* Overlay */}
-            {showOverlay && (
-                <>
-                    <div
-                        className="fixed inset-0 bg-black bg-opacity-50 z-40"
-                        onClick={() => setShowOverlay(false)}
-                    />
-                    <div className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-2xl px-4">
-                        <div className="bg-gray-800 rounded-lg shadow-xl p-6">
-                            <h2 className="text-2xl font-bold mb-4 text-center">
-                                Entered Result  fo Match #{activeMatch + 1}
-                            </h2>
-
-                            <Button onConfirm={() => setShowOverlay(false)} />
-
-                            <div className="mt-6 text-right">
-                                <button
-                                    onClick={() => setShowOverlay(false)}
-                                    className="px-4 py-2 bg-red-500 rounded hover:bg-red-600"
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </>
-            )}
-        </div>
-    );
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
