@@ -7,31 +7,79 @@ export default function WinningSets({ matchPlayers, index, onResultConfirm }) {
     const [results, setResults] = useState([]);
     const [error, setError] = useState("");
 
-useEffect(() => {
-    const storedForm = localStorage.getItem("form");
-    if (storedForm) {
-        try {
-            const parsedForm = JSON.parse(storedForm);
-            const sets = parseInt(parsedForm.sets, 10);
-            const goals = parseInt(parsedForm.goals, 10);
-            if (sets >= 1 && sets <= 3) {
-                setSetsCount(sets);
-                
-                const totalGames = sets === 1 ? 1 : sets * 2 - 1;
-                setResults(Array(totalGames).fill(null));
-            }
-            if (goals >= 1 && goals <= 8) setGoalsToWin(goals);
-        } catch (error) {
-            console.error("Fehler beim Parsen von 'form': ", error);
-        }
-    }
-}, []);
+    useEffect(() => {
+        const storedForm = localStorage.getItem("form");
+        if (storedForm) {
+            try {
+                const parsedForm = JSON.parse(storedForm);
+                const sets = parseInt(parsedForm.sets, 10);
+                const goals = parseInt(parsedForm.goals, 10);
+                if (sets >= 1 && sets <= 3) {
+                    setSetsCount(sets);
 
+                    
+                    const maxSets = sets * 2 - 1;
+                    setResults(Array(maxSets).fill(null));
+                }
+                if (goals >= 1 && goals <= 8) setGoalsToWin(goals);
+            } catch (error) {
+                console.error("Fehler beim Parsen von 'form': ", error);
+            }
+        }
+    }, []);
 
     if (setsCount === 0) return null;
 
-    const topButtons = Array.from({ length: goalsToWin}, (_, i) => i);
-    const bottomButtons = [...topButtons].reverse();
+    
+    function getSetWinner(result) {
+        if (!result) return null;
+        const [a, b] = result.split(":").map(Number);
+        if (a > b) return "A";
+        if (b > a) return "B";
+        return null;
+    }
+
+    
+    function countWins(results) {
+        let winsA = 0;
+        let winsB = 0;
+        for (const r of results) {
+            const winner = getSetWinner(r);
+            if (winner === "A") winsA++;
+            if (winner === "B") winsB++;
+        }
+        return { winsA, winsB };
+    }
+
+function getVisibleSetsCount(results, maxSets, setsToWin) {
+    const { winsA, winsB } = countWins(results);
+
+    
+    if (winsA >= setsToWin || winsB >= setsToWin) {
+        const lastPlayedIndex = results.findIndex(r => r === null);
+        return lastPlayedIndex === -1 ? maxSets : lastPlayedIndex;
+    }
+
+    
+    let minRows = setsToWin;
+    if (setsToWin === 3) minRows = 3;
+
+    
+    if (winsA === winsB) {
+        return Math.min(Math.max(winsA + winsB + 1, minRows), maxSets);
+    }
+
+    
+    return Math.min(Math.max(winsA + winsB + 1, minRows), maxSets);
+}
+
+
+
+    const maxSets = setsCount * 2 - 1;
+    const setsToWin = setsCount;
+
+   
+    const visibleSetsCount = getVisibleSetsCount(results, maxSets, setsToWin);
 
     function handleResultChange(setIndex, teamAScore, teamBScore) {
         const newResults = [...results];
@@ -41,16 +89,17 @@ useEffect(() => {
     }
 
     function handleConfirmAll() {
-        if (results.some(result => result === null)) {
+        
+        if (results.slice(0, visibleSetsCount).some(result => result === null)) {
             setError("Please enter all Results!");
             return;
         }
-        onResultConfirm(results, index, matchPlayers);
+        onResultConfirm(results.slice(0, visibleSetsCount), index, matchPlayers);
     }
 
     return (
         <div className={`match-table-container-${setsCount}`}>
-            {results.map((_, setIndex) => (
+            {results.slice(0, visibleSetsCount).map((_, setIndex) => (
                 <ResultSelector
                     key={setIndex}
                     goalsToWin={goalsToWin}
@@ -68,26 +117,37 @@ useEffect(() => {
 }
 
 function ResultSelector({ goalsToWin, onResultSelected }) {
-    const [teamAScore, setTeamAScore] = useState(null);
-    const [teamBScore, setTeamBScore] = useState(null);
+    const [scores, setScores] = useState([null, null]);
 
-    const topButtons = Array.from({ length: goalsToWin +1 }, (_, i) => i);
+    const topButtons = Array.from({ length: goalsToWin + 1 }, (_, i) => i);
     const bottomButtons = [...topButtons].reverse();
 
-    useEffect(() => {
-        if (teamAScore !== null && teamBScore !== null) {
-            onResultSelected(topButtons[teamAScore], bottomButtons[teamBScore]);
+    function updateScores(team, score) {
+        let newScores = [...scores];
+        newScores[team] = score;
+
+        const otherTeam = team === 0 ? 1 : 0;
+        if (score < goalsToWin) {
+            newScores[otherTeam] = goalsToWin;
         }
-    }, [teamAScore, teamBScore]);
+
+        setScores(newScores);
+    }
+
+    useEffect(() => {
+        if (scores[0] !== null && scores[1] !== null) {
+            onResultSelected(scores[0], scores[1]);
+        }
+    }, [scores]);
 
     return (
         <div className="button-wrapper">
             <div className="button-row">
-                {topButtons.map((num, index) => (
+                {topButtons.map((num) => (
                     <button
-                        key={`top-${index}`}
-                        onClick={() => setTeamAScore(prev => (prev === index ? null : index))}
-                        className={`toggle-button ${teamAScore === index ? "active" : "inactive"}`}
+                        key={`top-${num}`}
+                        onClick={() => updateScores(0, num)}
+                        className={`toggle-button ${scores[0] === num ? "active" : "inactive"}`}
                     >
                         {num}
                     </button>
@@ -97,11 +157,11 @@ function ResultSelector({ goalsToWin, onResultSelected }) {
             <span className="colon">:</span>
 
             <div className="button-row">
-                {bottomButtons.map((num, index) => (
+                {bottomButtons.map((num) => (
                     <button
-                        key={`bottom-${index}`}
-                        onClick={() => setTeamBScore(prev => (prev === index ? null : index))}
-                        className={`toggle-button ${teamBScore === index ? "active" : "inactive"}`}
+                        key={`bottom-${num}`}
+                        onClick={() => updateScores(1, num)}
+                        className={`toggle-button ${scores[1] === num ? "active" : "inactive"}`}
                     >
                         {num}
                     </button>
@@ -110,3 +170,8 @@ function ResultSelector({ goalsToWin, onResultSelected }) {
         </div>
     );
 }
+
+
+
+
+
