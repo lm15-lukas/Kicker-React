@@ -8,7 +8,6 @@ import Trashbin from '../assets/images/trash-solid.svg';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import TournamentHeader from './TurnamentHeader.jsx';
-import SideButtons from '../../SideButtons.jsx';
 
 export default function PlayerTable() {
   
@@ -308,7 +307,6 @@ export default function PlayerTable() {
       )}
 
       <div className="fixed bottom-4 left-4 flex space-x-2 z-50">
-        <SideButtons/>
       </div>
     </div>
     </>

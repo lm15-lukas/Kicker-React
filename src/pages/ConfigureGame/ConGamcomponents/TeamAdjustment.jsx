@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import SideButtons from "../../SideButtons";
 
 export default function PlayerAdjustment() {
   const navigate = useNavigate();
@@ -151,8 +150,6 @@ export default function PlayerAdjustment() {
           </div>
         </div>
       )}
-
-      <SideButtons />
     </div>
   );
 }

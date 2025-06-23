@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoadTournament.css';
 import { motion } from 'framer-motion';
-import SideButtons from '../../SideButtons';
 
 export default function LoadTournaments() {
 
@@ -98,7 +97,6 @@ export default function LoadTournaments() {
                         ))}
                     </motion.ul>
                 )}
-                <SideButtons />
             </div>
             
         </>

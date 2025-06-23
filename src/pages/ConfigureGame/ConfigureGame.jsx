@@ -4,7 +4,6 @@ import HeadHeader from "./ConGamcomponents/Header.jsx";
 import SelectGameMode from "./ConGamcomponents/SelectGameMode.jsx";
 import './ConfigureGame.css';
 import { motion } from "framer-motion";
-import SideButtons from "../SideButtons.jsx";
 
 const getInitialErrors = (data) => {
   const errs = {};
@@ -198,7 +197,7 @@ export default function ConfigureGame() {
           </motion.button>
         </div>
       </div>
-      <SideButtons/>
+      
     </div>
   );
 }
