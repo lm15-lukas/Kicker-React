@@ -11,6 +11,7 @@ export default function TournamentHeader({onEndTournament}) {
     navigate("/scoreboard");
   };
   function handleFinalRound(){
+    onEndTournament();
   navigate('/finalRound')
   }
 
