@@ -9,7 +9,7 @@ import HeroSection from "./pages/CreateGame/HeroSection.jsx";
 import ScoreBoard from "./pages/ScoreBoard/components/ScoreBoard.jsx"
 import LoadTournaments from "./pages/Tournament/TournamentComponents/LoadTournament.jsx";
 import Sidebar from "./pages/Sidebar.jsx";
-import FinalRound from "./pages/Tournament/TournamentComponents/FinalRound.jsx";
+import FinalRound from "./pages/FinalRound/FinalRoundComponents/FinalRound.jsx";
 
 function App() {
   return (
