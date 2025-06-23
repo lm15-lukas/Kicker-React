@@ -50,6 +50,24 @@ export default function PlayerTable() {
   useEffect(() => {
     localStorage.setItem('playedPlayers', JSON.stringify(playedPlayers)); // korrekt klein
   }, [playedPlayers]);
+  useEffect(() => {
+  const sortedPlayers = players
+    .map((player) => ({
+      player,
+      ...stats[player] || {
+        games: 0,
+        wins: 0,
+        losses: 0,
+        points: 0,
+        goalDiff: 0,
+      }
+    }))
+    .sort((a, b) => b.points - a.points || b.goalDiff - a.goalDiff)
+    .map((entry) => entry.player);
+
+  localStorage.setItem("sortedPlayers", JSON.stringify(sortedPlayers));
+}, [players, stats]);
+ 
 
   function startNewRound() {
     const unplayed = players.filter((p) => !playedPlayers.includes(p));

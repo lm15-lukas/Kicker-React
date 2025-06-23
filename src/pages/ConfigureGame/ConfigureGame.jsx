@@ -79,7 +79,6 @@ export default function ConfigureGame() {
       <>
         <HeadHeader />
         <SelectGameMode />
-        <NavigationButtons />
       </>
     );
   }
