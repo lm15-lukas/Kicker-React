@@ -28,7 +28,7 @@ export default function PlayerTable() {
     return saved ? JSON.parse(saved) : [];
   });
   const [playedPlayers, setPlayedPlayers] = useState(() => {
-    const saved = localStorage.getItem('playedPlayers'); // korrekt klein geschrieben!
+    const saved = localStorage.getItem('playedPlayers'); 
     return saved ? JSON.parse(saved) : [];
   });
   const [showMatchResults, setShowMatchResults] = useState({});
@@ -48,7 +48,7 @@ export default function PlayerTable() {
   }, [matches]);
 
   useEffect(() => {
-    localStorage.setItem('playedPlayers', JSON.stringify(playedPlayers)); // korrekt klein
+    localStorage.setItem('playedPlayers', JSON.stringify(playedPlayers));
   }, [playedPlayers]);
   useEffect(() => {
   const sortedPlayers = players
