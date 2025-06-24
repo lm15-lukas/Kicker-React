@@ -27,9 +27,9 @@ export default function FinalRound() {
             ];
 
             return [
-                { round: "Halbfinale 1", players: [teams[0], teams[1]], result: null },
-                { round: "Halbfinale 2", players: [teams[2], teams[3]], result: null },
-                { round: "Finale", players: [null, null], result: null },
+                { round: "Semi Final 1", players: [teams[0], teams[1]], result: null },
+                { round: "Semi Final 2", players: [teams[2], teams[3]], result: null },
+                { round: "Final", players: [null, null], result: null },
             ];
         }
 
@@ -43,13 +43,13 @@ export default function FinalRound() {
         }
 
         return [
-            { round: "Viertelfinale 1", players: [teams[0], teams[1]], result: null },
-            { round: "Viertelfinale 2", players: [teams[2], teams[3]], result: null },
-            { round: "Viertelfinale 3", players: [teams[4], teams[5]], result: null },
-            { round: "Viertelfinale 4", players: [teams[6], teams[7]], result: null },
-            { round: "Halbfinale 1", players: [null, null], result: null },
-            { round: "Halbfinale 2", players: [null, null], result: null },
-            { round: "Finale", players: [null, null], result: null },
+            { round: "Quarter Final 1", players: [teams[0], teams[1]], result: null },
+            { round: "Quarter Final 2", players: [teams[2], teams[3]], result: null },
+            { round: "Quarter Final 3", players: [teams[4], teams[5]], result: null },
+            { round: "Quarter Final 4", players: [teams[6], teams[7]], result: null },
+            { round: "Semi Final 1", players: [null, null], result: null },
+            { round: "Semi Final 2", players: [null, null], result: null },
+            { round: "Final", players: [null, null], result: null },
         ];
     }
 
@@ -116,7 +116,7 @@ export default function FinalRound() {
                 onClick={startBracket}
                 className="mb-6 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700"
             >
-                KO-Baum starten (Top 8 oder 16)
+                Start KO-Phase (Top 8 or 16)
             </button>
 
             {matches.length === 0 && <p className="text-gray-400">Noch keine Matches.</p>}

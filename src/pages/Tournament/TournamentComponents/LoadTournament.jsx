@@ -98,7 +98,7 @@ export default function LoadTournaments() {
                     </motion.ul>
                 )}
             </div>
-            
+
         </>
     );
 }

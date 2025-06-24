@@ -3,6 +3,9 @@ import Trophy from "../assets/images/trophy-solid.svg";
 import { motion } from "framer-motion";
 
 export default function TournamentHeader({onEndTournament}) {
+  const form = localStorage.getItem("form");
+const tournamentDate = form ? JSON.parse(form).date : "unknown";
+
   const tournamentName = localStorage.getItem("tournament-name") || "Unnamed Tournament";
   const navigate = useNavigate();
 
@@ -19,7 +22,7 @@ export default function TournamentHeader({onEndTournament}) {
     <header className="bg-gray-900 text-white py-4 px-6 pl-64 flex justify-between items-center shadow-lg rounded-b-xl">
       <div className="flex items-center space-x-4">
         <img src={Trophy} alt="Trophy" className="w-8 h-8 text-yellow-400" />
-        <h1 className="text-2xl font-semibold">Tournament: "{tournamentName}"</h1>
+        <h1 className="text-2xl font-semibold">Tournament: "{tournamentName}" for the "{tournamentDate}"</h1>
       </div>
       <div className="flex gap-5">
       <motion.button
