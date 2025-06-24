@@ -228,66 +228,82 @@ export default function PlayerTable() {
               initial={{ height: 0 }}
               transition={{ duration: 0.3 }}
             >
+              <div className="h-full flex flex-col">
+                {/* Fester Kopfbereich */}
+                <div className="bg-gray-900 text-white px-4 py-4 shadow z-10">
+                  <h2 className="text-3xl font-bold mb-2">"{tournamentName}"</h2>
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-xl font-semibold">Participants</h3>
+                    <AddPlayer onAdd={addPlayer} />
+                  </div>
+                </div>
 
-              <div className="bg-gray-900 text-white px-4 py-4 shadow sticky top-0 z-20 mt-0">
-                <h2 className="text-3xl font-bold mb-2">"{tournamentName}"</h2>
-                <h3 className="text-xl font-semibold mb-4">Participants</h3>
-                <AddPlayer onAdd={addPlayer} />
+                {/* Scrollbarer Tabellenbereich */}
+                <div className="flex-grow overflow-auto">
+                  <table className="min-w-full text-left border-none text-sm">
+                    <thead className="sticky top-0 bg-gray-800 text-gray-200 z-10">
+                      <tr>
+                        <th className="p-3 py-4">#</th>
+                        <th className="p-3 py-4">Player</th>
+                        <th className="p-3 py-4">G</th>
+                        <th className="p-3 py-4">W</th>
+                        <th className="p-3 py-4">L</th>
+                        <th className="p-3 py-4">Pts</th>
+                        <th className="p-3 py-4">Diff</th>
+                        <th className="p-3 py-4">✕</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {players
+                        .map((player) => ({
+                          player,
+                          ...stats[player] || {
+                            games: 0,
+                            wins: 0,
+                            losses: 0,
+                            points: 0,
+                            goalDiff: 0,
+                          }
+                        }))
+                        .sort((a, b) => b.points - a.points || b.goalDiff - a.goalDiff)
+                        .map((p, index) => (
+                          <tr key={p.player} className="even:bg-gray-800 odd:bg-gray-900 text-white">
+                            <td className="p-3">{index + 1}</td>
+                            <td className="p-3">{p.player}</td>
+                            <td className="p-3">{p.games}</td>
+                            <td className="p-3">{p.wins}</td>
+                            <td className="p-3">{p.losses}</td>
+                            <td className="p-3">{p.points}</td>
+                            <td className="p-3">{p.goalDiff}</td>
+                            <td className="p-3">
+                              <button
+                                onClick={() => removePlayer(p.player)}
+                                className="text-red-400 hover:text-red-600"
+                              >
+                                ✕
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                    <div className="flex justify-center mt-4">
+                      <motion.button
+                        onClick={() => setShowSaveModal(true)}
+                        className="px-4 py-2 rounded bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        Save Tournament
+                      </motion.button>
+                    </div>
+
+                  </table>
+                </div>
               </div>
-              <div className="flex-grow overflow-auto">
-                <table className="min-w-full text-left border-collapse text-sm">
-                  <thead className="bg-gray-700 text-gray-200 sticky top-0">
-                    <tr>
-                      <th className="p-2">#</th>
-                      <th className="p-2">Player</th>
-                      <th className="p-2">G</th>
-                      <th className="p-2">W</th>
-                      <th className="p-2">L</th>
-                      <th className="p-2">Pts</th>
-                      <th className="p-2">Diff</th>
-                      <th className="p-2">✕</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {players
-                      .map((player) => ({
-                        player,
-                        ...stats[player] || {
-                          games: 0,
-                          wins: 0,
-                          losses: 0,
-                          points: 0,
-                          goalDiff: 0,
-                        }
-                      }))
-                      .sort((a, b) => b.points - a.points || b.goalDiff - a.goalDiff)
-                      .map((p, index) => (
-                        <tr key={p.player} className="even:bg-gray-800">
-                          <td className="p-2">{index + 1}</td>
-                          <td className="p-2">{p.player}</td>
-                          <td className="p-2">{p.games}</td>
-                          <td className="p-2">{p.wins}</td>
-                          <td className="p-2">{p.losses}</td>
-                          <td className="p-2">{p.points}</td>
-                          <td className="p-2">{p.goalDiff}</td>
-                          <td className="p-2">
-                            <button onClick={() => removePlayer(p.player)} className="text-red-400 hover:text-red-600">✕</button>
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className="flex justify-center mt-4">
-                <motion.button
-                  onClick={() => setShowSaveModal(true)}
-                  className="px-4 py-2 rounded bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Save Tournament
-                </motion.button>
-              </div>
+
+
+
+
             </motion.div>
           </div>
         </div>
