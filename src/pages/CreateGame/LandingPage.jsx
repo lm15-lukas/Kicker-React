@@ -27,7 +27,7 @@ const Header = () => {
 
         {/* Navigation */}
         <nav className="lg:flex hidden space-x-8">
-          {["Tournaments","Player Profile", "Ranking", "Calender", "Group", "Log out/Leave"].map((item, index) => (
+          {["Tournaments", "Player Profile", "Ranking", "Calender", "Group", "Log out/Leave"].map((item, index) => (
             <motion.a
               key={item}
               initial={{ opacity: 0, y: -20 }}
@@ -35,9 +35,14 @@ const Header = () => {
               transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.7 + index * 0.2 }}
               className="relative text-gray-800 dark:text-gray-200 hover:text-red-600 dark:hover:text-red-400 font-medium transition-colors duration-300 group"
               href="#"
-              onClick={(e) =>{
+              onClick={(e) => {
                 e.preventDefault();
-                if(item === "Tournaments") navigate("/load");
+                if (item === "Tournaments") navigate("/load");
+                if (item === "Player Profile") navigate("/betafeature")
+                if (item === "Ranking") navigate("/betafeature")
+                if (item === "Calender") navigate("/betafeature")
+                if (item === "Group") navigate("/betafeature")
+                if (item === "Log out/Leave") navigate("/betafeature")
               }}
             >
               {item}
@@ -86,7 +91,7 @@ const Header = () => {
         className="md:hidden overflow-hidden bg-white dark:bg-gray-900 shadow-lg px-4 py-5 space-y-5"
       >
         <nav className="flex flex-col space-y-3">
-          {["Tournaments","Player Profile", "Ranking", "Calender", "Group", "Log out/Leave"].map((item) => (
+          {["Tournaments", "Player Profile", "Ranking", "Calender", "Group", "Log out/Leave"].map((item) => (
             <a onClick={toggleMenu} className="text-gray-300 font-medium py-2" key={item} href="#">
               {item}
             </a>
