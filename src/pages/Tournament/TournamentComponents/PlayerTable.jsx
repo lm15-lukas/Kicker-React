@@ -41,7 +41,7 @@ export default function PlayerTable() {
   const tournamentName = localStorage.getItem('tournament-name') || 'Unnamed Tournament';
 
   const stats = WinningLogic(matches, goalsToWin);
-  const { players, removePlayer, addPlayer } = usePlayers();
+  const { players, removePlayer, addPlayer,setPlayers } = usePlayers();
 
   useEffect(() => {
     localStorage.setItem('matches', JSON.stringify(matches));
@@ -159,6 +159,8 @@ export default function PlayerTable() {
     localStorage.removeItem('form');
     localStorage.removeItem('tournament-name');
     localStorage.removeItem('player-names');
+
+    setPlayers([]);
 
     navigate('/load');
   }

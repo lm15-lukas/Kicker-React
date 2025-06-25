@@ -4,6 +4,7 @@ import HeadHeader from "./ConGamcomponents/Header.jsx";
 import SelectGameMode from "./ConGamcomponents/SelectGameMode.jsx";
 import './ConfigureGame.css';
 import { motion } from "framer-motion";
+import { usePlayers } from "../Tournament/context/PlayerContext.jsx";
 
 const getInitialErrors = (data) => {
   const errs = {};
@@ -27,6 +28,7 @@ function getFormValues() {
 }
 
 export default function ConfigureGame() {
+  const {setPlayers} = usePlayers();
   const navigate = useNavigate();
   const [formData, setFormData] = useState(getFormValues);
   const [errors, setErrors] = useState(getInitialErrors(formData));
@@ -47,6 +49,8 @@ export default function ConfigureGame() {
     setErrors(getInitialErrors(resetData));
     localStorage.removeItem("form");
     localStorage.removeItem('player-names')
+
+    setPlayers([]);
   };
 
   const handleFormDataChange = (event) => {
