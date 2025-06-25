@@ -1,8 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Home, Settings, Table, FolderPlus, PlayCircle,Network } from "lucide-react";
+import { Home, Settings, Table, FolderPlus, PlayCircle,Network,HardHat,Crown } from "lucide-react";
 import SideButtons from "./SideButtons";
-import { HardHat } from "lucide-react";
 
 export default function Sidebar() {
   const links = [
@@ -12,6 +11,7 @@ export default function Sidebar() {
     { to: "/load", label: "Load Tournament", icon: <PlayCircle size={20} /> },
     { to: "/team-adjustment", label: "Team Adjustment", icon: <Settings size={20} /> },
     {to: "/finalRound" ,label:"KO-Tree",icon:<Network size={20}/>},
+    {to: "/scoreboard",label:"Score Board",icon:<Crown size={20}/>},
     {to:"/betafeature",label:"Coming Soon", icon:<HardHat size={20}/>}
   ];
 
