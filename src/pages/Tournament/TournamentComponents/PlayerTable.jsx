@@ -158,6 +158,7 @@ export default function PlayerTable() {
     localStorage.removeItem('playedPlayers');
     localStorage.removeItem('form');
     localStorage.removeItem('tournament-name');
+    localStorage.removeItem('player-names');
 
     navigate('/load');
   }
