@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { PlayerProvider } from "./pages/Tournament/context/PlayerContext.jsx";
 import ConfigureGame from "./pages/ConfigureGame/ConfigureGame";
 import Tournament from"./pages/Tournament/TournamentComponents/Tournament.jsx"
@@ -25,8 +25,9 @@ function App() {
             <LandingPage />
             <HeroSection />
           </>
-        } />
-        <Route path="/configure" element={<ConfigureGame />} />
+        } /> 
+        <Route path="/" element={<Navigate to="/configure-game-page" replace/>}/>
+        <Route path="/configure" element={<ConfigureGame/>}/>
         <Route path="/team-adjustment" element={<TeamAdjustment />} />
         <Route path="/select-game-mode" element={<SelectGameMode />} />
         <Route path="/tournament" element={<Tournament />} />
