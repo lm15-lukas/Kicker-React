@@ -9,6 +9,9 @@ export default function ComingSoon() {
                     <p className="text-lg text-gray-400">
                         This function will be available soon.
                     </p>
+                    <p className="text-lg text-gray-40">
+                        until this happens Martin F. needs to Wirbel less.
+                    </p>
                 </div>
             </div>
         </>

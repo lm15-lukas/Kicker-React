@@ -104,7 +104,7 @@ const ScoreboardPage = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <h2 className='text-2xl font-bold mb-4'>{selectedPlayer.player}</h2>
+              <h2 className='text-2xl font-bold mb-4'>"{selectedPlayer.player}"</h2>
               <ul className='space-y-1 mb-4 text-lg'>
                 <li className='flex items-center space-x-3'>
                   <img src={medal}alt='medal' className='w-8 h-8'/>
