@@ -45,7 +45,7 @@ export default function PlayerAdjustment() {
     localStorage.setItem("tournament-name", tournamentName.trim());
     localStorage.setItem("matches", JSON.stringify([]));
     localStorage.setItem("results", JSON.stringify([]));
-    window.location.href = "/tournament";
+    window.location.hash = "/tournament";
   };
 
   const handleKeyDown = (e) => {
