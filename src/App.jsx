@@ -36,7 +36,7 @@ function App() {
         <Route path="/scoreboard" element={<ScoreBoard />} />
         <Route path="/load" element={<LoadTournaments/>}></Route>
         <Route path="/finalRound" element={<FinalRound/>}></Route>
-        <Route path="martinf" element={<Martinf/>}/>
+        <Route path="/martinf" element={<Martinf/>}/>
         <Route path="/betafeature" element={<ComingSoon/>}/>
       </Routes>
       </main>
