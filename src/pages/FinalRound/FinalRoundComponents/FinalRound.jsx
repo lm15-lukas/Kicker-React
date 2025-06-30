@@ -185,6 +185,7 @@ export default function FinalRound() {
                             Close
                         </button>
                     </div>
+                    
                 </div>
             )}
         </div>

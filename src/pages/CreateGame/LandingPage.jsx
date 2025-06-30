@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { SiPersonio } from "react-icons/si";
-import { BsMicrosoftTeams } from "react-icons/bs";
+import { SiPersonio,BsMicrosoftTeams } from "react-icons/si";
 import { FaAtlassian } from "react-icons/fa";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -82,47 +81,6 @@ const Header = () => {
           </motion.button>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      <motion.div
-        initial={{ opacity: 0, height: 0 }}
-        animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? "auto" : 0 }}
-        transition={{ duration: 0.5 }}
-        className="md:hidden overflow-hidden bg-white dark:bg-gray-900 shadow-lg px-4 py-5 space-y-5"
-      >
-        <nav className="flex flex-col space-y-3">
-          {["Tournaments", "Player Profile", "Ranking", "Calender", "Group", "Log out/Leave"].map((item) => (
-            <a onClick={toggleMenu} className="text-gray-300 font-medium py-2" key={item} href="#">
-              {item}
-            </a>
-          ))}
-        </nav>
-
-        <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex space-x-5">
-            <a href="https://impaq.personio.de/login/index" target="_blank" rel="noopener noreferrer">
-              <SiPersonio className="h-5 w-5 text-gray-300" />
-            </a>
-            <a href="https://teams.microsoft.com" target="_blank" rel="noopener noreferrer">
-              <BsMicrosoftTeams className="h-5 w-5 text-gray-300" />
-            </a>
-            <a href="https://id.atlassian.com/login" target="_blank" rel="noopener noreferrer">
-              <FaAtlassian className="h-5 w-5 text-gray-300" />
-            </a>
-          </div>
-
-          {/* Spielen Button (Mobile) */}
-          <button
-            onClick={() => {
-              toggleMenu();
-              navigate("/configure"); // ✅ Navigation aktivieren
-            }}
-            className="mt-4 block w-full px-4 py-2 rounded-lg bg-gradient-to-r from-red-400 to-red-600 text-white font-bold"
-          >
-            Play
-          </button>
-        </div>
-      </motion.div>
     </header>
   );
 };
