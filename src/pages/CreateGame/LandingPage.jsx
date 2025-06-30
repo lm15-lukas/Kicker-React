@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { SiPersonio,BsMicrosoftTeams } from "react-icons/si";
+import { SiPersonio } from "react-icons/si";
+import { BsMicrosoftTeams } from "react-icons/bs";
 import { FaAtlassian } from "react-icons/fa";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -81,6 +82,8 @@ const Header = () => {
           </motion.button>
         </div>
       </div>
+
+
     </header>
   );
 };
