@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { PlayerProvider } from "./pages/Tournament/context/PlayerContext.jsx";
 import ConfigureGame from "./pages/ConfigureGame/ConfigureGame";
 import Tournament from"./pages/Tournament/TournamentComponents/Tournament.jsx"
