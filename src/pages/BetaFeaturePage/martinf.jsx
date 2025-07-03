@@ -1,6 +1,5 @@
 import { Rocket } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import wirbel from './assets/images/thewirbler.jpg'
 
 export default function Martinf() {
   const navigate = useNavigate();
@@ -32,15 +31,6 @@ export default function Martinf() {
               Overdoses of <span className="text-yellow-400">wirbeln</span> – every. single. match.
             </li>
           </ul>
-        </div>
-
-        {/* Placeholder image */}
-        <div className="mt-8">
-          <img
-            src={wirbel}
-            alt="Martin F. doing his thing"
-            className="w-full max-w-sm mx-auto rounded-lg shadow-lg"
-          />
         </div>
       </div>
     </div>

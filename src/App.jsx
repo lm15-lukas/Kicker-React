@@ -12,6 +12,7 @@ import Sidebar from "./pages/Sidebar.jsx";
 import FinalRound from "./pages/FinalRound/FinalRoundComponents/FinalRound.jsx";
 import ComingSoon from "./pages/BetaFeaturePage/BetaFeaturPageComponents/ComingSoon.jsx";
 import Martinf from "./pages/BetaFeaturePage/martinf.jsx";
+import Impressum from "./pages/Impressum/Impressum.jsx";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/finalRound" element={<FinalRound/>}></Route>
         <Route path="/martinf" element={<Martinf/>}/>
         <Route path="/betafeature" element={<ComingSoon/>}/>
+        <Route path="/impressum" element={<Impressum/>}/>
       </Routes>
       </main>
       </div>

@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import { SiPersonio } from "react-icons/si";
 import { BsMicrosoftTeams } from "react-icons/bs";
 import { FaAtlassian } from "react-icons/fa";
 import { useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
+import {FileText} from "lucide-react";
 import { useNavigate } from "react-router-dom"; // ✅ Navigation importieren
 
 const Header = () => {
@@ -53,20 +52,27 @@ const Header = () => {
 
         {/* Icons */}
         <div className="md:flex hidden items-center space-x-4">
-          <motion.a href="https://impaq.personio.de/login/index" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1.3, duration: 0.8 }} className="text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-300">
-            <SiPersonio className="w-5 h-5" />
-          </motion.a>
           <motion.a href="https://teams.microsoft.com" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1.3, duration: 0.8 }} className="text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-300">
             <BsMicrosoftTeams className="w-5 h-5" />
           </motion.a>
           <motion.a href="https://id.atlassian.com/login" target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1.3, duration: 0.8 }} className="text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-300">
             <FaAtlassian className="w-5 h-5" />
           </motion.a>
+          <motion.a
+            onClick={() => navigate("/impressum")}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.3, duration: 0.8 }}
+            className="cursor-pointer text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-300 flex items-center gap-1"
+          >
+            <FileText className="w-5 h-5" />
+          </motion.a>
+
         </div>
 
         {/* Spielen Button (Desktop) */}
         <motion.button
-          onClick={() => navigate("/configure")} // ✅ Navigation aktivieren
+          onClick={() => navigate("/configure")}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1.6, duration: 0.8, type: "spring", stiffness: 100, damping: 15 }}
@@ -75,12 +81,6 @@ const Header = () => {
           Play
         </motion.button>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
-          <motion.button whileTap={{ scale: 0.7 }} onClick={toggleMenu} className="text-gray-300">
-            {isOpen ? <FiX className="h-6 w-6" /> : <FiMenu className="h-6 w-6" />}
-          </motion.button>
-        </div>
       </div>
 
 
